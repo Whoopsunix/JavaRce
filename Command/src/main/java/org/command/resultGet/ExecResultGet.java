@@ -11,7 +11,6 @@ public class ExecResultGet {
 
     // normal
     public String normal(InputStream inputStream) throws Exception {
-        // InputStream inputStream = Runtime.getRuntime().exec(payload).getInputStream();
         byte[] bytes = new byte[1024];
         int len = 0;
         StringBuilder stringBuilder = new StringBuilder();
