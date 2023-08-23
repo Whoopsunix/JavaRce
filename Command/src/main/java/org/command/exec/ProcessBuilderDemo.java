@@ -37,6 +37,6 @@ public class ProcessBuilderDemo {
         InputStream inputStream = exec("ifconfig -a");
         inputStream = reflect("ifconfig -a");
         ExecResultGet execResultGet = new ExecResultGet();
-        System.out.println(execResultGet.normal(inputStream));
+        System.out.println(execResultGet.stringBuilder(inputStream));
     }
 }

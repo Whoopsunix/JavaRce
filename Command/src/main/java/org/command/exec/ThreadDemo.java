@@ -31,6 +31,6 @@ public class ThreadDemo {
     public static void main(String[] args) throws Exception {
         InputStream inputStream = exec("ifconfig -a");
         ExecResultGet execResultGet = new ExecResultGet();
-        System.out.println(execResultGet.normal(inputStream));
+        System.out.println(execResultGet.stringBuilder(inputStream));
     }
 }

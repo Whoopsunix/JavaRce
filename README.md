@@ -4,7 +4,7 @@ By. Whoopsunix
 
 # 0x00 do what?
 
-Java 能获取到权限的 Demo，目前涵盖如下：
+Java 能获取到权限的 Demo，目前涵盖命令执行、表达式、内存马、JDBC、反序列化、工具类
 
 # 命令执行
 
@@ -21,14 +21,23 @@ Java 能获取到权限的 Demo，目前涵盖如下：
 - [x] ScriptEngineManager
 - [x] jni
 
-## 执行结果输出（InputStream 获取）
+## 执行结果输出（InputStream 处理Demo）
 
-- [x] byte[]
+- [x] java.lang.StringBuilder
+- [x] java.io.ByteArrayOutputStream
+- [x] java.util.Scanner
+- [x] java.io.BufferedReader
+- [x] java.io.InputStream.readNBytes > JDK 9
 - [x] org.springframework:spring-core
 - [x] org.apache.commons:commons-io
-- [x] org.apache.commons:commons-lang3
 
 # 表达式注入
+
+## OGNL
+
+## SPEL
+
+
 
 # JDBC相关
 
@@ -38,4 +47,5 @@ Java 能获取到权限的 Demo，目前涵盖如下：
 
 > https://github.com/javaweb-sec/javaweb-sec
 > 
+> https://github.com/yzddmr6/Java-Js-Engine-Payloads
 > 

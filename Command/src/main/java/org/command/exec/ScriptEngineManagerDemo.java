@@ -31,7 +31,5 @@ public class ScriptEngineManagerDemo {
 
     public static void main(String[] args) throws Exception {
         InputStream inputStream = exec("ifconfig -a");
-//        ExecResultGet execResultGet = new ExecResultGet();
-//        System.out.println(execResultGet.normal(inputStream));
     }
 }

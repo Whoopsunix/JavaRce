@@ -26,6 +26,6 @@ public class ProcessImplDemo {
     public static void main(String[] args) throws Exception {
         InputStream inputStream = reflect("ifconfig -a");
         ExecResultGet execResultGet = new ExecResultGet();
-        System.out.println(execResultGet.normal(inputStream));
+        System.out.println(execResultGet.stringBuilder(inputStream));
     }
 }
