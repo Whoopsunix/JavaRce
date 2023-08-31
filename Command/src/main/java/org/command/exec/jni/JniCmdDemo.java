@@ -42,7 +42,8 @@ public class JniCmdDemo {
             /**
              * 替换lib路径
              */
-            File libPath = new File("/Users/ppp/Documents/pppRepository/github_file/JavaRceDemo/Command/src/main/java/org/command/exec/jni/com/command/exec/jni/libcmd.jnilib");
+            // 获取项目目录
+            File libPath = new File(System.getProperty("user.dir") + "/Command/src/main/java/org/command/exec/jni/com/command/exec/jni/libcmd.jnilib");
 
             /**
              * load命令执行类
@@ -50,7 +51,7 @@ public class JniCmdDemo {
             Class<?> commandClass = loader.loadClass(COMMAND_CLASS_NAME);
 
             // 可以用System.load也加载lib也可以用反射ClassLoader加载,如果loadLibrary0被拦截了可以换java.lang.ClassLoader$NativeLibrary类的load方法
-//            System.load("/Users/ppp/Documents/dev/PPPVULNS/Myana/vulSpringboot/src/main/java/com/whoopsunix/vul/exec/jni/com/whoopsunix/vul/exec/jni/libcmd.jnilib");
+//            System.load(libPath.getAbsolutePath());
             Method loadLibrary0Method = ClassLoader.class.getDeclaredMethod("loadLibrary0", Class.class, File.class);
             loadLibrary0Method.setAccessible(true);
             loadLibrary0Method.invoke(loader, commandClass, libPath);

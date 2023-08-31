@@ -35,6 +35,22 @@
             <version>4.3.16.RELEASE</version>
         </dependency>
 
+        <!-- EL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <!-- 考虑到实际使用更多的是引用的 servlet-api ，避免漏掉可能的调用-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-el-api &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-el-api</artifactId>-->
+<!--            <version>8.5.82</version>-->
+<!--        </dependency>-->
+
+
+
         <!-- Inputstream -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -53,6 +69,8 @@
             <version>3.12.0</version>
             <scope>compile</scope>
         </dependency>
+
+
 
 
     </dependencies>

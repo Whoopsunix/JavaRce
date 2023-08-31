@@ -26,9 +26,9 @@ public class RuntimeDemo {
     public static void main(String[] args) throws Exception {
         InputStream inputStream = exec("ifconfig -a");
         ExecResultGet execResultGet = new ExecResultGet();
-        System.out.println(execResultGet.stringBuilder(inputStream));
+//        System.out.println(execResultGet.stringBuilder(inputStream));
 //        System.out.println(execResultGet.byteArrayOutputStream(inputStream));
-//        System.out.println(execResultGet.scanner(inputStream));
+        System.out.println(execResultGet.scanner(inputStream));
 //        System.out.println(execResultGet.bufferedReader(inputStream));
 //        System.out.println(execResultGet.bufferedReader2(inputStream));
 //        System.out.println(execResultGet.readNBytes(inputStream));

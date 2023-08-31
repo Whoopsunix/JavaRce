@@ -1,7 +1,5 @@
 package org.command.exec;
 
-import org.command.resultGet.ExecResultGet;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.InputStream;
