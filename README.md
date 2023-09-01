@@ -9,8 +9,8 @@ By. Whoopsunix
 ## 目录
 
 - [命令执行](#0x01-command)
-    - [执行Demo](#执行demo)
-    - [执行结果输出（InputStream 处理Demo）](#执行结果输出（InputStream 处理Demo）)
+    - 命令执行Demo
+    - 执行结果输出（InputStream 处理Demo）
 - [表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
         - get、set执行，sout输出时的回显
@@ -20,11 +20,9 @@ By. Whoopsunix
 
 目前涵盖：命令执行及输出、表达式及输出、内存马、JDBC、反序列化、工具类
 
-# 0x01 Command
+# 0x01 [Command](Command)
 
 参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
-
-[命令执行 Demo](Command)
 
 ## 执行Demo
 
@@ -47,16 +45,14 @@ By. Whoopsunix
 - [x] org.springframework:spring-core
 - [x] org.apache.commons:commons-io
 
-# 0x02 expression inject
-
-[表达式注入 Demo](Expression)
+# 0x02 [expression inject](Expression)
 
 ## OGNL
 
 - [x] 普通执行demo：get、set
 - [x] 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
-    - 原生
-    - base64加密
+    - 明文
+    - 套一层base64加密
 
 # 0x03 JDBC Attack
 
