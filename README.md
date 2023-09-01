@@ -19,8 +19,8 @@ By. Whoopsunix
     - [OGNL](#ognl)
         - get、set执行，sout输出时的回显
 - [JDBC Attack](#0x03-jdbc-attack)
-    - Mysql
-    - H2database
+    - [Mysql](#mysql)
+    - [H2database](#h2database)
 - [鸣谢](#Thanks)
 
 目前涵盖：命令执行及输出、表达式及输出、JDBC
@@ -70,7 +70,7 @@ By. Whoopsunix
     - statementInterceptors
     - detectCustomCollations
 
-## [H2](JDBCAttack/H2Attack)
+## [H2database](JDBCAttack/H2Attack)
 
 - [x] RUNSCRIPT
 - [x] INIT转义分号
