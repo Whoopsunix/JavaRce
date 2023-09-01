@@ -21,6 +21,7 @@ By. Whoopsunix
 - [JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
     - [H2database](#h2database)
+    - [IBMDB2](#ibmdb2)
 - [鸣谢](#Thanks)
 
 目前涵盖：命令执行及输出、表达式及输出、JDBC
@@ -76,6 +77,10 @@ By. Whoopsunix
 - [x] INIT转义分号
 - [x] TriggerJS
 - [x] Groovy
+
+## [IBMDB2](JDBCAttack/IBMDB2Attack)
+
+- [x] JNDI
 
 # Thanks
 
