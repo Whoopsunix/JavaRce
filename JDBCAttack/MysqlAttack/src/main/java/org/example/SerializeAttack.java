@@ -60,8 +60,8 @@ public class SerializeAttack {
 
 
         // 低版本需要加载
-//        String driver = "com.mysql.jdbc.Driver";
-//        Class.forName(driver);
+        String driver = "com.mysql.jdbc.Driver";
+        Class.forName(driver);
 
         Connection connection = DriverManager.getConnection(serializeAttackUrl_8_7_19);
 

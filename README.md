@@ -4,7 +4,7 @@ By. Whoopsunix
 
 # 0x00 do what?
 
-🚀 对照实战场景梳理 Java Rce 相关漏洞的利用方式
+🚀 对照实战场景梳理较通用的 Java Rce 相关漏洞的利用方式
 
 🚩 对于研究过的组件会针对可利用版本进行一个梳理 详情见代码
 
@@ -59,11 +59,11 @@ By. Whoopsunix
     - 明文
     - 套一层base64加密
 
-# 0x03 JDBC Attack
+# 0x03 [JDBC Attack](JDBCAttack)
 
 参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 有很详细的例子
 
-## [mysql](JDBCAttack/MysqlAttack)
+## [Mysql](JDBCAttack/MysqlAttack)
 
 - [x] 文件读取
 - [x] 反序列化
@@ -86,3 +86,5 @@ By. Whoopsunix
 > https://github.com/yzddmr6/Java-Js-Engine-Payloads
 >
 > https://github.com/su18/JDBC-Attack
+> 
+> https://pyn3rd.github.io/
