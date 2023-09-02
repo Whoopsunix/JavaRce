@@ -13,15 +13,15 @@ By. Whoopsunix
 ## 目录
 
 - [命令执行](#0x01-command)
-    - 命令执行Demo
-    - 执行结果输出（InputStream 处理Demo）
 - [表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
-        - get、set执行，sout输出时的回显
 - [JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
     - [H2database](#h2database)
-    - [IBMDB2](#ibmdb2)
+    - [IBM DB2](#ibmdb2)
+    - [ModeShape](#modeshape)
+    - [Apache Derby](#apache-derby)
+    - [Sqlite](#sqlite)
 - [鸣谢](#Thanks)
 
 目前涵盖：命令执行及输出、表达式及输出、JDBC
@@ -82,6 +82,18 @@ By. Whoopsunix
 
 - [x] JNDI
 
+## [ModeShape](JDBCAttack/ModeShapeAttack)
+
+- [x] JNDI
+
+## [Apache Derby](JDBCAttack/DerbyAttack)
+
+- [x] Serialize
+
+## [Sqlite](JDBCAttack/SqliteAttack)
+
+- [x] RCE
+
 # Thanks
 
 感谢师傅们的研究 带来了很大的帮助 :)
@@ -91,5 +103,5 @@ By. Whoopsunix
 > https://github.com/yzddmr6/Java-Js-Engine-Payloads
 >
 > https://github.com/su18/JDBC-Attack
-> 
+>
 > https://pyn3rd.github.io/

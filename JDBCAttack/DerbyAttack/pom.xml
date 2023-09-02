@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>MysqlAttack</artifactId>
+    <artifactId>DerbyAttack</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>MysqlAttack</name>
+    <name>DerbyAttack</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,12 +15,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <!--        <version>3.1.11</version>-->
-                    <version>5.1.49</version>
-            <!--      <version>6.0.6</version>-->
-<!--            <version>8.0.19</version>-->
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.10.1.1</version>
         </dependency>
 
         <dependency>

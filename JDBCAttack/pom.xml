@@ -11,6 +11,9 @@
         <module>MysqlAttack</module>
         <module>H2Attack</module>
         <module>IBMDB2Attack</module>
+        <module>ModeShapeAttack</module>
+        <module>DerbyAttack</module>
+        <module>SqliteAttack</module>
     </modules>
 
     <name>JDBCAttack</name>
