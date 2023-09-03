@@ -17,6 +17,7 @@ By. Whoopsunix
     - [OGNL](#ognl)
 - [JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
+    - [PostgreSQL](#postgresql)
     - [H2database](#h2database)
     - [IBM DB2](#ibmdb2)
     - [ModeShape](#modeshape)
@@ -71,12 +72,22 @@ By. Whoopsunix
     - statementInterceptors
     - detectCustomCollations
 
+## [PostgreSQL](JDBCAttack/PostgreSQLAttack)
+
+- [x] CVE-2022-21724 RCE
+  - AbstractXmlApplicationContext 实现类
+- [x] 文件写入
+  - loggerLevel / loggerFile
+    - 原始方式写入 EL
+    - 截断方式拓展更多写法 写入 jsp
+
 ## [H2database](JDBCAttack/H2Attack)
 
-- [x] RUNSCRIPT
-- [x] INIT转义分号
-- [x] TriggerJS
-- [x] Groovy
+- [x] RUNSCRIPT 远程sql加载
+- [x] 代码执行
+  - INIT转义分号
+  - TriggerJS
+  - Groovy
 
 ## [IBMDB2](JDBCAttack/IBMDB2Attack)
 
