@@ -1,5 +1,7 @@
 package org.command.exec;
 
+import org.command.resultGet.ExecResultGet;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.InputStream;
@@ -14,20 +16,37 @@ public class ScriptEngineManagerDemo {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         // runtime
+//        engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime(); " +
+//                "var process = runtime.exec(\"" + cmd + "\"); " +
+//                "var inputStream = process.getInputStream(); " +
+//                "var inputStreamReader = new java.io.InputStreamReader(inputStream); " +
+//                "var bufferedReader = new java.io.BufferedReader(inputStreamReader); " +
+//                "var line; " +
+//                "while ((line = bufferedReader.readLine()) != null) { " +
+//                "    print(line); " +
+//                "}");
+
+//        engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime(); " +
+//                "var process = runtime.exec(\"" + cmd + "\"); " +
+//                "var inputStream = process.getInputStream(); " +
+//                "var inputStreamReader = new java.io.InputStreamReader(inputStream); " +
+//                "var bufferedReader = new java.io.BufferedReader(inputStreamReader); " +
+//                "var line; " +
+//                "while ((line = bufferedReader.readLine()) != null) { " +
+//                "    print(line); " +
+//                "}");
         engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime(); " +
                 "var process = runtime.exec(\"" + cmd + "\"); " +
-                "var inputStream = process.getInputStream(); " +
-                "var inputStreamReader = new java.io.InputStreamReader(inputStream); " +
-                "var bufferedReader = new java.io.BufferedReader(inputStreamReader); " +
-                "var line; " +
-                "while ((line = bufferedReader.readLine()) != null) { " +
-                "    print(line); " +
-                "}");
+                "var inputStream = process.getInputStream(); ");
+        // 获取对象
+        inputStream = (InputStream) engine.eval("inputStream;");
 
         return inputStream;
     }
 
     public static void main(String[] args) throws Exception {
         InputStream inputStream = exec("ifconfig -a");
+        ExecResultGet execResultGet = new ExecResultGet();
+        System.out.println(execResultGet.scanner(inputStream));
     }
 }

@@ -13,6 +13,8 @@ By. Whoopsunix
 ## 目录
 
 - [命令执行](#0x01-command)
+  - 执行Demo，java jsp
+  - 执行结果输出（InputStream 处理Demo）
 - [表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
 - [JDBC Attack](#0x03-jdbc-attack)
@@ -79,7 +81,7 @@ By. Whoopsunix
 - [x] 文件写入
   - loggerLevel / loggerFile
     - 原始方式写入 EL
-    - 截断方式拓展更多写法 写入 jsp
+    - 截断方式写入 jsp
 
 ## [H2database](JDBCAttack/H2Attack)
 

@@ -5,7 +5,7 @@
     <groupId>org.command</groupId>
     <artifactId>Command</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>Command</name>
 

