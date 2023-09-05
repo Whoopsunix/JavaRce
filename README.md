@@ -17,6 +17,7 @@ By. Whoopsunix
   - 执行结果输出（InputStream 处理Demo）
 - [表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
+    - [EL](#el)
 - [JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
     - [PostgreSQL](#postgresql)
@@ -56,12 +57,19 @@ By. Whoopsunix
 
 # 0x02 [Expression inject](Expression)
 
-## OGNL
+## [OGNL](Expression/OGNLAttack)
 
 - [x] 普通执行demo：get、set
 - [x] 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
     - 明文
     - 套一层base64加密
+
+## [EL](Expression/ELAttack)
+
+- [x] EL 写法
+  - runtime 回显
+  - js 回显
+- [x] Scriptlet 标记写法（放在这里对照）
 
 # 0x03 [JDBC Attack](JDBCAttack)
 
