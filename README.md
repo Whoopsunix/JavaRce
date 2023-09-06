@@ -8,16 +8,17 @@ By. Whoopsunix
 
 🚩 对于研究过的组件会针对可利用版本进行一个梳理 详情见代码
 
-🚧 长期项目 不定期梳理后更新......
+🚧 长期项目 不定期学习后更新......
 
 ## 目录
 
 - [命令执行](#0x01-command)
-  - 执行Demo，java jsp
-  - 执行结果输出（InputStream 处理Demo）
+    - 执行Demo，java jsp
+    - 执行结果输出（InputStream 处理Demo）
 - [表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
     - [EL](#el)
+    - [com.example.spelattack.SPEL](#spel)
 - [JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
     - [PostgreSQL](#postgresql)
@@ -59,17 +60,26 @@ By. Whoopsunix
 
 ## [OGNL](Expression/OGNLAttack)
 
-- [x] 普通执行demo：get、set
+- [x] 普通执行demo、jsEngine：get、set方式
 - [x] 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
     - 明文
     - 套一层base64加密
+- [x] 探测用Payload
+    - DNSLOG、HTTPLOG
+    - 延时
 
 ## [EL](Expression/ELAttack)
 
-- [x] EL 写法
-  - runtime 回显
-  - js 回显
+- [x] runtime 回显
+- [x] jsEngine 回显
 - [x] Scriptlet 标记写法（放在这里对照）
+
+## [SPEL](Expression/SPELAttack)
+
+- [x] runtime 回显
+- [x] 探测用Payload
+    - DNSLOG、HTTPLOG
+    - 延时
 
 # 0x03 [JDBC Attack](JDBCAttack)
 
@@ -85,19 +95,19 @@ By. Whoopsunix
 ## [PostgreSQL](JDBCAttack/PostgreSQLAttack)
 
 - [x] CVE-2022-21724 RCE
-  - AbstractXmlApplicationContext 实现类
+    - AbstractXmlApplicationContext 实现类
 - [x] 文件写入
-  - loggerLevel / loggerFile
-    - 原始方式写入 EL
-    - 截断方式写入 jsp
+    - loggerLevel / loggerFile
+        - 原始方式写入 EL
+        - 截断方式写入 jsp
 
 ## [H2database](JDBCAttack/H2Attack)
 
 - [x] RUNSCRIPT 远程sql加载
 - [x] 代码执行
-  - INIT转义分号
-  - TriggerJS
-  - Groovy
+    - INIT转义分号
+    - TriggerJS
+    - Groovy
 
 ## [IBMDB2](JDBCAttack/IBMDB2Attack)
 
@@ -126,3 +136,7 @@ By. Whoopsunix
 > https://github.com/su18/JDBC-Attack
 >
 > https://pyn3rd.github.io/
+>
+> https://forum.butian.net/share/886
+>
+> https://github.com/woodpecker-appstore/jexpr-encoder-utils
