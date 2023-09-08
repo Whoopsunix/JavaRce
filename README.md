@@ -4,22 +4,22 @@ By. Whoopsunix
 
 # 0x00 do what?
 
-🚀 对照实战场景梳理较通用的 Java Rce 相关漏洞的利用方式
+🚀 记录贴 对照实战场景梳理较通用的 Java Rce 相关漏洞的利用方式或知识点
 
-🚩 对于研究过的组件会针对可利用版本进行一个梳理 详情见代码
+🚩 对于实际环境遇到过的组件如有必要会针对可利用版本进行一个梳理 详情见代码
 
 🚧 长期项目 不定期学习后更新......
 
 ## 目录
 
-- [命令执行](#0x01-command)
+- [0x01 命令执行](#0x01-command)
     - 执行Demo，java jsp
     - 执行结果输出（InputStream 处理Demo）
-- [表达式注入](#0x02-expression-inject)
+- [0x02 表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
     - [EL](#el)
     - [com.example.spelattack.SPEL](#spel)
-- [JDBC Attack](#0x03-jdbc-attack)
+- [0x03 JDBC Attack](#0x03-jdbc-attack)
     - [Mysql](#mysql)
     - [PostgreSQL](#postgresql)
     - [H2database](#h2database)
@@ -27,6 +27,12 @@ By. Whoopsunix
     - [ModeShape](#modeshape)
     - [Apache Derby](#apache-derby)
     - [Sqlite](#sqlite)
+- [0x04 Serialization](#0x04-serialization)
+  - [BCEL](#bcel)
+  - [远程Jar加载](#remotejar)
+  - [XMLSerialization](#xmlserialization)
+    - [JavaBean](#jarbean)
+    - [XStream](#xstream)
 - [鸣谢](#Thanks)
 
 目前涵盖：命令执行及输出、表达式及输出、JDBC
@@ -125,6 +131,36 @@ By. Whoopsunix
 
 - [x] RCE
 
+# 0x04 [Serialization](Serialization)
+
+## [BCEL](Serialization/BCELAttack)
+
+- [x] static 触发
+- [x] 构造方法触发
+- [x] 方法触发
+
+## [RemoteJar](Serialization/AttackJar)
+
+- [x] static 触发
+- [x] 构造方法触发
+- [x] 方法触发
+
+## [XMLSerialization](Serialization/XMLSerialization)
+
+### [JarBean](Serialization/XMLSerialization/JavaBean)
+
+- [x] 命令执行 Runtime、ProcessBuilder、js
+- [x] 探测用Payload
+  - DNSLOG、SOCKETLOG
+  - 延时
+- [x] JNDI
+- [x] BCEL
+- [x] RemoteJar
+
+### XStream
+
+主要为 CVE 不具体展开
+
 # Thanks
 
 感谢师傅们的研究 带来了很大的帮助 :)
@@ -139,4 +175,4 @@ By. Whoopsunix
 >
 > https://forum.butian.net/share/886
 >
-> https://github.com/woodpecker-appstore/jexpr-encoder-utils
+> https://github.com/woodpecker-appstore
