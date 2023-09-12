@@ -2,10 +2,7 @@ package org.tools;
 
 import sun.reflect.ReflectionFactory;
 
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 
 @SuppressWarnings("restriction")
 public class Reflections {
@@ -67,6 +64,36 @@ public class Reflections {
         Constructor<?> sc = ReflectionFactory.getReflectionFactory().newConstructorForSerialization(classToInstantiate, objCons);
         setAccessible(sc);
         return (T) sc.newInstance(consArgs);
+    }
+
+    public static void method(Object obj, String methodName, Object... args){
+        try {
+            Class<?>[] argsClass = new Class[args.length];
+            for (int i = 0; i < args.length; i++) {
+                argsClass[i] = args[i].getClass();
+                if(argsClass[i].equals(Integer.class))
+                    argsClass[i] =Integer.TYPE;
+                else if(argsClass[i].equals(Boolean.class))
+                    argsClass[i] =Boolean.TYPE;
+                else if(argsClass[i].equals(Byte.class))
+                    argsClass[i] =Byte.TYPE;
+                else if(argsClass[i].equals(Long.class))
+                    argsClass[i] =Long.TYPE;
+                else if(argsClass[i].equals(Double.class))
+                    argsClass[i] =Double.TYPE;
+                else if(argsClass[i].equals(Float.class))
+                    argsClass[i] =Float.TYPE;
+                else if(argsClass[i].equals(Character.class))
+                    argsClass[i] =Character.TYPE;
+                else if(argsClass[i].equals(Short.class))
+                    argsClass[i] =Short.TYPE;
+            }
+            Method method = obj.getClass().getDeclaredMethod(methodName, argsClass);
+            method.invoke(obj, args);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

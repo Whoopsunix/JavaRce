@@ -13,6 +13,8 @@
         <module>Expression</module>
         <module>JDBCAttack</module>
         <module>Serialization</module>
+        <module>RceEcho</module>
+        <module>MemShell</module>
         <module>Utils</module>
     </modules>
 

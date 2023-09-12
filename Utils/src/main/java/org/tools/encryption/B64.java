@@ -3,8 +3,10 @@ package org.tools.encryption;
 import com.sun.org.apache.bcel.internal.Repository;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -19,11 +21,23 @@ public class B64 {
         try {
             JavaClass javaClass = Repository.lookupClass(cls);
             System.out.println(Arrays.toString(javaClass.getBytes()));
-            return encodeStr(javaClass.getBytes());
+            String b64Str = encodeStr(javaClass.getBytes());
+            System.out.println(b64Str);
+            return b64Str;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public String encodeObj(Object obj) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(obj);
+        oos.close();
+        String base64str = new String(Base64.getEncoder().encode(baos.toByteArray()));
+        System.out.println(base64str);
+        return base64str;
     }
 
     // byte[]

@@ -6,7 +6,7 @@ By. Whoopsunix
 
 🚀 记录贴 对照实战场景梳理较通用的 Java Rce 相关漏洞的利用方式或知识点
 
-🚩 对于实际环境遇到过的组件如有必要会针对可利用版本进行一个梳理 详情见代码
+🚩 对于实际环境遇到过的组件如有必要会针对可利用版本进行一个梳理 慢更
 
 🚧 长期项目 不定期学习后更新......
 
@@ -28,21 +28,23 @@ By. Whoopsunix
     - [Apache Derby](#apache-derby)
     - [Sqlite](#sqlite)
 - [0x04 Serialization](#0x04-serialization)
-  - [BCEL](#bcel)
-  - [远程Jar加载](#remotejar)
-  - [XMLSerialization](#xmlserialization)
-    - [JavaBean](#jarbean)
-    - [XStream](#xstream)
-- [0x05 MemShell](#0x05-memshell)
+    - [BCEL](#bcel)
+    - [远程Jar加载](#remotejar)
+    - [XMLSerialization](#xmlserialization)
+        - [JavaBean](#jarbean)
+        - [XStream](#xstream)
+- [0x05 RceEcho](#0x05-rceecho)
+    - [Tomcat](#tomcatecho)
+- [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
 目前涵盖：命令执行及输出、表达式及输出、JDBC
 
 # 0x01 [Command](Command)
 
-参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
-
 ## 执行Demo
+
+参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
 
 - [x] Runtime
 - [x] ProcessBuilder
@@ -152,8 +154,8 @@ By. Whoopsunix
 
 - [x] 命令执行 Runtime、ProcessBuilder、js
 - [x] 探测用Payload
-  - DNSLOG、SOCKETLOG
-  - 延时
+    - DNSLOG、SOCKETLOG
+    - 延时
 - [x] JNDI
 - [x] BCEL
 - [x] RemoteJar
@@ -162,7 +164,22 @@ By. Whoopsunix
 
 主要为 CVE 不具体展开
 
-# 0x05 [MemShell](MemShell)
+# 0x05 [RceEcho](RceEcho)
+
+参考 [Java-Rce-Echo](https://github.com/feihong-cs/Java-Rce-Echo) 有很详细的例子
+
+慢更版本适配
+
+## [TomcatEcho](RceEcho/TomcatEcho)
+
+Version support
+
+- 6.0.53
+- 7.0.59、7.0.109
+- 8.0.53、8.5.82
+- 9.0.65
+
+# 0x06 [MemShell](MemShell)
 
 ## [tomcat](MemShell/tomcat)
 
@@ -181,3 +198,9 @@ By. Whoopsunix
 > https://forum.butian.net/share/886
 >
 > https://github.com/woodpecker-appstore
+>
+> https://www.yulegeyu.com/archives/
+>
+> https://github.com/c0ny1/java-object-searcher
+>
+> https://github.com/feihong-cs/Java-Rce-Echo
