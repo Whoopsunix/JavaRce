@@ -94,6 +94,8 @@ By. Whoopsunix
 
 参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 有很详细的例子
 
+结合 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具挖掘
+
 ## [Mysql](JDBCAttack/MysqlAttack)
 
 - [x] 文件读取
