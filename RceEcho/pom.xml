@@ -11,6 +11,7 @@
 
   <modules>
     <module>TomcatEcho</module>
+    <module>SpringEcho</module>
   </modules>
 
   <properties>

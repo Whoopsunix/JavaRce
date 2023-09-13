@@ -35,6 +35,7 @@ By. Whoopsunix
         - [XStream](#xstream)
 - [0x05 RceEcho](#0x05-rceecho)
     - [Tomcat](#tomcatecho)
+    - [Spring](#springecho)
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
@@ -92,9 +93,7 @@ By. Whoopsunix
 
 # 0x03 [JDBC Attack](JDBCAttack)
 
-参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 有很详细的例子
-
-结合 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具挖掘
+参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 、[pyn3rd blog](https://pyn3rd.github.io/) 有很详细的例子
 
 ## [Mysql](JDBCAttack/MysqlAttack)
 
@@ -164,22 +163,29 @@ By. Whoopsunix
 
 ### XStream
 
-主要为 CVE 不具体展开
+主要为 CVE 不具体展开，<= 1.4.17 的生成集成在 yso 项目中
 
 # 0x05 [RceEcho](RceEcho)
 
-参考 [Java-Rce-Echo](https://github.com/feihong-cs/Java-Rce-Echo) 有很详细的例子
-
 慢更版本适配
+
+结合 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具挖掘
 
 ## [TomcatEcho](RceEcho/TomcatEcho)
 
-Version support
+Version Test
 
 - 6.0.53
 - 7.0.59、7.0.109
 - 8.0.53、8.5.82
 - 9.0.65
+
+## [SpringEcho](RceEcho/SpringEcho)
+
+Version Test
+
+- spring-boot-starter-web
+    - [2.2.x, 2.7.x]
 
 # 0x06 [MemShell](MemShell)
 

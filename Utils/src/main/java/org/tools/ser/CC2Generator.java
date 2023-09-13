@@ -20,6 +20,7 @@ public class CC2Generator {
         B64 b64 = new B64();
         String base64Str = b64.encodeObj(cc2Demo(b64.encodeJavaClass(Calc.class)));
 
+        // 反序列化
 //        byte[] bytes = Base64.getDecoder().decode(base64Str);
 //        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 //        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
