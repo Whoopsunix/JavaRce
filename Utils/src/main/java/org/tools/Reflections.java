@@ -88,9 +88,13 @@ public class Reflections {
                 else if(argsClass[i].equals(Short.class))
                     argsClass[i] =Short.TYPE;
             }
-            Method method = obj.getClass().getDeclaredMethod(methodName, argsClass);
-            method.invoke(obj, args);
-
+            try {
+                Method method = obj.getClass().getDeclaredMethod(methodName, argsClass);
+                method.invoke(obj, args);
+            }catch (NoSuchMethodException e){
+                Method method = obj.getClass().getSuperclass().getDeclaredMethod(methodName, argsClass);
+                method.invoke(obj, args);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

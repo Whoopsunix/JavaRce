@@ -187,6 +187,12 @@ Version Test
 - spring-boot-starter-web
     - [2.2.x, 2.7.x]
 
+## [JettyEcho](RceEcho/JettyEcho)
+
+Version Test
+
+- 7.x、8.x、9.x、10.x 全版本
+
 # 0x06 [MemShell](MemShell)
 
 ## [tomcat](MemShell/tomcat)
@@ -212,3 +218,6 @@ Version Test
 > https://github.com/c0ny1/java-object-searcher
 >
 > https://github.com/feihong-cs/Java-Rce-Echo
+
+[![Stargazers over time](https://starchart.cc/Whoopsunix/JavaRce.svg)](https://starchart.cc/Whoopsunix/JavaRce)
+

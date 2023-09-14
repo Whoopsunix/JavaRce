@@ -12,6 +12,7 @@
   <modules>
     <module>TomcatEcho</module>
     <module>SpringEcho</module>
+    <module>JettyEcho</module>
   </modules>
 
   <properties>
