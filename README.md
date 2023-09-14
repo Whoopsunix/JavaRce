@@ -41,8 +41,6 @@ By. Whoopsunix
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
-目前涵盖：命令执行及输出、表达式及输出、JDBC
-
 # 0x01 [Command](Command)
 
 ## 执行Demo
