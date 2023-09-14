@@ -36,6 +36,7 @@ By. Whoopsunix
 - [0x05 RceEcho](#0x05-rceecho)
     - [Tomcat](#tomcatecho)
     - [Spring](#springecho)
+    - [Jetty](#jettyecho)
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
