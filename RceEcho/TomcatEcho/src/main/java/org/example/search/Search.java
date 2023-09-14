@@ -4,7 +4,7 @@ import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
 import org.example.gadgets.TomcatEcho;
-import org.tools.ser.CC2Generator;
+import org.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Search {
     public static void main(String[] args) throws Exception{
-        CC2Generator cc2Generator = new CC2Generator();
-        cc2Generator.make(TomcatEcho.class);
+        CC4Generator cc4Generator = new CC4Generator();
+        cc4Generator.make(TomcatEcho.class);
     }
 
     public void searchTomcat() {

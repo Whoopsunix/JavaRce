@@ -1,9 +1,9 @@
-package org.example.search;
+package com.example.undertowecho.search;
 
+import com.example.undertowecho.gadget.UndertowEcho;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
-import org.example.gadget.JettyEcho;
 import org.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ import java.util.List;
 public class Search {
     public static void main(String[] args) throws Exception{
         CC4Generator cc4Generator = new CC4Generator();
-        cc4Generator.make(JettyEcho.class);
+        cc4Generator.make(UndertowEcho.class);
     }
 
-    public void searchJetty() {
+    public void searchUndertow() {
         //设置搜索类型包含Request关键字的对象
         List<Keyword> keys = new ArrayList<>();
         keys.add(new Keyword.Builder().setField_type("Request").build());

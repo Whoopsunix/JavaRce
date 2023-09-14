@@ -13,6 +13,7 @@
     <module>TomcatEcho</module>
     <module>SpringEcho</module>
     <module>JettyEcho</module>
+    <module>UndertowEcho</module>
   </modules>
 
   <properties>

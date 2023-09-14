@@ -37,6 +37,7 @@ By. Whoopsunix
     - [Tomcat](#tomcatecho)
     - [Spring](#springecho)
     - [Jetty](#jettyecho)
+    - [Undertow](#undertowecho)
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
@@ -193,6 +194,15 @@ Version Test
 Version Test
 
 - 7.x、8.x、9.x、10.x 全版本
+
+## [UndertowEcho](RceEcho/UndertowEcho)
+
+WildFly 默认容器用的 Undertow
+
+Version Test
+
+- spring-boot-starter-undertow
+  - 2.7.15
 
 # 0x06 [MemShell](MemShell)
 

@@ -27,6 +27,8 @@ public class JettyEcho {
                 if (entry == null || isEcho)
                     continue;
                 Object value = getFieldValue(entry, "value");
+                if (value == null)
+                    continue;
                 // Jetty 7、8
                 if (value.getClass().getName().equals("org.eclipse.jetty.server.AsyncHttpConnection")) {
                     Object request = getFieldValue(value, "_request");
@@ -87,7 +89,7 @@ public class JettyEcho {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 
