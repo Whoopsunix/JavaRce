@@ -44,7 +44,7 @@ By. Whoopsunix
 
 # 0x01 [Command](Command)
 
-## 执行Demo
+## [执行Demo](Command)
 
 参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
 
@@ -57,7 +57,7 @@ By. Whoopsunix
 - [x] ScriptEngineManager
 - [x] jni
 
-## 执行结果输出（InputStream 处理Demo）
+## [执行结果输出（InputStream 处理Demo）](Command)
 
 - [x] java.lang.StringBuilder
 - [x] java.io.ByteArrayOutputStream
