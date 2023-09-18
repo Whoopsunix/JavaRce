@@ -13,8 +13,8 @@ By. Whoopsunix
 ## 目录
 
 - [0x01 命令执行](#0x01-command)
-    - 执行Demo，java jsp
-    - 执行结果输出（InputStream 处理Demo）
+    - [执行Demo，java jsp](#执行demo)
+    - [执行结果输出（InputStream 处理Demo）](#执行结果输出inputstream-处理demo)
 - [0x02 表达式注入](#0x02-expression-inject)
     - [OGNL](#ognl)
     - [EL](#el)
