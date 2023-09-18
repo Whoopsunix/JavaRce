@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 /**
  * @author Whoopsunix
- * <p>
+ *
  * use https://github.com/c0ny1/java-object-searcher
  * TargetObject = {org.apache.tomcat.util.threads.TaskThread}
  * ---> group = {java.lang.ThreadGroup}
@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  * ---> this$0 = {org.apache.tomcat.util.net.NioEndpoint}
  * ---> handler = {org.apache.coyote.AbstractProtocol$ConnectionHandler}
  * ---> global = {org.apache.coyote.RequestGroupInfo}
- * <p>
+ *
  * Version test
  * 6.0.53
  * 7.0.59、7.0.109

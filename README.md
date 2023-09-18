@@ -38,6 +38,7 @@ By. Whoopsunix
     - [Spring](#springecho)
     - [Jetty](#jettyecho)
     - [Undertow](#undertowecho)
+    - [Resin](#resinecho)
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
@@ -201,6 +202,12 @@ Version Test
 
 - spring-boot-starter-undertow
   - 2.7.15
+
+## [ResinEcho](RceEcho/ResinEcho)
+
+Version Test
+
+- [4.0.52, 4.0.66]
 
 # 0x06 [MemShell](MemShell)
 

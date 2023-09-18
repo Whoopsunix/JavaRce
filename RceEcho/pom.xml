@@ -14,6 +14,7 @@
     <module>SpringEcho</module>
     <module>JettyEcho</module>
     <module>UndertowEcho</module>
+    <module>ResinEcho</module>
   </modules>
 
   <properties>
