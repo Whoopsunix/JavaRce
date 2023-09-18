@@ -235,5 +235,5 @@ Version Test
 >
 > https://github.com/feihong-cs/Java-Rce-Echo
 
-[![Stargazers over time](https://starchart.cc/Whoopsunix/JavaRce.svg)](https://starchart.cc/Whoopsunix/JavaRce)
+[//]: # ([![Stargazers over time]&#40;https://starchart.cc/Whoopsunix/JavaRce.svg&#41;]&#40;https://starchart.cc/Whoopsunix/JavaRce&#41;)
 
