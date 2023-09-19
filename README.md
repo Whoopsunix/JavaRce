@@ -39,6 +39,7 @@ By. Whoopsunix
     - [Jetty](#jettyecho)
     - [Undertow](#undertowecho)
     - [Resin](#resinecho)
+    - [OS](#osecho)
 - [0x06 MemShell](#0x06-memshell)
 - [鸣谢](#Thanks)
 
@@ -168,9 +169,9 @@ By. Whoopsunix
 
 # 0x05 [RceEcho](RceEcho)
 
-慢更版本适配
+结合 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具挖掘命令回显 慢更版本适配
 
-结合 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具挖掘
+本项目主要给出反序列化 demo，jsp 的例子可以参考 [Java-Rce-Echo](https://github.com/feihong-cs/Java-Rce-Echo) 
 
 ## [TomcatEcho](RceEcho/TomcatEcho)
 
@@ -208,6 +209,11 @@ Version Test
 Version Test
 
 - [4.0.52, 4.0.66]
+
+## [OSEcho](RceEcho/OSEcho)
+
+- windows
+- linux
 
 # 0x06 [MemShell](MemShell)
 

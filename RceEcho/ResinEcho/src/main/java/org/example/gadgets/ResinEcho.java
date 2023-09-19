@@ -48,7 +48,6 @@ public class ResinEcho {
 
         } catch (Exception e) {
             // 测试
-            e.printStackTrace();
         }
     }
 
