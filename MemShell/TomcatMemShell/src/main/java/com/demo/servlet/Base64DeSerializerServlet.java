@@ -19,6 +19,7 @@ public class Base64DeSerializerServlet extends HttpServlet {
         try {
             // 反序列化
             String base64Str = req.getParameter("base64Str");
+            System.out.println(base64Str);
             byte[] bytes = Base64.getDecoder().decode(base64Str);
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);

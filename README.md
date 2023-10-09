@@ -10,6 +10,8 @@ By. Whoopsunix
 
 🚧 长期项目 不定期学习后更新......
 
+部分 RceDemo 已经集成在二开 [ysoserial](https://github.com/Whoopsunix/ysoserial) 项目中
+
 ## 目录
 
 - [0x01 RceEcho](#0x05-rceecho)
@@ -121,7 +123,7 @@ Version Test
 - [x] ProcessImpl & UnixProcess
 - [x] ProcessImpl & UnixProcess by unsafe + Native
 - [x] Thread
-- [x] ScriptEngineManager
+- [x] ScriptEngine
 - [x] jni
 
 ## [执行结果输出（InputStream 处理Demo）](Command)

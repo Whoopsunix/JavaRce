@@ -9,7 +9,7 @@ import java.io.InputStream;
 /**
  * @author Whoopsunix
  */
-public class ScriptEngineManagerDemo {
+public class ScriptEngineDemo {
     public static InputStream exec(String cmd) throws Exception {
         InputStream inputStream = null;
 

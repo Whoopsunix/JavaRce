@@ -7,9 +7,19 @@ public class ExecArg {
     public ExecArg() {
     }
 
-    public ExecArg(String cmd) {
+    private ExecArg(String cmd) {
         try {
             Runtime.getRuntime().exec(cmd);
+        } catch (Exception e) {
+        }
+    }
+
+    public ExecArg(Integer num) {
+        try {
+            if (num == 123) {
+                Runtime.getRuntime().exec("open -a Calculator.app");
+            }
+
         } catch (Exception e) {
         }
     }
