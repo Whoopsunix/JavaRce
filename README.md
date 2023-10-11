@@ -6,7 +6,7 @@ By. Whoopsunix
 
 🚀 记录贴 对照实战场景梳理较通用的 Java Rce 相关漏洞的利用方式或知识点
 
-🚩 对于实际环境遇到过的组件如有必要会针对可利用版本进行一个梳理 慢更
+🚩 对于实际环境遇到过的组件如有必要会针对可利用版本进行一个梳理 慢更 
 
 🚧 长期项目 不定期学习后更新......
 
@@ -14,23 +14,23 @@ By. Whoopsunix
 
 ## 目录
 
-- [0x01 RceEcho](#0x05-rceecho)
+- [0x01 RceEcho](#0x01-rceecho)
     - [Tomcat](#tomcatecho)
     - [Spring](#springecho)
     - [Jetty](#jettyecho)
     - [Undertow](#undertowecho)
     - [Resin](#resinecho)
     - [OS](#osecho)
-- [0x02 MemShell](#0x06-memshell)
+- [0x02 MemShell](#0x02-memshell)
     - [TomcatMemShell](#tomcatmemshell)
-- [0x03 命令执行](#0x01-command)
+- [0x03 命令执行](#0x03-command)
   - [执行Demo，java jsp](#执行demo)
   - [执行结果输出（InputStream 处理Demo）](#执行结果输出inputstream-处理demo)
-- [0x04 表达式注入](#0x02-expression-inject)
+- [0x04 表达式注入](#0x04-expression-inject)
   - [OGNL](#ognl)
   - [EL](#el)
   - [SPEL](#spel)
-- [0x05 JDBC Attack](#0x03-jdbc-attack)
+- [0x05 JDBC Attack](#0x05-jdbc-attack)
   - [Mysql](#mysql)
   - [PostgreSQL](#postgresql)
   - [H2database](#h2database)
@@ -38,7 +38,7 @@ By. Whoopsunix
   - [ModeShape](#modeshape)
   - [Apache Derby](#apache-derby)
   - [Sqlite](#sqlite)
-- [0x06 Serialization](#0x04-serialization)
+- [0x06 Serialization](#0x06-serialization)
   - [BCEL](#bcel)
   - [远程Jar加载](#remotejar)
   - [XMLSerialization](#xmlserialization)

