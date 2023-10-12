@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
  * @author Whoopsunix
  * 写lib到临时目录
  * @Ref: https://github.com/javaweb-sec/javaweb-sec
- * ProcessImpl & UnixProcess by unsafe + Native
  */
 public class JniCmdDemo2 {
     /**

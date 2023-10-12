@@ -28,14 +28,14 @@ public class ScriptEngineDemo {
 //                "    print(line); " +
 //                "}");
         // 直接返回对象
-        Object obj = engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime();" +
-                "var process = runtime.exec(\"hostname\");" +
-                "var inputStream = process.getInputStream();" +
-                "var scanner = new java.util.Scanner(inputStream,\"GBK\").useDelimiter(\"\\\\A\");" +
-                "var result = scanner.hasNext() ? scanner.next() : \"\";" +
-                "scanner.close();" +
-                "result;");
-        System.out.println(obj.toString());
+//        Object obj = engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime();" +
+//                "var process = runtime.exec(\"hostname\");" +
+//                "var inputStream = process.getInputStream();" +
+//                "var scanner = new java.util.Scanner(inputStream,\"GBK\").useDelimiter(\"\\\\A\");" +
+//                "var result = scanner.hasNext() ? scanner.next() : \"\";" +
+//                "scanner.close();" +
+//                "result;");
+//        System.out.println(obj.toString());
 
 
         engine.eval("var runtime = java.lang./**/Runtime./**/getRuntime(); " +

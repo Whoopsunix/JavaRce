@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
  * @author Whoopsunix
  * 手动指定lib
  * @Ref: https://github.com/javaweb-sec/javaweb-sec
- * ProcessImpl & UnixProcess by unsafe + Native
  */
 public class JniCmdDemo {
 
