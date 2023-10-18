@@ -44,6 +44,7 @@ By. Whoopsunix
   - [XMLSerialization](#xmlserialization)
     - [JavaBean](#jarbean)
     - [XStream](#xstream)
+- [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [鸣谢](#Thanks)
 
 # 0x01 [RceEcho](RceEcho)
@@ -234,6 +235,10 @@ Version Test
 ### XStream
 
 主要为 CVE 不具体展开，<= 1.4.17 的生成集成在 yso 项目中
+
+# 0x07 [文件读写 Demo](FilesOperations)
+
+可用的文件读写函数
 
 # Thanks
 
