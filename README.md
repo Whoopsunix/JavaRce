@@ -10,7 +10,9 @@ By. Whoopsunix
 
 🚧 长期项目 不定期学习后更新......
 
-部分 RceDemo 已经集成在二开 [ysoserial](https://github.com/Whoopsunix/ysoserial) 项目中
+🛰️ 部分利用已经集成在二开 [ysoserial](https://github.com/Whoopsunix/ysoserial) 项目中
+
+🪝 [PPPRASP](https://github.com/Whoopsunix/PPPRASP) 项目中对本项目给出的漏洞实现防护（仅实现关键函数的 HOOK，不作进一步处理）
 
 ## 目录
 

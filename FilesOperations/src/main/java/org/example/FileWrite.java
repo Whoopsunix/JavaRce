@@ -6,6 +6,13 @@ import java.io.*;
  * @author Whoopsunix
  */
 public class FileWrite {
+
+    public static void main(String[] args) throws Exception{
+        String path = "/tmp/1.txt";
+        String content = "Hello World!";
+        new FileWrite().write_FileWriter_CharArrayWriter(path, content);
+    }
+
     /**
      * java.io.FileWriter
      */

@@ -14,6 +14,7 @@ public class FileRead {
      */
     public String read_InputStreamReader(String filePath) throws Exception {
         FileInputStream fileInputStream = new FileInputStream(filePath);
+
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         int character;
         StringBuilder content = new StringBuilder();

@@ -24,6 +24,10 @@ public class SPEL {
         // 延时
         String sleep = "T(java.lang.Thread).sleep(10000)";
 
+        /**
+         * todo 类加载
+         */
+
 
         Object obj = spel(sleep);
         System.out.println(obj);
