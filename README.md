@@ -42,7 +42,7 @@ By. Whoopsunix
   - [Sqlite](#sqlite)
 - [0x06 Serialization](#0x06-serialization)
   - [BCEL](#bcel)
-  - [远程Jar加载](#remotejar)
+  - [远程类加载](#remotejar)
   - [XMLSerialization](#xmlserialization)
     - [JavaBean](#jarbean)
     - [XStream](#xstream)
@@ -216,11 +216,13 @@ Version Test
 - [x] 构造方法触发
 - [x] 方法触发
 
-## [RemoteJar](Serialization/AttackJar)
+## [RemoteJar](Serialization/ClassLoad)
 
-- [x] static 触发
-- [x] 构造方法触发
-- [x] 方法触发
+- [x] URLClassLoader
+  - [x] static 触发
+  - [x] 构造方法触发
+  - [x] 方法触发
+- [x] AppClassLoader
 
 ## [XMLSerialization](Serialization/XMLSerialization)
 
