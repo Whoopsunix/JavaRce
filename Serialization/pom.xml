@@ -10,7 +10,7 @@
     <name>Serialization</name>
 
     <modules>
-        <module>AttackJar</module>
+        <module>ClassLoad</module>
         <module>BCELAttack</module>
         <module>XMLSerialization</module>
     </modules>

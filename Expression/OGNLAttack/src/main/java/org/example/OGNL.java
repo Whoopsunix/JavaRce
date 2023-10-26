@@ -84,6 +84,15 @@ public class OGNL {
         return null;
     }
 
+    public static Object ognlGetValueSafe(String payload) {
+        try {
+            System.out.println(payload);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * ognl.Ognl#setValue()
      */

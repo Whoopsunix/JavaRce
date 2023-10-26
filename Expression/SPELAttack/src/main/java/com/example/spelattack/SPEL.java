@@ -1,6 +1,11 @@
 package com.example.spelattack;
 
+import org.springframework.context.expression.MethodBasedEvaluationContext;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.SimpleEvaluationContext;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 /**
  * @author Whoopsunix
@@ -29,11 +34,45 @@ public class SPEL {
          */
 
 
-        Object obj = spel(sleep);
+
+        Object obj = spel(runtime);
         System.out.println(obj);
     }
 
     public static Object spel(String payload) {
         return new SpelExpressionParser().parseExpression(payload).getValue();
+    }
+
+    /**
+     * 默认也是用的 StandardEvaluationContext
+     */
+    public static Object spelStandardEvaluationContext(String payload) {
+        EvaluationContext evaluationContext = new StandardEvaluationContext();
+        return new SpelExpressionParser().parseExpression(payload).getValue(evaluationContext);
+    }
+
+    public static Object spelMethodBasedEvaluationContext(String payload) {
+
+        EvaluationContext evaluationContext = new MethodBasedEvaluationContext(new User(), null, null, null);
+        return new SpelExpressionParser().parseExpression(payload).getValue(evaluationContext);
+    }
+
+    /**
+     * safe
+     */
+
+    /**
+     * SimpleEvaluationContext
+     */
+    public static Object spelSimpleEvaluationContext(String payload) {
+        EvaluationContext evaluationContext = SimpleEvaluationContext.forReadOnlyDataBinding().build();
+        return new SpelExpressionParser().parseExpression(payload).getValue(evaluationContext);
+    }
+
+    public static Object spelSafe(String payload) {
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("payload", payload);
+        Expression expression = new SpelExpressionParser().parseExpression("#payload");
+        return expression.getValue(context);
     }
 }

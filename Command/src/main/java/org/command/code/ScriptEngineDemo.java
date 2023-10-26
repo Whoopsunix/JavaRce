@@ -1,10 +1,12 @@
-package org.command.exec;
+package org.command.code;
 
 import org.command.resultGet.ExecResultGet;
 
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author Whoopsunix
@@ -50,8 +52,33 @@ public class ScriptEngineDemo {
     }
 
     public static void main(String[] args) throws Exception {
-        InputStream inputStream = exec("ifconfig -a");
-        ExecResultGet execResultGet = new ExecResultGet();
-        System.out.println(execResultGet.scanner(inputStream));
+//        InputStream inputStream = exec("ifconfig -a");
+//        ExecResultGet execResultGet = new ExecResultGet();
+//        System.out.println(execResultGet.scanner(inputStream));
+        printScriptEngineManagerFactories();
+    }
+
+    /**
+     * 获取引擎信息
+     */
+    public static void printScriptEngineManagerFactories() {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        List<ScriptEngineFactory> factories = manager.getEngineFactories();
+        for (ScriptEngineFactory factory: factories){
+            System.out.printf(
+                    "Name: %s%n" + "Version: %s%n" + "Language name: %s%n" +
+                            "Language version: %s%n" +
+                            "Extensions: %s%n" +
+                            "Mime types: %s%n" +
+                            "Names: %s%n",
+                    factory.getEngineName(),
+                    factory.getEngineVersion(),
+                    factory.getLanguageName(),
+                    factory.getLanguageVersion(),
+                    factory.getExtensions(),
+                    factory.getMimeTypes(),
+                    factory.getNames()
+            );
+        }
     }
 }
