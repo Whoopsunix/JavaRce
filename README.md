@@ -41,11 +41,11 @@ By. Whoopsunix
   - [Apache Derby](#apache-derby)
   - [Sqlite](#sqlite)
 - [0x06 Serialization](#0x06-serialization)
-  - [BCEL](#bcel)
-  - [远程类加载](#remotejar)
+  - [类加载](#class-load)
   - [XMLSerialization](#xmlserialization)
     - [JavaBean](#jarbean)
     - [XStream](#xstream)
+  - [构造方法利用](#constructorexp)
 - [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [鸣谢](#Thanks)
 
@@ -210,19 +210,14 @@ Version Test
 
 # 0x06 [Serialization](Serialization)
 
-## [BCEL](Serialization/BCELAttack)
+## [Class load](Serialization/ClassLoad)
 
-- [x] static 触发
-- [x] 构造方法触发
-- [x] 方法触发
-
-## [RemoteJar](Serialization/ClassLoad)
-
-- [x] URLClassLoader
-  - [x] static 触发
-  - [x] 构造方法触发
-  - [x] 方法触发
-- [x] AppClassLoader
++ AppClassLoader
++ URLCLassLoader
++ BCEL
++ TransletClassLoaderDemo
++ Unsafe
++ ReflectUtils
 
 ## [XMLSerialization](Serialization/XMLSerialization)
 
@@ -235,6 +230,10 @@ Version Test
 - [x] JNDI
 - [x] BCEL
 - [x] RemoteJar
+
+## [ConstructorEXP](Serialization/ConstructorEXP)
+
+Class.forName 场景通过构造方法RCE
 
 ### XStream
 

@@ -11,8 +11,8 @@
 
     <modules>
         <module>ClassLoad</module>
-        <module>BCELAttack</module>
         <module>XMLSerialization</module>
+        <module>ConstructorEXP</module>
     </modules>
 
     <properties>
