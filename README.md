@@ -120,47 +120,47 @@ Version Test
 
 参考 [javaweb-sec](https://github.com/javaweb-sec/javaweb-sec) 有很详细的例子
 
-- [x] Runtime
-- [x] ProcessBuilder
-- [x] ProcessImpl
-- [x] ProcessImpl & UnixProcess
-- [x] ProcessImpl & UnixProcess by unsafe + Native
-- [x] Thread
-- [x] ScriptEngine
-- [x] jni
+- Runtime
+- ProcessBuilder
+- ProcessImpl
+- ProcessImpl & UnixProcess
+- ProcessImpl & UnixProcess by unsafe + Native
+- Thread
+- ScriptEngine
+- jni
 
 ## [执行结果输出（InputStream 处理Demo）](Command)
 
-- [x] java.lang.StringBuilder
-- [x] java.io.ByteArrayOutputStream
-- [x] java.util.Scanner
-- [x] java.io.BufferedReader
-- [x] java.io.InputStream.readNBytes > JDK 9
-- [x] org.springframework:spring-core
-- [x] org.apache.commons:commons-io
+- java.lang.StringBuilder
+- java.io.ByteArrayOutputStream
+- java.util.Scanner
+- java.io.BufferedReader
+- java.io.InputStream.readNBytes > JDK 9
+- org.springframework:spring-core
+- org.apache.commons:commons-io
 
 # 0x04 [Expression inject](Expression)
 
 ## [OGNL](Expression/OGNLAttack)
 
-- [x] 普通执行demo、jsEngine：get、set方式
-- [x] 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
+- 普通执行demo、jsEngine：get、set方式
+- 有sout的回显 (Ps. 通过 Servlet 的回显移到 RceEcho 章节介绍)
   - 明文
   - 套一层base64加密
-- [x] 探测用Payload
+- 探测用Payload
   - DNSLOG、HTTPLOG
   - 延时
 
 ## [EL](Expression/ELAttack)
 
-- [x] runtime 回显
-- [x] jsEngine 回显
-- [x] Scriptlet 标记写法（放在这里对照）
+- runtime 回显
+- jsEngine 回显
+- Scriptlet 标记写法（放在这里对照）
 
 ## [SPEL](Expression/SPELAttack)
 
-- [x] runtime 回显
-- [x] 探测用Payload
+- runtime 回显
+- 探测用Payload
   - DNSLOG、HTTPLOG
   - 延时
 
@@ -170,70 +170,72 @@ Version Test
 
 ## [Mysql](JDBCAttack/MysqlAttack)
 
-- [x] 文件读取
-- [x] 反序列化
+- 文件读取
+- 反序列化
     - statementInterceptors
     - detectCustomCollations
 
 ## [PostgreSQL](JDBCAttack/PostgreSQLAttack)
 
-- [x] CVE-2022-21724 RCE
+- CVE-2022-21724 RCE
     - AbstractXmlApplicationContext 实现类
-- [x] 文件写入
+- 文件写入
     - loggerLevel / loggerFile
         - 原始方式写入 EL
         - 截断方式写入 jsp
 
 ## [H2database](JDBCAttack/H2Attack)
 
-- [x] RUNSCRIPT 远程sql加载
-- [x] 代码执行
+- RUNSCRIPT 远程sql加载
+- 代码执行
     - INIT转义分号
     - TriggerJS
     - Groovy
 
 ## [IBMDB2](JDBCAttack/IBMDB2Attack)
 
-- [x] JNDI
+- JNDI
 
 ## [ModeShape](JDBCAttack/ModeShapeAttack)
 
-- [x] JNDI
+- JNDI
 
 ## [Apache Derby](JDBCAttack/DerbyAttack)
 
-- [x] Serialize
+- Serialize
 
 ## [Sqlite](JDBCAttack/SqliteAttack)
 
-- [x] RCE
+- RCE
 
 # 0x06 [Serialization](Serialization)
 
 ## [Class load](Serialization/ClassLoad)
 
-+ AppClassLoader
-+ URLCLassLoader
-+ BCEL
-+ TransletClassLoaderDemo
-+ Unsafe
-+ ReflectUtils
+- AppClassLoader
+- URLCLassLoader
+- BCEL
+- TransletClassLoaderDemo
+- Unsafe
+- ReflectUtils
 
 ## [XMLSerialization](Serialization/XMLSerialization)
 
 ### [JarBean](Serialization/XMLSerialization/JavaBean)
 
-- [x] 命令执行 Runtime、ProcessBuilder、js
-- [x] 探测用Payload
+- 命令执行 Runtime、ProcessBuilder、js
+- 探测用Payload
     - DNSLOG、SOCKETLOG
     - 延时
-- [x] JNDI
-- [x] BCEL
-- [x] RemoteJar
+- JNDI
+- BCEL
+- RemoteJar
 
 ## [ConstructorEXP](Serialization/ConstructorEXP)
 
-Class.forName 场景通过构造方法RCE
+通过构造方法触发RCE
+
+- xml
 
 ### XStream
 
