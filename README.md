@@ -124,7 +124,7 @@ Version Test
 - ProcessBuilder
 - ProcessImpl
 - ProcessImpl & UnixProcess
-- ProcessImpl & UnixProcess by unsafe + Native
+- ProcessImpl & UnixProcess by unsafe - Native
 - Thread
 - ScriptEngine
 - jni
@@ -166,47 +166,54 @@ Version Test
 
 # 0x05 [JDBC Attack](JDBCAttack)
 
-参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 、[pyn3rd blog](https://pyn3rd.github.io/) 有很详细的例子
-
-## [Mysql](JDBCAttack/MysqlAttack)
-
-- 文件读取
-- 反序列化
-    - statementInterceptors
-    - detectCustomCollations
-
-## [PostgreSQL](JDBCAttack/PostgreSQLAttack)
-
-- CVE-2022-21724 RCE
+参考 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 、[pyn3rd blog](https://pyn3rd.github.io/) 、[A New Attack Interface In Java Applications](https://i.blackhat.com/Asia-23/AS-23-Yuanzhen-A-new-attack-interface-in-Java.pdf) 、 [Deserial_Sink_With_JDBC](https://github.com/luelueking/Deserial_Sink_With_JDBC)
+- Mysql
+    - 文件读取
+    - 反序列化
+        - statementInterceptors、detectCustomCollations
+- PostgreSQL
+  - CVE-2022-21724 RCE
     - AbstractXmlApplicationContext 实现类
-- 文件写入
+  - 文件写入
     - loggerLevel / loggerFile
-        - 原始方式写入 EL
-        - 截断方式写入 jsp
+      - 原始方式写入 EL
+      - 截断方式写入 jsp
 
-## [H2database](JDBCAttack/H2Attack)
+- H2database
 
-- RUNSCRIPT 远程sql加载
-- 代码执行
-    - INIT转义分号
-    - TriggerJS
-    - Groovy
+  - RUNSCRIPT 远程sql加载
 
-## [IBMDB2](JDBCAttack/IBMDB2Attack)
+  - 代码执行
+      - INIT转义分号
+      - TriggerJS
+      - Groovy
 
-- JNDI
+- IBMDB2
+  - JNDI
 
-## [ModeShape](JDBCAttack/ModeShapeAttack)
 
-- JNDI
+- ModeShape
+  - JNDI
 
-## [Apache Derby](JDBCAttack/DerbyAttack)
 
-- Serialize
+- Apache Derby
+  - Serialize
 
-## [Sqlite](JDBCAttack/SqliteAttack)
 
-- RCE
+- Sqlite
+  - RCE
+
+
+- dameng 达梦
+  - JDNI
+
+- Oracle
+  - JNDI
+- teradata
+
+  - JDBC RCE
+
+
 
 # 0x06 [Serialization](Serialization)
 
@@ -245,6 +252,10 @@ Version Test
 
 可用的文件读写函数
 
+# Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/818a4d2c0d1562eec751b2637b825b3b0d2cf0e3.svg "Repobeats analytics image")
+
 # Thanks
 
 感谢师傅们的研究 带来了很大的帮助 :)
@@ -266,8 +277,9 @@ Version Test
 > https://github.com/c0ny1/java-object-searcher
 >
 > https://github.com/feihong-cs/Java-Rce-Echo
-> 
+>
 > https://flowerwind.github.io/2021/10/11/tomcat6%E3%80%817%E3%80%818%E3%80%819%E5%86%85%E5%AD%98%E9%A9%AC/
+>
+> https://github.com/luelueking/Deserial_Sink_With_JDBC
 
 [//]: # ([![Stargazers over time]&#40;https://starchart.cc/Whoopsunix/JavaRce.svg&#41;]&#40;https://starchart.cc/Whoopsunix/JavaRce&#41;)
-
