@@ -14,7 +14,7 @@ public class RMIClient {
 //        System.out.println(remoteObject.sayHello());
 
 //        // M2 Registry
-        Registry registry = LocateRegistry.getRegistry("192.168.66.175", 1099);
+        Registry registry = LocateRegistry.getRegistry("192.168.66.143", 1099);
         RemoteInterface remoteObject2 = (RemoteInterface) registry.lookup("Hello");
         System.out.println(remoteObject2.sayHello());
     }

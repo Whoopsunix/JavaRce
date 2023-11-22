@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>UndertowEcho</artifactId>
+    <artifactId>SpringMemShell</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>UndertowEcho</name>
-    <description>UndertowEcho</description>
+    <name>SpringMemShell</name>
+    <description>SpringMemShell</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -25,22 +25,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>me.gv7.tools</groupId>
-            <artifactId>java-object-searcher</artifactId>
-            <version>0.1.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
         </dependency>
 
         <dependency>
@@ -55,6 +45,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
+                    </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>
