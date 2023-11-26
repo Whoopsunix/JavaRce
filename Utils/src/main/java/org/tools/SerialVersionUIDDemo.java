@@ -10,7 +10,7 @@ public class SerialVersionUIDDemo {
 
     }
 
-    public long getSerialVersionUID(Class<?> clazz){
+    public static long getSerialVersionUID(Class<?> clazz){
         ObjectStreamClass objectStreamClass = ObjectStreamClass.lookup(clazz);
 
         // 获取默认生成的 serialVersionUID 值

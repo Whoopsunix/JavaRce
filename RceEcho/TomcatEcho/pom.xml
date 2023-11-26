@@ -38,6 +38,15 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <!--                        <version>1.9.2</version>-->
+                        <version>1.8.3</version>
+            <!--            <version>1.6.1</version>-->
+<!--            <version>1.9.4</version>-->
+        </dependency>
+
+        <dependency>
             <groupId>me.gv7.tools</groupId>
             <artifactId>java-object-searcher</artifactId>
             <version>0.1.0</version>

