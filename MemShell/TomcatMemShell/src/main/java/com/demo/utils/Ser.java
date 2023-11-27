@@ -1,6 +1,10 @@
 package com.demo.utils;
 
 import com.demo.memshell.*;
+import com.demo.memshell.unload.UnloadTomcatFilterThreadMS;
+import com.demo.memshell.unload.UnloadTomcatListenerContextClassMS;
+import com.demo.memshell.unload.UnloadTomcatListenerJMXMS;
+import com.demo.memshell.unload.UnloadTomcatServletContextClassMS;
 import org.tools.ser.CC4Generator;
 
 /**
@@ -9,6 +13,6 @@ import org.tools.ser.CC4Generator;
 public class Ser {
     public static void main(String[] args) throws Exception{
         CC4Generator cc4Generator = new CC4Generator();
-        cc4Generator.make(TomcatServletJMXMS.class);
+        cc4Generator.make(UnloadTomcatServletContextClassMS.class);
     }
 }
