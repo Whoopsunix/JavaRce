@@ -9,6 +9,6 @@ import org.tools.ser.CC4Generator;
 public class Ser {
     public static void main(String[] args) throws Exception{
         CC4Generator cc4Generator = new CC4Generator();
-        cc4Generator.make(Tomcat6FilterThreadMS.class);
+        cc4Generator.make(TomcatServletJMXMS.class);
     }
 }

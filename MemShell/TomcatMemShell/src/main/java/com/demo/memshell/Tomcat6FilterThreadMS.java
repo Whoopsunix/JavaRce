@@ -119,7 +119,6 @@ public class Tomcat6FilterThreadMS implements Filter {
                 filterConfigs.put(NAME, filterConfig);
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

