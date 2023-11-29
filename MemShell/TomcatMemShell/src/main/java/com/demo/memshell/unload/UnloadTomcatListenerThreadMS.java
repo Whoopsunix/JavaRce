@@ -11,7 +11,7 @@ import java.util.List;
  * Tomcat 7 8 9
  */
 public class UnloadTomcatListenerThreadMS {
-    private static String NAME = "TomcatListenerJMXMS";
+    private static String CLASSNAME = "TomcatListenerJMXMS";
     private static HttpServletRequest request;
 
     static {
@@ -63,7 +63,7 @@ public class UnloadTomcatListenerThreadMS {
              */
             List<Object> applicationEventListeners = (List<Object>) getFieldValue(standardContext, "applicationEventListenersList");
             for (Object applicationEventListener : applicationEventListeners) {
-                if (applicationEventListener.getClass().getName().contains(NAME)) {
+                if (applicationEventListener.getClass().getName().contains(CLASSNAME)) {
                     applicationEventListeners.remove(applicationEventListener);
                     break;
                 }

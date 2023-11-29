@@ -14,7 +14,7 @@ import java.util.Set;
  * Tomcat 7 8 9
  */
 public class UnloadTomcatListenerJMXMS {
-    private static String NAME = "TomcatListenerJMXMS";
+    private static String CLASSNAME = "TomcatListenerJMXMS";
 
     static {
         try {
@@ -37,7 +37,7 @@ public class UnloadTomcatListenerJMXMS {
                  */
                 List<Object> applicationEventListeners = (List<Object>) getFieldValue(standardContext, "applicationEventListenersList");
                 for (Object applicationEventListener : applicationEventListeners) {
-                    if (applicationEventListener.getClass().getName().contains(NAME)) {
+                    if (applicationEventListener.getClass().getName().contains(CLASSNAME)) {
                         applicationEventListeners.remove(applicationEventListener);
                         break;
                     }
