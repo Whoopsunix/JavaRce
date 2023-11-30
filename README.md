@@ -210,9 +210,10 @@ Version Test
 - AppClassLoader
 - URLCLassLoader
 - BCEL
-- TransletClassLoaderDemo
+- TransletClassLoader
 - Unsafe
 - ReflectUtils
+- RhinoClassloader
 
 ## [XMLSerialization](Serialization/XMLSerialization)
 
