@@ -13,7 +13,7 @@ public class RhinoClassloaderDemo {
         defineClass_rhino(b64Str, "org.example.Exec");
     }
 
-    // sun.misc.Unsafe
+    // org.mozilla.javascript.DefiningClassLoader
     public static void defineClass_rhino(String calcBase64, String className) throws Exception {
 
         byte[] bytes = java.util.Base64.getDecoder().decode(calcBase64);

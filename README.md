@@ -214,6 +214,7 @@ Version Test
 - Unsafe
 - ReflectUtils
 - RhinoClassloader
+- ScriptEngineDemo
 
 ## [XMLSerialization](Serialization/XMLSerialization)
 
