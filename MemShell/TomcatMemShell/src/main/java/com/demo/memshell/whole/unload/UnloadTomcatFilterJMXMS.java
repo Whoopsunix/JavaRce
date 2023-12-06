@@ -1,4 +1,4 @@
-package com.demo.memshell.unload;
+package com.demo.memshell.whole.unload;
 
 import com.sun.jmx.mbeanserver.NamedObject;
 

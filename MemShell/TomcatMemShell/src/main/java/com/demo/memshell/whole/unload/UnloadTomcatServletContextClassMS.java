@@ -1,21 +1,17 @@
-package com.demo.memshell.unload;
+package com.demo.memshell.whole.unload;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @author Whoopsunix
  *
- * 卸载 ContextClassLoader 注入 Tomcat Listener 型内存马
+ * 卸载 ContextClassLoader 注入 Tomcat Servlet 型内存马
  * Tomcat 8 9
  */
-public class UnloadTomcatListenerContextClassMS {
-    private static String CLASSNAME = "TomcatListenerContextClassMS";
-
-    public UnloadTomcatListenerContextClassMS() {
-
-    }
+public class UnloadTomcatServletContextClassMS {
+    private static String NAME = "Whoopsunix";
+    private static String pattern = "/WhoopsunixShell";
 
     static {
         try {
@@ -29,21 +25,23 @@ public class UnloadTomcatListenerContextClassMS {
                 Method getContextmethod = resources.getClass().getDeclaredMethod("getContext");
                 getContextmethod.setAccessible(true);
                 standardContext = getContextmethod.invoke(resources);
-            } catch (Exception ignored) {
+            } catch (Exception e) {
                 Object root = getFieldValue(webappClassLoaderBase, "resources");
                 standardContext = getFieldValue(root, "context");
             }
-            List<Object> applicationEventListeners = (List<Object>) getFieldValue(standardContext, "applicationEventListenersList");
-            for (Object applicationEventListener : applicationEventListeners) {
-                if (applicationEventListener.getClass().getName().contains(CLASSNAME)) {
-                    applicationEventListeners.remove(applicationEventListener);
-                    break;
-                }
+            Object container = standardContext.getClass().getSuperclass().getDeclaredMethod("findChild", String.class).invoke(standardContext, NAME);
+            if (container != null) {
+                // 删除 servlet
+                standardContext.getClass().getSuperclass().getDeclaredMethod("removeChild", Class.forName("org.apache.catalina.Container")).invoke(standardContext, container);
+                // 删除 servlet 映射
+                standardContext.getClass().getDeclaredMethod("removeServletMapping", String.class).invoke(standardContext, pattern);
             }
 
         } catch (Exception e) {
+
         }
     }
+
     public static Object getFieldValue(final Object obj, final String fieldName) throws Exception {
         final Field field = getField(obj.getClass(), fieldName);
         return field.get(obj);

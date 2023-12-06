@@ -1,7 +1,6 @@
 package com.demo.utils;
 
-import com.demo.memshell.*;
-import com.demo.memshell.unload.*;
+import com.demo.memshell.whole.exec.TomcatServletJMXMS;
 import org.tools.ser.CC4Generator;
 
 /**
