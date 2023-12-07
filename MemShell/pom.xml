@@ -10,6 +10,9 @@
   <name>MemShell</name>
   <modules>
     <module>TomcatMemShell</module>
+    <module>SpringMemShell</module>
+    <module>UndertowMemShell</module>
+    <module>ResinMemShell</module>
   </modules>
 
   <properties>

@@ -77,10 +77,4 @@ public class B64 {
         }
         return "";
     }
-
-    // base64解密spring方法
-    public String decodeStr3(String base64Str) {
-        byte[] b = org.springframework.util.Base64Utils.decodeFromString(base64Str);
-        return new String(b);
-    }
 }
