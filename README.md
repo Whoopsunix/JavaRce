@@ -101,29 +101,40 @@ Version Test
 
 ## [TomcatMemShell](MemShell/TomcatMemShell)
 
-- Filter 注入和卸载
-  - ContextClassLoader support 8 9
-  - JMX support 7 8 9
-  - Thread support 6 7 8 9
-- Servlet 注入和卸载
-  - ContextClassLoader support 8 9
-  - JMX support 7 8 9
-  - Thread support 7 8 9
-- Listener 注入和卸载
-  - ContextClassLoader support 8 9
-    - Godzilla
-  - JMX support 7 8 9
-  - Thread support 7 8 9
+| Tomcat     |                    |          |
+| ---------- | ------------------ | -------- |
+| 内存马类型 | Loader             | 测试版本 |
+| Filter     | ContextClassLoader | 8 9      |
+|            | JMX                | 7 8 9    |
+|            | Thread             | 6 7 8 9  |
+| Servlet    | ContextClassLoader | 8 9      |
+|            | JMX                | 7 8 9    |
+|            | Thread             | 7 8 9    |
+| Listener   | ContextClassLoader | 8 9      |
+|            | JMX                | 7 8 9    |
+|            | Thread             | 7 8 9    |
 
 ## [SpringMemShell](MemShell/SpringMemShell)
 
-- Controller
+| Springboot2 |                       |                |
+| ----------- | --------------------- | -------------- |
+| 内存马类型  | Loader                | 测试版本       |
+| Controller  | WebApplicationContext | [2.2.x, 2.7.x] |
 
 ## [UndertowMemShell](MemShell/UndertowMemShell)
 
-- Listener
+| Undertow   |        |          |
+| ---------- | ------ | -------- |
+| 内存马类型 | Loader | 测试版本 |
+| Listener   | Thread | 2.7.15   |
 
-## []()
+## [ResinMemShell](MemShell/ResinMemShell)
+
+| 内存马类型 | Loader | 测试版本         |
+| ---------- | ------ | ---------------- |
+| Listener   | Thread | [4.0.52, 4.0.66] |
+| Servlet    | Thread | [4.0.52, 4.0.66] |
+| Filter     | Thread | [4.0.52, 4.0.66] |
 
 # 0x03 [Command](Command)
 
