@@ -29,7 +29,9 @@ public class ResinListenerExecMS implements ServletRequestListener {
                     Class cls = threads[i].currentThread().getContextClassLoader().loadClass("com.caucho.server.dispatch.ServletInvocation");
                     Object contextRequest = cls.getMethod("getContextRequest").invoke(null);
                     Object webapp = contextRequest.getClass().getMethod("getWebApp").invoke(contextRequest);
-
+                    if (webapp == null){
+                        continue;
+                    }
                     if (isInject(webapp, resinListenerExecMS.getClass().getName())) {
                         break;
                     }

@@ -25,6 +25,9 @@ By. Whoopsunix
     - [OS](#osecho)
 - [0x02 MemShell](#0x02-memshell)
     - [TomcatMemShell](#tomcatmemshell)
+    - [SpringMemShell](#springmemshell)
+    - [UndertowMemShell](#undertowmemshell)
+    - [ResinMemShell](#resinmemshell)
 - [0x03 命令执行](#0x03-command)
   - [执行Demo，java jsp](#执行demo)
   - [执行结果输出（InputStream 处理Demo）](#执行结果输出inputstream-处理demo)
@@ -127,6 +130,7 @@ Version Test
 | ---------- | ------ | -------- |
 | 内存马类型 | Loader | 测试版本 |
 | Listener   | Thread | 2.7.15   |
+| Filter     | Thread | 2.7.15   |
 
 ## [ResinMemShell](MemShell/ResinMemShell)
 

