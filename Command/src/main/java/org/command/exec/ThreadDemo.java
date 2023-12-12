@@ -15,7 +15,13 @@ public class ThreadDemo {
             @Override
             public void run() {
                 try {
-                    InputStream inputStream = Runtime.getRuntime().exec(cmd).getInputStream();
+                    String[] cmds = null;
+                    if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                        cmds = new String[]{"cmd.exe", "/c", cmd};
+                    } else {
+                        cmds = new String[]{"/bin/sh", "-c", cmd};
+                    }
+                    InputStream inputStream = Runtime.getRuntime().exec(cmds).getInputStream();
                     inputStreamRef.set(inputStream);
                 } catch (Exception e) {
                     // Handle the exception

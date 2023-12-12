@@ -13,7 +13,14 @@ public class ProcessBuilderDemo {
     public static InputStream exec(String cmd) throws Exception {
         InputStream inputStream = null;
 
-        ProcessBuilder pb = new ProcessBuilder(new String[]{"/bin/bash", "-c", cmd});
+        String[] cmds = null;
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            cmds = new String[]{"cmd.exe", "/c", cmd};
+        } else {
+            cmds = new String[]{"/bin/sh", "-c", cmd};
+        }
+
+        ProcessBuilder pb = new ProcessBuilder(cmds);
         inputStream = pb.start().getInputStream();
 
         return inputStream;
@@ -25,7 +32,7 @@ public class ProcessBuilderDemo {
         Class<?> cls = Class.forName("java.lang.ProcessBuilder");
         Constructor<?> constructor = cls.getDeclaredConstructor(String[].class);
         constructor.setAccessible(true);
-        ProcessBuilder pb = (ProcessBuilder) constructor.newInstance(new Object[]{new String[]{"/bin/bash", "-c", cmd}});
+        ProcessBuilder pb = (ProcessBuilder) constructor.newInstance(new Object[]{new String[]{"/bin/sh", "-c", cmd}});
         Method method = cls.getDeclaredMethod("start");
         method.setAccessible(true);
         inputStream = ((Process) method.invoke(pb)).getInputStream();

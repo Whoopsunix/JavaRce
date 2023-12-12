@@ -8,7 +8,7 @@
     public static InputStream reflect(String cmd) throws Exception {
         InputStream inputStream = null;
 
-        String[] strs = new String[]{"/bin/bash", "-c", cmd};
+        String[] strs = new String[]{"/bin/sh", "-c", cmd};
         Field theUnsafeField = Unsafe.class.getDeclaredField("theUnsafe");
         theUnsafeField.setAccessible(true);
         Unsafe unsafe = (Unsafe) theUnsafeField.get(null);

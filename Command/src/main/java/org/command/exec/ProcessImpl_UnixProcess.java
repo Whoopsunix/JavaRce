@@ -14,7 +14,12 @@ import java.lang.reflect.Method;
 public class ProcessImpl_UnixProcess {
     public static InputStream reflect(String cmd) throws Exception {
         InputStream inputStream = null;
-        String[] strs = new String[]{"/bin/bash", "-c", cmd};
+        String[] strs = null;
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            strs = new String[]{"cmd.exe", "/c", cmd};
+        } else {
+            strs = new String[]{"/bin/sh", "-c", cmd};
+        }
         Class<?> processClass = null;
         try {
             processClass = Class.forName("java.lang.UNIXProcess");

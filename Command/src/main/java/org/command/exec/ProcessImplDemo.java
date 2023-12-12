@@ -13,7 +13,12 @@ public class ProcessImplDemo {
     public static InputStream reflect(String cmd) throws Exception {
         InputStream inputStream = null;
 
-        String[] cmds = new String[]{"/bin/bash", "-c", cmd};
+        String[] cmds = null;
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            cmds = new String[]{"cmd.exe", "/c", cmd};
+        } else {
+            cmds = new String[]{"/bin/sh", "-c", cmd};
+        }
         Class<?> cls = Class.forName("java.lang.ProcessImpl");
         Method method = cls.getDeclaredMethod("start", String[].class, Map.class, String.class, ProcessBuilder.Redirect[].class, boolean.class);
         method.setAccessible(true);

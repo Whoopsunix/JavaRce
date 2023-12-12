@@ -4,7 +4,7 @@
     public static InputStream exec(String cmd) throws Exception {
         InputStream inputStream = null;
 
-        ProcessBuilder pb = new ProcessBuilder(new String[]{"/bin/bash", "-c", cmd});
+        ProcessBuilder pb = new ProcessBuilder(new String[]{"/bin/sh", "-c", cmd});
         inputStream = pb.start().getInputStream();
 
         return inputStream;

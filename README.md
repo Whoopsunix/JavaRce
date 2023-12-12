@@ -102,6 +102,10 @@ Version Test
 
 # 0x02 [MemShell](MemShell)
 
+内存马注入的其实可以看为 注入器+内存马组成，注入器即去上下文中寻找 Request 对象，内存马即通用的 Servlet、Filter 这类。抽象出来的好处是：写注入器时关注与中间件，内存马功能拓展也不用去每个中间件都测一遍。
+
+这里给出的例子没有分开，都是直接写成一个文件，之后会将分离的写法作为功能的一部分集成在后续工具中。
+
 ## [TomcatMemShell](MemShell/TomcatMemShell)
 
 | Tomcat     |                    |          |
@@ -134,8 +138,9 @@ Version Test
 
 ## [ResinMemShell](MemShell/ResinMemShell)
 
-| 内存马类型 | Loader | 测试版本         |
+| Resin      |        |                  |
 | ---------- | ------ | ---------------- |
+| 内存马类型 | Loader | 测试版本         |
 | Listener   | Thread | [4.0.52, 4.0.66] |
 | Servlet    | Thread | [4.0.52, 4.0.66] |
 | Filter     | Thread | [4.0.52, 4.0.66] |
