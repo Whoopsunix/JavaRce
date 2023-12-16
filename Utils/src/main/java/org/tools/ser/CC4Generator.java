@@ -11,6 +11,8 @@ import org.tools.Reflections;
 import org.tools.encryption.B64;
 
 import javax.xml.transform.Templates;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.PriorityQueue;
 
@@ -34,6 +36,14 @@ public class CC4Generator {
     public String make(Class<?> clazz) throws Exception {
         B64 b64 = new B64();
         return b64.encodeObj(cc4Demo(b64.encodeJavaClass(clazz)));
+    }
+
+    public void makeFile(Class<?> clazz, String fileName) throws Exception {
+        B64 b64 = new B64();
+        Object object = cc4Demo(b64.encodeJavaClass(clazz));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+        oos.writeObject(object);
+
     }
 
     public static class Foo implements Serializable {

@@ -15,15 +15,6 @@ import java.util.Base64;
  */
 @Controller
 public class Base64Controller {
-    @RequestMapping("/test")
-    @ResponseBody
-    protected String test(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        // 反序列化
-        String str = req.getParameter("str");
-        return str;
-    }
-
-
     @RequestMapping("/base64")
     protected void base64De(HttpServletRequest req, HttpServletResponse resp) throws Exception{
         try {

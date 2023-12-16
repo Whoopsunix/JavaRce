@@ -78,7 +78,7 @@ public class UndertowListenerExecMS implements ServletRequestListener {
             Object managedListener = Class.forName("io.undertow.servlet.core.ManagedListener").getConstructor(Class.forName("io.undertow.servlet.api.ListenerInfo"), Boolean.TYPE).newInstance(ListenerInfo, true);
             applicationListeners.getClass().getDeclaredMethod("addListener", Class.forName("io.undertow.servlet.core.ManagedListener")).invoke(applicationListeners, managedListener);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
