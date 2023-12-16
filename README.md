@@ -135,6 +135,7 @@ Version Test
 | 内存马类型 | Loader | 测试版本 |
 | Listener   | Thread | 2.7.15   |
 | Filter     | Thread | 2.7.15   |
+| Servlet    | Thread | 2.7.15   |
 
 ## [ResinMemShell](MemShell/ResinMemShell)
 
