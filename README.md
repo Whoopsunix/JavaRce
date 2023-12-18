@@ -106,20 +106,22 @@ Version Test
 
 这里给出的例子没有分开，都是直接写成一个文件，之后会将分离的写法作为功能的一部分集成在后续工具中。
 
+可以直接用 Rest Client 发包，比较方便
+
 ## [TomcatMemShell](MemShell/TomcatMemShell)
 
-| Tomcat     |                    |          |
-| ---------- | ------------------ | -------- |
-| 内存马类型 | Loader             | 测试版本 |
-| Filter     | ContextClassLoader | 8 9      |
-|            | JMX                | 7 8 9    |
-|            | Thread             | 6 7 8 9  |
-| Servlet    | ContextClassLoader | 8 9      |
-|            | JMX                | 7 8 9    |
-|            | Thread             | 7 8 9    |
-| Listener   | ContextClassLoader | 8 9      |
-|            | JMX                | 7 8 9    |
-|            | Thread             | 7 8 9    |
+| Tomcat     |        |          |
+| ---------- | ------ | -------- |
+| 内存马类型 | Loader | 测试版本 |
+| Filter     | WebApp | 8 9      |
+|            | JMX    | 7 8 9    |
+|            | Thread | 6 7 8 9  |
+| Servlet    | WebApp | 8 9      |
+|            | JMX    | 7 8 9    |
+|            | Thread | 7 8 9    |
+| Listener   | WebApp | 8 9      |
+|            | JMX    | 7 8 9    |
+|            | Thread | 7 8 9    |
 
 ## [SpringMemShell](MemShell/SpringMemShell)
 

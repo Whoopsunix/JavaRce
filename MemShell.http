@@ -24,9 +24,8 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Content-Disposition: form-data; name="file"; filename="cc4.bin"
 Content-Type: application/octet-stream
 
-@./cc4.bin
+< ./cc4.bin
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
-
-
+###

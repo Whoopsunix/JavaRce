@@ -12,4 +12,12 @@
         <servlet-name>Base64DeSerializerServlet</servlet-name>
         <url-pattern>/base64</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BinaryDeSerializerServlet</servlet-name>
+        <servlet-class>com.demo.servlet.BinaryDeSerializerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BinaryDeSerializerServlet</servlet-name>
+        <url-pattern>/binary</url-pattern>
+    </servlet-mapping>
 </web-app>
