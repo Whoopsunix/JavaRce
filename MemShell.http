@@ -21,10 +21,10 @@ X-Token: hostname
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="test.bin"
+Content-Disposition: form-data; name="file"; filename="cc4.bin"
 Content-Type: application/octet-stream
 
-< cc4.bin
+@./cc4.bin
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 

