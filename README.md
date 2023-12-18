@@ -276,7 +276,7 @@ Version Test
 
 ![Alt](https://repobeats.axiom.co/api/embed/818a4d2c0d1562eec751b2637b825b3b0d2cf0e3.svg "Repobeats analytics image")
 
-[![Stargazers over time](https://starchart.cc/Whoopsunix/JavaRce.svg)](https://starchart.cc/Whoopsunix/JavaRce)
+[//]: # ([![Stargazers over time]&#40;https://starchart.cc/Whoopsunix/JavaRce.svg&#41;]&#40;https://starchart.cc/Whoopsunix/JavaRce&#41;)
 
 # Thanks
 
