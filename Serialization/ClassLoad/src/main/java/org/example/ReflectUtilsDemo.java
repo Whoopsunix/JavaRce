@@ -1,7 +1,5 @@
 package org.example;
 
-import org.tools.encryption.B64;
-
 /**
  * @author Whoopsunix
  */
