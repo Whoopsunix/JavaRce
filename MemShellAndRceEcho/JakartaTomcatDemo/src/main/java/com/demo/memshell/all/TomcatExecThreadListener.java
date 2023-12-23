@@ -1,7 +1,5 @@
 package com.demo.memshell.all;
 
-import org.ppp.tools.ThreadObjectFinder;
-
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -152,11 +150,9 @@ public class TomcatExecThreadListener implements InvocationHandler {
     }
 
     public static Object getTargetObject(String className) throws Exception {
-        ThreadObjectFinder threadObjectFinder = new ThreadObjectFinder();
-        List<ClassLoader> activeClassLoaders = threadObjectFinder.getActiveClassLoaders();
+        List<ClassLoader> activeClassLoaders = new TomcatExecThreadListener().getActiveClassLoaders();
 
-        Class cls = threadObjectFinder.getTargetClass(className, activeClassLoaders);
-        System.out.println(cls);
+        Class cls = getTargetClass(className, activeClassLoaders);
 
         // 死亡区域 已检查过的类
         HashSet breakObject = new HashSet();
@@ -165,15 +161,57 @@ public class TomcatExecThreadListener implements InvocationHandler {
         // 原始类型和包装类都不递归
         HashSet<String> breakType = new HashSet<>(Arrays.asList(int.class.getName(), short.class.getName(), long.class.getName(), double.class.getName(), byte.class.getName(), float.class.getName(), char.class.getName(), boolean.class.getName(), Integer.class.getName(), Short.class.getName(), Long.class.getName(), Double.class.getName(), Byte.class.getName(), Float.class.getName(), Character.class.getName(), Boolean.class.getName(), String.class.getName()));
 
-        Object result = threadObjectFinder.getTargetObject(cls, Thread.currentThread(), breakObject, breakType, 30);
+        Object result = getTargetObject(cls, Thread.currentThread(), breakObject, breakType, 30);
 
         return result;
     }
 
     /**
+     * 遍历 ClassLoader 加载目标 Class
+     */
+    public static Class getTargetClass(String className, List<ClassLoader> activeClassLoaders) {
+        for (ClassLoader activeClassLoader : activeClassLoaders) {
+            try {
+                return Class.forName(className, true, activeClassLoader);
+            } catch (Throwable e) {
+
+            }
+        }
+        return null;
+    }
+
+    public List<ClassLoader> getActiveClassLoaders() throws Exception {
+//        List<ClassLoader> activeClassLoaders = new ArrayList<>();
+        Set<ClassLoader> activeClassLoaders = new HashSet<>();
+
+        // 加载当前对象的加载器
+        activeClassLoaders.add(this.getClass().getClassLoader());
+
+        // 当前线程的上下文类加载器
+        activeClassLoaders.add(Thread.currentThread().getContextClassLoader());
+
+//        // 应用程序类加载器
+//        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+//        activeClassLoaders.add(systemClassLoader);
+//
+//        // 扩展类加载器
+//        activeClassLoaders.add(systemClassLoader.getParent());
+
+        // 获取线程组
+        ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
+        Thread[] threads = new Thread[threadGroup.activeCount()];
+        int count = threadGroup.enumerate(threads, true);
+        for (int i = 0; i < count; i++) {
+            activeClassLoaders.add(threads[i].getContextClassLoader());
+        }
+
+        return new ArrayList<>(activeClassLoaders);
+    }
+
+    /**
      * 递归查找
      */
-    public Object getTargetObject(Class targetCls, Object object, HashSet breakObject, HashSet<String> breakType, int maxDepth) {
+    public static Object getTargetObject(Class targetCls, Object object, HashSet breakObject, HashSet<String> breakType, int maxDepth) {
         // 最大递归深度
         maxDepth--;
         if (maxDepth < 0) {
