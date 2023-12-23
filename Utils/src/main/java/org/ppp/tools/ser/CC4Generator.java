@@ -1,6 +1,7 @@
 package org.ppp.tools.ser;
 
 import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+import com.thoughtworks.xstream.XStream;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.ChainedTransformer;
@@ -36,6 +37,12 @@ public class CC4Generator {
     public String make(Class<?> clazz) throws Exception {
         B64 b64 = new B64();
         return b64.encodeObj(cc4Demo(b64.encodeJavaClass(clazz)));
+    }
+
+    public String makeXStream(Class<?> clazz) throws Exception {
+        B64 b64 = new B64();
+        XStream xstream = new XStream();
+        return xstream.toXML(cc4Demo(b64.encodeJavaClass(clazz)));
     }
 
     public void makeFile(Class<?> clazz, String fileName) throws Exception {
