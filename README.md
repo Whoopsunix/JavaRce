@@ -17,11 +17,11 @@ By. Whoopsunix
 ## 目录
 
 - [0x01 RceEcho & MemShell](#0x01-rceecho--memshell)
-    - [Tomcat](#tomcatecho)
-    - [Spring](#springecho)
-    - [Jetty](#jettyecho)
-    - [Undertow](#undertowecho)
-    - [Resin](#resinecho)
+    - [Tomcat](#tomcat)
+    - [Spring](#spring)
+    - [Jetty](#jetty)
+    - [Undertow](#undertow)
+    - [Resin](#resin)
     - [OS](#osecho)
 - [0x02 命令执行](#0x02-command)
   - [执行Demo，java jsp](#执行demo)
@@ -30,14 +30,9 @@ By. Whoopsunix
   - [OGNL](#ognl)
   - [EL](#el)
   - [SPEL](#spel)
+  - [JxPath](#jxpath)
 - [0x04 JDBC Attack](#0x04-jdbc-attack)
-  - [Mysql](#mysql)
-  - [PostgreSQL](#postgresql)
-  - [H2database](#h2database)
-  - [IBM DB2](#ibmdb2)
-  - [ModeShape](#modeshape)
-  - [Apache Derby](#apache-derby)
-  - [Sqlite](#sqlite)
+  - Mysql、PostgreSQL、H2database、IBMDB2、ModeShape、Apache Derby、Sqlite、dameng 达梦、Oracle、teradata
 - [0x05 Serialization](#0x05-serialization)
   - [类加载](#class-load)
   - [XMLSerialization](#xmlserialization)
@@ -165,7 +160,6 @@ WildFly 默认容器用的 Undertow
 
 - runtime 回显
   - 一句话回显 https://forum.butian.net/share/886
-
 - jsEngine 回显
 - Scriptlet 标记写法（放在这里对照）
 
@@ -175,6 +169,11 @@ WildFly 默认容器用的 Undertow
 - 探测用Payload
   - DNSLOG、HTTPLOG
   - 延时
+
+## [JxPath](Expression/JxPathAttack)
+
+- runtime
+- js
 
 # 0x04 [JDBC Attack](JDBCAttack)
 
