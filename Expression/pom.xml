@@ -11,6 +11,7 @@
         <module>ELAttack</module>
         <module>OGNLAttack</module>
         <module>SPELAttack</module>
+        <module>JxPathAttack</module>
     </modules>
 
     <name>Expression</name>

