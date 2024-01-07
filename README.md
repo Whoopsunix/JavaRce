@@ -26,20 +26,21 @@ By. Whoopsunix
 - [0x02 命令执行](#0x02-command)
   - [执行Demo，java jsp](#执行demo)
   - [执行结果输出（InputStream 处理Demo）](#执行结果输出inputstream-处理demo)
-- [0x03 表达式注入](#0x03-expression-inject)
+- [0x03 代码执行]
+- [0x04 表达式注入](#0x04-expression-inject)
   - [OGNL](#ognl)
   - [EL](#el)
   - [SPEL](#spel)
   - [JxPath](#jxpath)
-- [0x04 JDBC Attack](#0x04-jdbc-attack)
+- [0x05 JDBC Attack](#0x05-jdbc-attack)
   - Mysql、PostgreSQL、H2database、IBMDB2、ModeShape、Apache Derby、Sqlite、dameng 达梦、Oracle、teradata
-- [0x05 Serialization](#0x05-serialization)
+- [0x06 Serialization](#0x06-serialization)
   - [类加载](#class-load)
   - [XMLSerialization](#xmlserialization)
     - [JavaBean](#jarbean)
     - [XStream](#xstream)
   - [构造方法利用](#constructorexp)
-- [0x06 文件读写 Demo](#0x06-文件读写-demo)
+- [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [鸣谢](#Thanks)
 
 # 0x01 [RceEcho & MemShell](MemShellAndRceEcho)
@@ -84,9 +85,9 @@ By. Whoopsunix
 
 ## Jetty
 
-| Jetty   |        |                            |
-| ------- | ------ | -------------------------- |
-| RceEcho | Thread | 7.x、8.x、9.x、10.x 全版本 |
+| Jetty   |        |                                  |
+| ------- | ------ | -------------------------------- |
+| RceEcho | Thread | 7.x、8.x、9.x、10.x 、11.x全版本 |
 
 ## Undertow
 
@@ -129,7 +130,6 @@ WildFly 默认容器用的 Undertow
 - ProcessImpl & UnixProcess
 - ProcessImpl & UnixProcess by unsafe - Native
 - Thread
-- ScriptEngine
 - jni
 
 ## [执行结果输出（InputStream 处理Demo）](Command)
@@ -142,7 +142,13 @@ WildFly 默认容器用的 Undertow
 - org.springframework:spring-core
 - org.apache.commons:commons-io
 
-# 0x03 [Expression inject](Expression)
+# 0x03 [Code](Command)
+
+## ScriptEngine
+
+参考 Tri0mphe 师傅文章  https://forum.butian.net/share/487
+
+# 0x04 [Expression inject](Expression)
 
 表达式注入可以看 https://github.com/yzddmr6/Java-Js-Engine-Payloads ，这部分知识笔记比较分散，还没整理进来。
 
@@ -175,7 +181,7 @@ WildFly 默认容器用的 Undertow
 - runtime
 - js
 
-# 0x04 [JDBC Attack](JDBCAttack)
+# 0x05 [JDBC Attack](JDBCAttack)
 
 JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com/su18/JDBC-Attack) 、[pyn3rd blog](https://pyn3rd.github.io/) 、[A New Attack Interface In Java Applications](https://i.blackhat.com/Asia-23/AS-23-Yuanzhen-A-new-attack-interface-in-Java.pdf) 、 [Deserial_Sink_With_JDBC](https://github.com/luelueking/Deserial_Sink_With_JDBC)
 - Mysql
@@ -210,7 +216,7 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 - teradata
   - JDBC RCE
 
-# 0x05 [Serialization](Serialization)
+# 0x06 [Serialization](Serialization)
 
 ## [Class load](Serialization/ClassLoad)
 
@@ -245,7 +251,7 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 
 主要为 CVE 不具体展开，<= 1.4.17 的生成集成在 yso 项目中
 
-# 0x06 [文件读写 Demo](FilesOperations)
+# 0x07 [文件读写 Demo](FilesOperations)
 
 可用的文件读写方法，即 Java 数据流的各种操作方法
 

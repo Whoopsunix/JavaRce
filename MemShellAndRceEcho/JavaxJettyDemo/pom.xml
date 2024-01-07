@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
-    <artifactId>JettyDemo</artifactId>
+    <artifactId>JavaxJettyDemo</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>JettyDemo</name>
@@ -11,15 +11,18 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>7.1.0.RC0</version>
+<!--            <version>10.0.0</version>-->
+            <version>9.0.0.M0</version>
+<!--            <version>8.0.0.M0</version>-->
+<!--            <version>7.1.0.RC0</version>-->
+<!--            <version>7.0.0.M0</version>-->
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.0</version>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
         </dependency>
-
         <dependency>
             <groupId>me.gv7.tools</groupId>
             <artifactId>java-object-searcher</artifactId>

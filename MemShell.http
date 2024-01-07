@@ -6,12 +6,18 @@ X-Token: hostname
 Content-Type: application/x-www-form-urlencoded
 
 
+cmd=whoami
+
+
 ###
 # Exec Listener
 POST /base64 HTTP/1.1
 Host: 127.0.0.1:8080
 X-Token: hostname
 Content-Type: application/x-www-form-urlencoded
+
+
+cmd=whoami
 
 
 ###
@@ -30,3 +36,10 @@ Content-Type: application/octet-stream
 
 
 ###
+POST /base64 HTTP/1.1
+Host: 127.0.0.1:8080
+#X-Token: hostname
+Content-Type: application/x-www-form-urlencoded
+
+
+cmd=whoami&base64Str=

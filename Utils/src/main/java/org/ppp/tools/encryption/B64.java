@@ -68,13 +68,13 @@ public class B64 {
     }
 
     // base64解密rt2
-    public String decodeStr2(String base64Str) {
-        try {
-            byte[] b = com.sun.org.apache.xml.internal.security.utils.Base64.decode(base64Str);
-            return new String(b);
-        } catch (Exception e){
-
-        }
-        return "";
-    }
+//    public String decodeStr2(String base64Str) {
+//        try {
+//            byte[] b = com.sun.org.apache.xml.internal.security.utils.Base64.decode(base64Str);
+//            return new String(b);
+//        } catch (Exception e){
+//
+//        }
+//        return "";
+//    }
 }
