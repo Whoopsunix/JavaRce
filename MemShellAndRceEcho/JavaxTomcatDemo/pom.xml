@@ -15,10 +15,10 @@
             <artifactId>tomcat-catalina</artifactId>
             <!--            <version>7.0.59</version>-->
             <!--            <version>7.0.109</version>-->
-<!--                        <version>8.0.53</version>-->
-                        <version>8.5.82</version>
-<!--            <version>9.0.65</version>-->
-<!--            <version>10.0.23</version>-->
+            <!--                        <version>8.0.53</version>-->
+            <version>8.5.82</version>
+            <!--            <version>9.0.65</version>-->
+            <!--            <version>10.0.23</version>-->
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -34,6 +34,12 @@
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.2</version>
+        </dependency>
+        <!-- ldap -->
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+            <version>3.1.1</version>
         </dependency>
 
         <dependency>
@@ -53,6 +59,40 @@
             <artifactId>java-object-searcher</artifactId>
             <version>0.1.0</version>
         </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>javax.servlet</groupId>-->
+        <!--            <artifactId>javax.servlet-api</artifactId>-->
+        <!--            <version>3.1.0</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!--        &lt;!&ndash; ldap &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.unboundid</groupId>-->
+        <!--            <artifactId>unboundid-ldapsdk</artifactId>-->
+        <!--            <version>3.1.1</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.tomcat.embed</groupId>-->
+        <!--            <artifactId>tomcat-embed-el</artifactId>-->
+        <!--            <version>8.5.43</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.tomcat.embed</groupId>-->
+        <!--            <artifactId>tomcat-embed-core</artifactId>-->
+        <!--            <version>8.5.43</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.tomcat.embed</groupId>-->
+        <!--            <artifactId>tomcat-embed-jasper</artifactId>-->
+        <!--            <version>8.5.43</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
     </dependencies>
 
 

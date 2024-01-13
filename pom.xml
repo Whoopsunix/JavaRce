@@ -15,6 +15,7 @@
         <module>Serialization</module>
         <module>MemShellAndRceEcho</module>
         <module>FilesOperations</module>
+        <module>XXE</module>
         <module>Utils</module>
     </modules>
 
