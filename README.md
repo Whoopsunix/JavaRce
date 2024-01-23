@@ -54,7 +54,7 @@ By. Whoopsunix
 
 
 
-反序列化的测试可以直接用 Rest Client [MemShell.http](MemShell.http) 发包，比较方便。
+反序列化的测试可以直接用 Rest Client [MemShell.http](JavaClass.http) 发包，比较方便。
 
 ## Tomcat
 
@@ -72,6 +72,7 @@ By. Whoopsunix
 | Listener   | Thread | 6-11     |
 |            | JMX    | 7 8 9    |
 |            | WebApp | 8 9      |
+| Executor   | Thread | 8        |
 |            |        |          |
 | RceEcho    | Thread |          |
 

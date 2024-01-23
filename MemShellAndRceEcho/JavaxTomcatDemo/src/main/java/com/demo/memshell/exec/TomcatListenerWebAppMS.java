@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * Tomcat 8 9
  */
 public class TomcatListenerWebAppMS implements ServletRequestListener {
-    private static String header = "X-Token";
+    private static String header = "Xoken";
     public TomcatListenerWebAppMS() {
 
     }

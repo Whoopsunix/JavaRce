@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 public class TomcatListenerThreadMS implements ServletRequestListener {
     private static HttpServletRequest request;
     private static HttpServletResponse response;
-    private static String header = "X-Token";
+    private static String header = "Xoken";
 
     public TomcatListenerThreadMS() {
 

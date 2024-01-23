@@ -15,7 +15,7 @@
     <module>UndertowDemo</module>
     <module>ResinDemo</module>
     <module>JavaxJettyDemo</module>
-    <module>JakartaTomcatDemo</module>
+    <module>JakartaJettyDemo</module>
     <module>OSEcho</module>
 
   </modules>

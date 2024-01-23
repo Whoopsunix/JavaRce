@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class TomcatExecThreadListener implements InvocationHandler {
 
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
     private static Object[] applicationEventListenersObjects;
     private static List applicationEventListeners;
     private static Boolean flag = false;

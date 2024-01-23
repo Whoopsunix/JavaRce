@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * [4.0.52, 4.0.66]
  */
 public class ResinListenerExecMS implements ServletRequestListener {
-    private static String header = "X-Token";
+    private static String header = "Xoken";
 
     static {
         try {

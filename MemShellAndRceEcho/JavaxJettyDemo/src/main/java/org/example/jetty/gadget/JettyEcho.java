@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  * 7.x、8.x、9.x、10.x、11.x
  */
 public class JettyEcho {
-    private static String HEADER = "X-Token";
+    private static String HEADER = "Xoken";
     private static String PARAM = "cmd";
     public JettyEcho() {
         try {

