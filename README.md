@@ -26,7 +26,7 @@ By. Whoopsunix
 - [0x02 命令执行](#0x02-command)
   - [执行Demo，java jsp](#执行demo)
   - [执行结果输出（InputStream 处理Demo）](#执行结果输出inputstream-处理demo)
-- [0x03 代码执行]
+- [0x03 代码执行](#0x03-code)
 - [0x04 表达式注入](#0x04-expression-inject)
   - [OGNL](#ognl)
   - [EL](#el)
@@ -73,6 +73,7 @@ By. Whoopsunix
 |            | JMX    | 7 8 9    |
 |            | WebApp | 8 9      |
 | Executor   | Thread | 8        |
+| Valve      | Thread | 8        |
 |            |        |          |
 | RceEcho    | Thread |          |
 

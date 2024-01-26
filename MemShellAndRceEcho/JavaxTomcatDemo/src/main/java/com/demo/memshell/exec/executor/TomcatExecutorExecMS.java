@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
  *
  * 参考 https://xz.aliyun.com/u/40487
  */
-public class ExecutorExecMS extends ThreadPoolExecutor {
+public class TomcatExecutorExecMS extends ThreadPoolExecutor {
     private static String HEADER = "Xoken";
 
-    public ExecutorExecMS(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
+    public TomcatExecutorExecMS(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     }
 

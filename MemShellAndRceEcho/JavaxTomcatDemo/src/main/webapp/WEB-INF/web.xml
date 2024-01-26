@@ -20,4 +20,12 @@
         <servlet-name>BinaryDeSerializerServlet</servlet-name>
         <url-pattern>/binary</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.demo.servlet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
 </web-app>
