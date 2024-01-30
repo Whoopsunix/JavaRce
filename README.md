@@ -40,6 +40,7 @@ By. Whoopsunix
     - [JavaBean](#jarbean)
     - [XStream](#xstream)
   - [构造方法利用](#constructorexp)
+  - [Snakeyaml](#snakeyaml)
 - [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [0x08 XXE 有回显测试 Demo](#0x08-xxe-有回显测试-demo)
 - [鸣谢](#Thanks)
@@ -249,6 +250,11 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 通过构造方法触发RCE
 
 - xml
+
+## [Snakeyaml](Serialization/SnakeyamlDemo)
+
+- ScriptEngineManager
+- c3p0
 
 ### XStream
 

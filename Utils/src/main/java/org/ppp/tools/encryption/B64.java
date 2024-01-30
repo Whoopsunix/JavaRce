@@ -50,6 +50,12 @@ public class B64 {
         return "";
     }
 
+    public static String base64encoder(byte[] bytes) throws Exception {
+        String base64str = new sun.misc.BASE64Encoder().encode(bytes);
+        base64str = base64str.replaceAll("\n|\r", "");
+        return base64str;
+    }
+
     // file
     public String encodeFile(String filePath) throws Exception {
         InputStream in = new FileInputStream(filePath);
