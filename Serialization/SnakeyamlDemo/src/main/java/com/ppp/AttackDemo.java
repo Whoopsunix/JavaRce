@@ -34,6 +34,13 @@ public class AttackDemo {
 
 
         Yaml yaml = new Yaml();
-        yaml.load(c3p0Hex);
+        yaml.load(jar);
+
+//        Iterable<Object> objects = yaml.loadAll(jar);
+//        for (Object object : objects) {
+//            System.out.println(object);
+//        }
+
+
     }
 }

