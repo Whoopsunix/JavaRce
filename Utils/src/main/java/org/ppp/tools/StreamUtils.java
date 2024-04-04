@@ -7,6 +7,8 @@ import java.nio.charset.Charset;
 
 /**
  * @author Whoopsunix
+ *
+ * 数据流工具类
  */
 public class StreamUtils {
     public static final int BUFFER_SIZE = 4096;

@@ -3,10 +3,7 @@ package org.example.jetty.utils;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
-import org.example.jetty.gadget.JettyEcho;
 import org.example.jetty.memshell.JettyListenerThreadLoader;
-import org.example.jetty.memshell.Test;
-import org.ppp.tools.encryption.B64;
 import org.ppp.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
