@@ -32,6 +32,14 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.0</version>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <!--<version>3.1</version>-->
+            <!--            <version>3.2</version>-->
+            <version>3.2.1</version>
+            <!--            <version>3.2.2</version>-->
+        </dependency>
 
         <dependency>
             <groupId>org.ppp.tools</groupId>

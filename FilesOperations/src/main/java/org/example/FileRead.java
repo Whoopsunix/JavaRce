@@ -7,6 +7,11 @@ import java.util.Scanner;
  * @author Whoopsunix
  */
 public class FileRead {
+    public static void main(String[] args) throws Exception {
+        String s = read_InputStreamReader_BufferedInputStream("/etc/passwd");
+        System.out.println(s);
+    }
+
     /**
      * abstract java.io.Reader
      * java.io.InputStreamReader
@@ -79,6 +84,20 @@ public class FileRead {
         }
         bufferedReader.close();
         return content.toString();
+    }
+
+    public static String read_InputStreamReader_BufferedInputStream(String filePath) throws Exception {
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+        byte[] buf = new byte[1024];
+        int len;
+        OutputStream outputStream = new ByteArrayOutputStream();
+        while ((len = bufferedInputStream.read(buf)) > 0) {
+            outputStream.write(buf, 0, len);
+        }
+        outputStream.close();
+        bufferedInputStream.close();
+        return outputStream.toString();
     }
 
     // java.io.FileInputStream

