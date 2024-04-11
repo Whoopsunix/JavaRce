@@ -43,7 +43,7 @@ By. Whoopsunix
   - [Snakeyaml](#snakeyaml)
 - [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [0x08 XXE 有回显测试 Demo](#0x08-xxe-有回显测试-demo)
-- [0x09 SSTI](#0x09-ssti-freemarker)
+- [0x09 SSTI](#0x09-ssti)
 - [鸣谢](#Thanks)
 
 # 0x01 [RceEcho & MemShell](MemShellAndRceEcho)
@@ -269,7 +269,10 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 
 测试 JDK 原生的 XXE Demo 时最好将 pom 引入的依赖注释掉，idea 调试时容易出问题进不到想要的 hook 点 
 
-# 0x09 [SSTI FreeMarker](SSTI)
+# 0x09 [SSTI](SSTI)
+
+- freeMarker
+- thymeleaf
 
 # Stats
 

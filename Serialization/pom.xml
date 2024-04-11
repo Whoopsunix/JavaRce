@@ -13,6 +13,7 @@
         <module>ClassLoad</module>
         <module>XMLSerialization</module>
         <module>ConstructorEXP</module>
+        <module>SnakeyamlDemo</module>
     </modules>
 
     <properties>

@@ -17,6 +17,7 @@
     <module>JavaxJettyDemo</module>
     <module>JakartaJettyDemo</module>
     <module>OSEcho</module>
+    <module>LowTomcatDemo</module>
 
   </modules>
 
