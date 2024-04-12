@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class FileRead {
     public static void main(String[] args) throws Exception {
-        String s = read_InputStreamReader_BufferedInputStream("/etc/passwd");
+        String s = read_FileUtils("/etc/passwd");
         System.out.println(s);
     }
 
@@ -17,7 +17,7 @@ public class FileRead {
      * java.io.InputStreamReader
      * 自带的 read()
      */
-    public String read_InputStreamReader(String filePath) throws Exception {
+    public static String read_InputStreamReader(String filePath) throws Exception {
         FileInputStream fileInputStream = new FileInputStream(filePath);
 
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -38,7 +38,7 @@ public class FileRead {
      * java.io.InputStreamReader
      * java.io.BufferedReader
      */
-    public String read_InputStreamReader_BufferedReader(String filePath) throws Exception {
+    public static String read_InputStreamReader_BufferedReader(String filePath) throws Exception {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -51,7 +51,7 @@ public class FileRead {
         return content.toString();
     }
 
-    public String read_InputStreamReader_CharArrayReader(String filePath) throws Exception {
+    public static String read_InputStreamReader_CharArrayReader(String filePath) throws Exception {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         char[] charArray = new char[1024];
@@ -72,7 +72,7 @@ public class FileRead {
     /**
      * 对照组
      */
-    public String read_InputStreamReader_text(String str) throws Exception {
+    public static String read_InputStreamReader_text(String str) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(str.getBytes());
 
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -86,7 +86,7 @@ public class FileRead {
         return content.toString();
     }
 
-    public static String read_InputStreamReader_BufferedInputStream(String filePath) throws Exception {
+    public static String read_FileInputStream_BufferedInputStream(String filePath) throws Exception {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
         byte[] buf = new byte[1024];
@@ -101,7 +101,7 @@ public class FileRead {
     }
 
     // java.io.FileInputStream
-    public String read_FileInputStream(String filePath) {
+    public static String read_FileInputStream(String filePath) {
         String content = "";
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
@@ -120,7 +120,7 @@ public class FileRead {
      * FileReader
      */
     // java.io.BufferedReader.readLine()
-    public String read_FileReader_bufferedReader1(String filePath) throws Exception {
+    public static String read_FileReader_bufferedReader1(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileReader reader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -134,7 +134,7 @@ public class FileRead {
     }
 
     // java.io.BufferedReader.read()
-    public String read_FileReader_bufferedReader2(String filePath) throws Exception {
+    public static String read_FileReader_bufferedReader2(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileReader reader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -151,7 +151,7 @@ public class FileRead {
 
     // java.io.FileReader.read()
     // 不套其他 直接通过 FileReader 读取
-    public String read_FileReader(String filePath) throws Exception {
+    public static String read_FileReader(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileReader reader = new FileReader(filePath);
         int character;
@@ -166,7 +166,7 @@ public class FileRead {
     }
 
     // java.io.LineNumberReader.read()
-    public String read_FileReader_LineNumberReader(String filePath) throws Exception {
+    public static String read_FileReader_LineNumberReader(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileReader reader = new FileReader(filePath);
         LineNumberReader lineNumberReader = new LineNumberReader(reader);
@@ -180,7 +180,7 @@ public class FileRead {
     }
 
     // java.io.CharArrayReader.read()
-    public String read_FileReader_CharArrayReader(String filePath) throws Exception {
+    public static String read_FileReader_CharArrayReader(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
 
         FileReader reader = new FileReader(filePath);
@@ -199,7 +199,7 @@ public class FileRead {
     }
 
     // java.io.PushbackReader
-    public String read_PushbackReader(String filePath) throws Exception {
+    public static String read_PushbackReader(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileReader reader = new FileReader(filePath);
         PushbackReader pushbackReader = new PushbackReader(reader);
@@ -218,13 +218,13 @@ public class FileRead {
      * Files
      */
     // java.nio.file.Files.readAllBytes()
-    public String read_Files_readAllBytes(String filePath) throws Exception {
+    public static String read_Files_readAllBytes(String filePath) throws Exception {
         byte[] data = java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(filePath));
         return new String(data, "UTF-8");
     }
 
     // java.nio.file.Files.readAllLines()
-    public String read_Files_readAllLines(String filePath) throws Exception {
+    public static String read_Files_readAllLines(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         java.util.List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(filePath));
         for (String line : lines) {
@@ -237,7 +237,7 @@ public class FileRead {
      * Scanner
      */
     // java.util.Scanner
-    public String read_Scanner_File(String filePath) throws Exception {
+    public static String read_Scanner_File(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         Scanner scanner = new Scanner(new File(filePath));
         while (scanner.hasNextLine()) {
@@ -248,7 +248,7 @@ public class FileRead {
     }
 
     // java.util.Scanner
-    public String read_Scanner_Path(String filePath) throws Exception {
+    public static String read_Scanner_Path(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         Scanner scanner = new Scanner(java.nio.file.Paths.get(filePath));
         while (scanner.hasNextLine()) {
@@ -262,7 +262,7 @@ public class FileRead {
      * java.io.RandomAccessFile
      * readLine()
      */
-    public String read_RandomAccessFile_readLine(String filePath) throws Exception {
+    public static String read_RandomAccessFile_readLine(String filePath) throws Exception {
         RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "r");
         StringBuilder content = new StringBuilder();
         String line;
@@ -279,7 +279,7 @@ public class FileRead {
      * java.io.RandomAccessFile
      * read()
      */
-    public String read_RandomAccessFile_read(String filePath) throws Exception {
+    public static String read_RandomAccessFile_read(String filePath) throws Exception {
         RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "r");
         StringBuilder content = new StringBuilder();
         int character;
@@ -295,7 +295,7 @@ public class FileRead {
     }
 
     // java.nio.channels.FileChannel
-    public String read_FileChannel(String filePath) throws Exception {
+    public static String read_FileChannel(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         FileInputStream fileInputStream = new FileInputStream(filePath);
         java.nio.channels.FileChannel fileChannel = fileInputStream.getChannel();
@@ -311,7 +311,7 @@ public class FileRead {
     }
 
     // java.nio.channels.FileChannel.open
-    public String read_FileChannel_open(String filePath) throws Exception {
+    public static String read_FileChannel_open(String filePath) throws Exception {
         StringBuilder content = new StringBuilder();
         java.nio.channels.FileChannel fileChannel = java.nio.channels.FileChannel.open(java.nio.file.Paths.get(filePath));
         java.nio.ByteBuffer byteBuffer = java.nio.ByteBuffer.allocate(1024);
@@ -327,7 +327,14 @@ public class FileRead {
     /**
      * org.apache.commons.io.FileUtils
      */
-    public String read_FileUtils(String filePath) throws Exception {
+    public static String read_FileUtils(String filePath) throws Exception {
         return org.apache.commons.io.FileUtils.readFileToString(new File(filePath), "UTF-8");
+    }
+
+    public static String read_IOUtils(String filePath) throws Exception {
+        FileInputStream input = new FileInputStream(filePath);
+        byte[] data = new byte[(int) new File(filePath).length()];
+        org.apache.commons.io.IOUtils.readFully(input, data);
+        return new String(data, "UTF-8");
     }
 }
