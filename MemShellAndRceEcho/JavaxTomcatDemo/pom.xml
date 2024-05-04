@@ -13,12 +13,11 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <!--            <version>7.0.59</version>-->
-            <!--            <version>7.0.109</version>-->
-<!--                                    <version>8.0.53</version>-->
-            <version>8.5.82</version>
-            <!--            <version>9.0.65</version>-->
-            <!--            <version>10.0.23</version>-->
+<!--                        <version>7.0.59</version>-->
+<!--                        <version>7.0.109</version>-->
+                                    <version>8.0.53</version>
+<!--            <version>8.5.82</version>-->
+<!--                        <version>9.0.65</version>-->
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -58,6 +57,11 @@
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
         </dependency>
 
         <dependency>

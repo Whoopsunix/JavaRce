@@ -114,7 +114,7 @@ public class UndertowListenerExecMS implements ServletRequestListener {
                     Object table = tables[i];
                     if (table == null)
                         continue;
-                    if (table.getClass().getName().equals("io.undertow.servlet.handlers.ServletRequestContext")) {
+                        if (table.getClass().getName().equals("io.undertow.servlet.handlers.ServletRequestContext")) {
                         httpServletResponse = (HttpServletResponse) getFieldValue(table, "originalResponse");
                         break;
                     }

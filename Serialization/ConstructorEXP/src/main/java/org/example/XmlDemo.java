@@ -10,7 +10,7 @@ import java.lang.reflect.Constructor;
 public class XmlDemo {
 
     public static void main(String[] args) throws Exception{
-        resourcePropertySourceDemo();
+        classPathXmlApplicationContextDemo();
     }
 
     /**

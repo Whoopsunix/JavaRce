@@ -1,31 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <artifactId>JakartaTomcatDemo</artifactId>
+    <artifactId>LowTomcatDemo</artifactId>
     <groupId>com.demo</groupId>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
-    <name>JakartaTomcatDemo</name>
+    <name>LowTomcatDemo</name>
 
 
     <dependencies>
 
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-catalina</artifactId>-->
+<!--            &lt;!&ndash;            <version>7.0.59</version>&ndash;&gt;-->
+<!--                        <version>7.0.109</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-catalina</artifactId>
-<!--            <version>10.0.23</version>-->
-            <version>11.0.0-M1</version>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>servlet-api</artifactId>-->
-<!--            <version>2.5</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet.jsp</groupId>-->
-<!--            <artifactId>jsp-api</artifactId>-->
-<!--            <version>2.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -40,6 +45,12 @@
             <version>3.2.1</version>
             <!--            <version>3.2.2</version>-->
         </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.ppp.tools</groupId>
@@ -52,6 +63,7 @@
             <artifactId>java-object-searcher</artifactId>
             <version>0.1.0</version>
         </dependency>
+
     </dependencies>
 
 
@@ -73,7 +85,7 @@
                 <filtering>false</filtering>
             </resource>
         </resources>
-        <finalName>JakartaTomcatDemo</finalName>
+        <finalName>JavaxTomcatDemo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
