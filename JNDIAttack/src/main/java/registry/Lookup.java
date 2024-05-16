@@ -30,7 +30,7 @@ public class Lookup {
                 new Class[]{Remote.class}, (InvocationHandler) annotationInvocationHandler));
 
         // 客户端逻辑
-        Registry registry_remote = LocateRegistry.getRegistry("192.168.66.143", 1099);
+        Registry registry_remote = LocateRegistry.getRegistry("127.0.0.1", 1099);
 
         // lookup 逻辑
         // 获取super.ref

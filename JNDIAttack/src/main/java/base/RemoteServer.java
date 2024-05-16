@@ -12,6 +12,6 @@ public class RemoteServer {
         LocateRegistry.createRegistry(1099);
         RemoteInterface remoteObject = new RemoteObject();
 //        Naming.bind("rmi://127.0.0.1/Hello", remoteObject);
-        Naming.bind("rmi://192.168.66.143/Hello", remoteObject);
+        Naming.bind("rmi://127.0.0.1/Hello", remoteObject);
     }
 }

@@ -10,7 +10,7 @@ By. Whoopsunix
 
 🚧 长期项目 不定期学习后更新......
 
-[//]: # (🛰️ 部分利用已经集成在二开 [ysoserial]&#40;https://github.com/Whoopsunix/ysoserial&#41; 项目中)
+🛰️ 部分利用已经集成在 [PPPYSO](https://github.com/Whoopsunix/PPPYSO) 项目中
 
 🪝 [PPPRASP](https://github.com/Whoopsunix/PPPRASP) 项目中对本项目给出的漏洞实现防护（仅实现关键函数的 HOOK，不作进一步处理）
 
@@ -44,7 +44,7 @@ By. Whoopsunix
 - [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [0x08 XXE 有回显测试 Demo](#0x08-xxe-有回显测试-demo)
 - [0x09 SSTI](#0x09-ssti)
-- [鸣谢](#Thanks)
+- [0x10 RMI](#0x10-rmi)
 
 # 0x01 [RceEcho & MemShell](MemShellAndRceEcho)
 
@@ -180,6 +180,8 @@ WildFly 默认容器用的 Undertow
 - 探测用Payload
   - DNSLOG、HTTPLOG
   - 延时
+- 字节码加载
+  - JDK 高版本加载
 
 ## [JxPath](Expression/JxPathAttack)
 
@@ -274,12 +276,12 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 - freeMarker
 - thymeleaf
 
+# 0x10 [RMI](JNDIAttack)
+
+RMI 分析配置代码
+
 # Stats
 
 ![Alt](https://repobeats.axiom.co/api/embed/818a4d2c0d1562eec751b2637b825b3b0d2cf0e3.svg "Repobeats analytics image")
 
 [//]: # ([![Stargazers over time]&#40;https://starchart.cc/Whoopsunix/JavaRce.svg&#41;]&#40;https://starchart.cc/Whoopsunix/JavaRce&#41;)
-
-# Thanks
-
-感谢师傅们的研究 带来了很大的帮助 :)

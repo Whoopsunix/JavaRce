@@ -24,7 +24,7 @@ public class Bind {
                 new Class[]{Remote.class}, (InvocationHandler) annotationInvocationHandler));
 
         // 远程
-        Registry registry_remote = LocateRegistry.getRegistry("192.168.66.143", 1099);
+        Registry registry_remote = LocateRegistry.getRegistry("127.0.0.1", 1099);
         registry_remote.bind("Hello", proxyEvalObject);
 
         // 自封装

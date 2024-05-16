@@ -21,4 +21,9 @@ public class RemoteObject extends UnicastRemoteObject implements RemoteInterface
         return name.getClass().getName();
     }
 
+    @Override
+    public int sayHello(int num) throws RemoteException {
+        return 0;
+    }
+
 }

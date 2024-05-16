@@ -15,7 +15,7 @@ public class AttackRemoteServer {
         AttackRemoteInterface remoteObject = new AttackRemoteObject();
 
         // 这个地址是客户端要访问的地址
-        Naming.bind("rmi://192.168.66.143/xxx", remoteObject);
+        Naming.bind("rmi://127.0.0.1/xxx", remoteObject);
         System.out.println("Server Start");
 
     }
