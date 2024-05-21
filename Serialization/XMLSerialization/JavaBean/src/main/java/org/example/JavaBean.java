@@ -173,7 +173,7 @@ public class JavaBean {
                 "    </new>\n" +
                 "</java>";
 
-        xmlDecoder(js);
+        xmlDecoder(processBuilder);
     }
 
     public static Object xmlDecoder(String payload) {

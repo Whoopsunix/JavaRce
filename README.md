@@ -155,8 +155,6 @@ WildFly 默认容器用的 Undertow
 
 # 0x04 [Expression inject](Expression)
 
-表达式注入可以看 https://github.com/yzddmr6/Java-Js-Engine-Payloads ，这部分知识笔记比较分散，还没整理进来。
-
 ## [OGNL](Expression/OGNLAttack)
 
 - 普通执行demo、jsEngine：get、set方式
@@ -187,6 +185,14 @@ WildFly 默认容器用的 Undertow
 
 - runtime
 - js
+
+## [MVEL](Expression/MVELAttack)
+
+- runtime
+
+## [JEXL](Expression/JEXLAttack)
+
+- runtime
 
 # 0x05 [JDBC Attack](JDBCAttack)
 
@@ -275,6 +281,7 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 
 - freeMarker
 - thymeleaf
+- Velocity
 
 # 0x10 [RMI](JNDIAttack)
 

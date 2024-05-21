@@ -11,6 +11,7 @@
 
     <modules>
         <module>ClassLoad</module>
+        <module>ClassLoaderJdk17</module>
         <module>XMLSerialization</module>
         <module>ConstructorEXP</module>
         <module>SnakeyamlDemo</module>
@@ -25,6 +26,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.10</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
