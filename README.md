@@ -149,9 +149,8 @@ WildFly 默认容器用的 Undertow
 
 # 0x03 [Code](Command)
 
-## ScriptEngine
-
-参考 Tri0mphe 师傅文章  https://forum.butian.net/share/487
+- ScriptEngine
+- Groovy
 
 # 0x04 [Expression inject](Expression)
 

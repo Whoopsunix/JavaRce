@@ -1,0 +1,1 @@
+"open -a Calculator.app".execute()
