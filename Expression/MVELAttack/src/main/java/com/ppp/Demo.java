@@ -13,7 +13,6 @@ public class Demo {
     public static void main(String[] args) {
         String poc = "Runtime.getRuntime().exec(\"open -a Calculator.app\")";
         System.out.println(eval(poc));
-        ;
     }
 
     public static Object eval(String poc) {

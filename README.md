@@ -16,7 +16,7 @@ By. Whoopsunix
 
 ## 目录
 
-- [0x01 RceEcho & MemShell](#0x01-rceecho--memshell)
+- [0x01 RceEcho & MemShell 减少重复代码移到 PPPYSO 项目中更新](#0x01-rceecho--memshell)
     - [Tomcat](#tomcat)
     - [Spring](#spring)
     - [Jetty](#jetty)
@@ -44,17 +44,15 @@ By. Whoopsunix
 - [0x07 文件读写 Demo](#0x07-文件读写-demo)
 - [0x08 XXE 有回显测试 Demo](#0x08-xxe-有回显测试-demo)
 - [0x09 SSTI](#0x09-ssti)
-- [0x10 RMI](#0x10-rmi)
+- [0x10 JNDI](#0x10-jndi)
 
 # 0x01 [RceEcho & MemShell](MemShellAndRceEcho)
 
+减少重复代码，目前已移到 PPPYSO 项目中更新。
+
 命令执行回显目前是通过 [java-object-searcher](https://github.com/c0ny1/java-object-searcher) 工具写的，版本适配还没做，之后再优化，本项目主要给出反序列化 demo，jsp 的例子可以参考 [Java-Rce-Echo](https://github.com/feihong-cs/Java-Rce-Echo)。
 
-
-
-对于内存马来说，请求处理接口 Servlet、Filter、Listener、Value 之类的请求处理接口都是通用的，变的其实是获取不同组件上下文的方式，因此可以将代码抽象为 注入器+功能实现 两部分来实现内存马。目前还没有将分开的例子给出来，还在写工具测试。
-
-
+对于内存马来说，请求处理接口 Servlet、Filter、Listener、Value 之类的请求处理接口都是通用的，变的其实是获取不同组件上下文的方式，因此可以将代码抽象为 注入器+功能实现 两部分来实现内存马，见工具化的代码。
 
 反序列化的测试可以直接用 Rest Client [MemShell.http](JavaClass.http) 发包，比较方便。
 
@@ -282,9 +280,14 @@ JDBC 序列化的知识可以参考这些项目 [JDBC-Attack](https://github.com
 - thymeleaf
 - Velocity
 
-# 0x10 [RMI](JNDIAttack)
+# 0x10 [JNDI](JNDIAttack)
 
-RMI 分析配置代码
+- RMI 分析配置代码
+- JNDI 代码
+  - LocalBeanFactory
+  - LocalJDBC
+  - LocalServiceFactory
+  - LocalXXERCE
 
 # Stats
 

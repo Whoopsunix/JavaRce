@@ -2,6 +2,7 @@ package server;
 
 import utils.Serializer;
 
+import java.lang.reflect.Method;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Arrays;

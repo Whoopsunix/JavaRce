@@ -17,6 +17,5 @@ public class VulRemoteServer {
         // 这个地址是客户端要访问的地址
         Naming.rebind("rmi://0.0.0.0/xxx", remoteObject);
         System.out.println("Server Start");
-
     }
 }
