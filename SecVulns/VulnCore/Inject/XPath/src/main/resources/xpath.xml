@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <users>
+        <user>
+            <id>1</id>
+            <username>admin</username>
+            <password>123456</password>
+        </user>
+        <user>
+            <id>2</id>
+            <username>Whoopsunix</username>
+            <password>Whoopsunixpass</password>
+        </user>
+        <user>
+            <id>3</id>
+            <username>superadmin</username>
+            <password>8998xxxads</password>
+        </user>
+        <user>
+            <id>4</id>
+            <username>test'</username>
+            <password>pass</password>
+        </user>
+    </users>
+</root>

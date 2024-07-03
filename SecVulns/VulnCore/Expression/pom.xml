@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ppp</groupId>
+    <artifactId>Expression</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <name>Expression</name>
+
+    <modules>
+        <module>ELAttack</module>
+        <module>JEXLAttack</module>
+        <module>JxPathAttack</module>
+        <module>MVELAttack</module>
+        <module>OGNLAttack</module>
+        <module>SPELAttack</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>ELAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>JEXLAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>JxPathAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>MVELAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>OGNLAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>SPELAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+</project>

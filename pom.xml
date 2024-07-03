@@ -9,19 +9,9 @@
 
     <name>JavaRce</name>
     <modules>
-        <module>Command</module>
-        <module>Expression</module>
-        <module>JDBCAttack</module>
-        <module>Serialization</module>
-        <module>MemShellAndRceEcho</module>
-        <module>FilesOperations</module>
-        <module>XXE</module>
-        <module>JNDIAttack</module>
-        <module>SSTI</module>
-
+        <module>SecVulns</module>
         <module>Utils</module>
-
-
+        <module>java-object-searcher</module>
     </modules>
 
     <properties>
@@ -31,10 +21,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

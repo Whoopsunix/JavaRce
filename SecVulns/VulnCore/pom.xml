@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ppp</groupId>
+    <artifactId>VulnCore</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <name>VulnCore</name>
+
+    <modules>
+        <module>Code</module>
+        <module>Command</module>
+        <module>Expression</module>
+        <module>XXE</module>
+        <module>FilesOperations</module>
+        <module>JDBCAttack</module>
+        <module>JNDIAttack</module>
+        <module>MemShellAndRceEcho</module>
+        <module>Serialization</module>
+        <module>SSTI</module>
+        <module>Inject</module>
+        <module>SSRF</module>
+        <module>JNI</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>Code</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>Command</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>Expression</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>FilesOperations</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>JDBCAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>Serialization</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>SSTI</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>XXE</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>FilesOperations</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>JNDIAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>Inject</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>SSRF</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>JNI</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+</project>

