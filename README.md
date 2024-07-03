@@ -8,7 +8,7 @@ By. Whoopsunix
 
 🚩 子目录 [VulnCore](SecVulns/VulnCore) 给出 Java 利用方式，具体覆盖量见对应 README.md 文件
 
-⛳️ 配套测试靶场 [SecVulns](SecVulns) 主要针对 DevSecOps 场景构建（IAST、RASP、SAST），采用 httpREST 实现批量测试。大多数 Java 靶场都把注意力集中在 Spring、Tomcat 组件上，之后会引入更多组件丰富 Source 点 
+⛳️ 配套测试靶场 [SecVulns](SecVulns) 主要针对 DevSecOps 场景构建（IAST、RASP、SAST），采用 [httpREST](SecVulns/SecVulnsREST) 实现批量测试。大多数 Java 靶场都把注意力集中在 Spring、Tomcat 组件上，之后会引入更多组件丰富 Source 点 
 
 🪝 EXP: 反序列化框架 [PPPYSO](https://github.com/Whoopsunix/PPPYSO) 集成了部分内容
 
