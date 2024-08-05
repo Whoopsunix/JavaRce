@@ -12,6 +12,12 @@ import java.util.Base64;
  */
 public class UnsafeDemo {
     public static void main(String[] args) throws Exception {
+        test1();
+
+        System.out.println(1);
+    }
+
+    public static void test1() throws Exception {
         addModule();
 
         Method defineClass = ClassLoader.class.getDeclaredMethod("defineClass", byte[].class, Integer.TYPE, Integer.TYPE);
@@ -22,16 +28,33 @@ public class UnsafeDemo {
     }
 
     public static void addModule() throws Exception{
-        Class unsafeClass = Class.forName("sun.misc.Unsafe");
-        Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
-        unsafeField.setAccessible(true);
-        Unsafe unsafe = (Unsafe) unsafeField.get(null);
+//        Class unsafeClass = Class.forName("sun.misc.Unsafe");
+//        Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
+//        unsafeField.setAccessible(true);
+//        Unsafe unsafe = (Unsafe) unsafeField.get(null);
+//
+//        Module module = Object.class.getModule();
+//        Class cls = UnsafeDemo.class;
+//        long offset = unsafe.objectFieldOffset(Class.class.getDeclaredField("module"));
+//
+//        unsafe.getAndSetObject(cls, offset, module);
+//        //        unsafe.putObject(cls, offset, module);
 
-        Module module = Object.class.getModule();
-        Class cls = UnsafeDemo.class;
-        long offset = unsafe.objectFieldOffset(Class.class.getDeclaredField("module"));
+        try {
+            Class unsafeClass = Class.forName("sun.misc.Unsafe");
+            Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
+            unsafeField.setAccessible(true);
+            Unsafe unsafe = (Unsafe) unsafeField.get(null);
+            Method method = Class.class.getDeclaredMethod("getModule");
+            method.setAccessible(true);
+            Object module = method.invoke(Object.class);
+            Class cls = UnsafeDemo.class;
+            long offset = unsafe.objectFieldOffset(Class.class.getDeclaredField("module"));
+            Method getAndSetObjectMethod = unsafeClass.getMethod("getAndSetObject", Object.class, long.class, Object.class);
+            getAndSetObjectMethod.setAccessible(true);
+            getAndSetObjectMethod.invoke(unsafe, cls, offset, module);
+        } catch (Exception e) {
 
-        unsafe.getAndSetObject(cls, offset, module);
-        //        unsafe.putObject(cls, offset, module);
+        }
     }
 }

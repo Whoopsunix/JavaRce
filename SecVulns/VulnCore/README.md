@@ -77,6 +77,13 @@
 > [JEXL](Expression/JEXLAttack)
 >
 > - Exec
+>
+> 
+>
+> [Aviator](Expression/AviatorAttack)
+>
+> + Exec
+> + BCEL
 
 ## [JDBC Attack](JDBCAttack)
 

@@ -42,6 +42,10 @@ public class BCEL {
     public static void decode(String s) throws Exception {
         new ClassLoader().loadClass(s).newInstance();
     }
+    public static void decode2(String s) throws Exception {
+        Object o = Class.forName(s, true, new ClassLoader()).newInstance();
+        o.getClass().getMethod("exec", String.class).invoke(o, "open -a Calculator.app");
+    }
 
     public static void decodeArg(String s, String arg) throws Exception {
 //        new ClassLoader().loadClass(s).getConstructors()[1].newInstance(arg);

@@ -16,6 +16,7 @@
         <module>MVELAttack</module>
         <module>OGNLAttack</module>
         <module>SPELAttack</module>
+        <module>AviatorAttack</module>
     </modules>
 
     <dependencies>
@@ -47,6 +48,11 @@
         <dependency>
             <groupId>com.ppp</groupId>
             <artifactId>SPELAttack</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppp</groupId>
+            <artifactId>AviatorAttack</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
