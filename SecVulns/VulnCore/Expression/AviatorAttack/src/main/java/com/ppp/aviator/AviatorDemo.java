@@ -3,11 +3,9 @@ package com.ppp.aviator;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.AviatorEvaluatorInstance;
 
-import java.util.Base64;
 
 /**
- * @author guchangan1
- * 参考：https://geekdaxue.co/read/lexiansheng@dix8fs/ll4oyy
+ * @author guchangan1 Whoopsunix
  */
 public class AviatorDemo {
     public static void main(String[] args) throws Exception {
