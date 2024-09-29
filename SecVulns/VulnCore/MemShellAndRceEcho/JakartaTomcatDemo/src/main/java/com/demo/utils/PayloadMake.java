@@ -4,7 +4,7 @@ import com.demo.memshell.all.TomcatExecThreadListener;
 import me.gv7.tools.josearcher.entity.Blacklist;
 import me.gv7.tools.josearcher.entity.Keyword;
 import me.gv7.tools.josearcher.searcher.SearchRequstByBFS;
-import org.ppp.tools.ser.CC4Generator;
+import com.ppp.tools.ser.CC4Generator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,10 @@ public class PayloadMake {
 
     public void searchTomcat() {
         //设置搜索类型包含Request关键字的对象
-        List<Keyword> keys = new ArrayList<>();
+        List<Keyword> keys = new ArrayList();
         keys.add(new Keyword.Builder().setField_type("Request").build());
         //定义黑名单
-        List<Blacklist> blacklists = new ArrayList<>();
+        List<Blacklist> blacklists = new ArrayList();
         blacklists.add(new Blacklist.Builder().setField_type("java.io.File").build());
         //新建一个广度优先搜索Thread.currentThread()的搜索器
         SearchRequstByBFS searcher = new SearchRequstByBFS(Thread.currentThread(), keys);

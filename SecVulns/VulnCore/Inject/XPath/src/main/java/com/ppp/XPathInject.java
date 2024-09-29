@@ -31,7 +31,7 @@ public class XPathInject {
         String xpath = "/root/users/user[username='" + username + "' and password='" + password + "']";
         System.out.println(xpath);
 
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
 
         List<Node> selectNodes = doc.selectNodes(xpath);
         if (!selectNodes.isEmpty()) {

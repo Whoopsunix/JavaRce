@@ -44,7 +44,7 @@ public class AliDruidInject {
 
         System.out.println(sql);
         ResultSet resultSet = preparedStatement.executeQuery(sql);
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
         while (resultSet.next()) {
             result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
         }
@@ -67,7 +67,7 @@ public class AliDruidInject {
 
         System.out.println(sql);
         ResultSet resultSet = preparedStatement.executeQuery(sql);
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
         while (resultSet.next()) {
             result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
         }

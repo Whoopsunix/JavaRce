@@ -1,4 +1,4 @@
-package org.ppp.tools.ser;
+package com.ppp.tools.ser;
 
 import java.util.Scanner;
 

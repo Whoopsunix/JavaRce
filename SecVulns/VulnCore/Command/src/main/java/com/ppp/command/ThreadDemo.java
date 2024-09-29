@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ThreadDemo {
     public static InputStream exec(String cmd) throws Exception {
-        AtomicReference<InputStream> inputStreamRef = new AtomicReference<>();
+        AtomicReference<InputStream> inputStreamRef = new AtomicReference();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

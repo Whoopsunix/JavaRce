@@ -1,4 +1,4 @@
-package org.ppp.tools.encryption;
+package com.ppp.tools.encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;

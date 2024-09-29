@@ -1,4 +1,4 @@
-package org.ppp.tools.encryption;
+package com.ppp.tools.encryption;
 
 import com.sun.org.apache.bcel.internal.Repository;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;

@@ -1,7 +1,7 @@
 package org.example.search;
 
 import org.example.gadgets.*;
-import org.ppp.tools.ser.CC4Generator;
+import com.ppp.tools.ser.CC4Generator;
 
 
 /**

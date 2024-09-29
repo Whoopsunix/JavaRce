@@ -32,7 +32,7 @@ public class JavaObjectSearcher {
     private String result_file;
     private String all_chain_file;
     private String run_log_file;
-    private List<Object> searched = new ArrayList<>();
+    private List<Object> searched = new ArrayList();
 
 
     public JavaObjectSearcher(Object target, String[] keys, String project_name){

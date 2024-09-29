@@ -20,8 +20,8 @@ public class SearchRequstByBFS {
     //private Logger logger = Logger.getLogger(SearchRequstByBFS.class);
     private String model_name = SearchRequstByBFS.class.getSimpleName();
     private Object target;
-    private List<Keyword> keys = new ArrayList<>();
-    private List<Blacklist> blacklists = new ArrayList<>();
+    private List<Keyword> keys = new ArrayList();
+    private List<Blacklist> blacklists = new ArrayList();
     private int max_search_depth = Integer.MAX_VALUE;/* 递归搜索深度 */
     private boolean is_debug = true;
     //记录所有访问过的元素

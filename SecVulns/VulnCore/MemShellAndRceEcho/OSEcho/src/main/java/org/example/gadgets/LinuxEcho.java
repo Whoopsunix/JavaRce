@@ -10,7 +10,7 @@ public class LinuxEcho {
     static {
         try {
             String command = "ls -l /proc/$PPID/fd|grep socket:|awk '{print $9}'";
-            java.util.List<String> list = new java.util.ArrayList<>();
+            java.util.List<String> list = new java.util.ArrayList();
             String[] cmd = new String[]{"/bin/sh", "-c", command};
             java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(Runtime.getRuntime().exec(cmd).getInputStream()));
             String line;

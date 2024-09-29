@@ -34,9 +34,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.ppp.tools</groupId>
+            <groupId>com.ppp.tools</groupId>
             <artifactId>Utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

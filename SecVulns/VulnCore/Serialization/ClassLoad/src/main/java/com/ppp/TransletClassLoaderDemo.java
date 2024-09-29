@@ -1,7 +1,7 @@
 package com.ppp;
 
-import org.ppp.tools.ClassFiles;
-import org.ppp.tools.encryption.B64;
+import com.ppp.tools.ClassFiles;
+import com.ppp.tools.encryption.B64;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;

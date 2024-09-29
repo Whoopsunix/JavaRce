@@ -73,7 +73,7 @@ public class TomcatExecutorExecMS extends ThreadPoolExecutor {
     }
 
     public static Map<String, String> getHeaders(String httpRequest) {
-        Map<String, String> headers = new HashMap<>();
+        Map<String, String> headers = new HashMap();
 
         // 按照空行分隔请求行和头部
         String[] parts = httpRequest.split("\r\n\r\n", 2);

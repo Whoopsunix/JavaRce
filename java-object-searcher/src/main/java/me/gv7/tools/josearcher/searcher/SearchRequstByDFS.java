@@ -24,7 +24,7 @@ public class SearchRequstByDFS {
     private String model_name = SearchRequstByDFS.class.getSimpleName();
     private Object target;
     private List<Keyword> keys;
-    private List<Blacklist> blacklists = new ArrayList<>();
+    private List<Blacklist> blacklists = new ArrayList();
     private int max_search_depth = Integer.MAX_VALUE;/* 递归搜索深度 */
     private boolean is_debug = false;
     private String report_save_path = null;

@@ -1,4 +1,4 @@
-package org.ppp.tools;
+package com.ppp.tools;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -28,13 +28,13 @@ public class ThreadObjectFinder {
         breakObject.add(System.identityHashCode(breakObject));
 
         // 原始类型和包装类都不递归
-        HashSet<String> breakType = new HashSet<>(Arrays.asList(int.class.getName(), short.class.getName(), long.class.getName(), double.class.getName(), byte.class.getName(), float.class.getName(), char.class.getName(), boolean.class.getName(), Integer.class.getName(), Short.class.getName(), Long.class.getName(), Double.class.getName(), Byte.class.getName(), Float.class.getName(), Character.class.getName(), Boolean.class.getName(), String.class.getName()));
+        HashSet<String> breakType = new HashSet(Arrays.asList(int.class.getName(), short.class.getName(), long.class.getName(), double.class.getName(), byte.class.getName(), float.class.getName(), char.class.getName(), boolean.class.getName(), Integer.class.getName(), Short.class.getName(), Long.class.getName(), Double.class.getName(), Byte.class.getName(), Float.class.getName(), Character.class.getName(), Boolean.class.getName(), String.class.getName()));
 
         Object object = Thread.currentThread();
 
 //        Object result = threadObjectFinder.getTargetObject(cls, Thread.currentThread(), breakObject, breakType, 30);
         // 调试用
-        ArrayList stackList = new ArrayList<>();
+        ArrayList stackList = new ArrayList();
         Object result = threadObjectFinder.getTargetObject(cls, Thread.currentThread(), breakObject, breakType, 30, stackList, object.getClass().getName());
 
 
@@ -267,8 +267,8 @@ public class ThreadObjectFinder {
      * @throws Exception
      */
     public List<ClassLoader> getActiveClassLoaders() throws Exception {
-//        List<ClassLoader> activeClassLoaders = new ArrayList<>();
-        Set<ClassLoader> activeClassLoaders = new HashSet<>();
+//        List<ClassLoader> activeClassLoaders = new ArrayList();
+        Set<ClassLoader> activeClassLoaders = new HashSet();
 
         // 加载当前对象的加载器
         activeClassLoaders.add(this.getClass().getClassLoader());
@@ -291,6 +291,6 @@ public class ThreadObjectFinder {
             activeClassLoaders.add(threads[i].getContextClassLoader());
         }
 
-        return new ArrayList<>(activeClassLoaders);
+        return new ArrayList(activeClassLoaders);
     }
 }

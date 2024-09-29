@@ -59,7 +59,7 @@ public class MysqlInject {
         }
         System.out.println(sql);
         ResultSet resultSet = statement.executeQuery(sql);
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
         while (resultSet.next()) {
             result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
         }
@@ -77,7 +77,7 @@ public class MysqlInject {
         PreparedStatement preparedStatement = connection.prepareStatement(String.format("select * from users where `username`='%s' and `password`='%s';", username, password));
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
         while (resultSet.next()) {
             result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
         }

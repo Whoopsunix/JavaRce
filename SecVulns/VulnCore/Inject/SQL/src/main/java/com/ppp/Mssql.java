@@ -24,7 +24,7 @@ public class Mssql {
         String sql = "SELECT * FROM users where username = '" + username + "' and password = '" + password + "';";
         ResultSet resultSet = statement.executeQuery(sql);
 
-        List<Object> result = new ArrayList<>();
+        List<Object> result = new ArrayList();
         while (resultSet.next()) {
             result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
         }

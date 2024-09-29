@@ -1,6 +1,6 @@
 package com.ppp;
 
-import org.ppp.tools.encryption.B64;
+import com.ppp.tools.encryption.B64;
 
 import javax.script.ScriptEngineManager;
 

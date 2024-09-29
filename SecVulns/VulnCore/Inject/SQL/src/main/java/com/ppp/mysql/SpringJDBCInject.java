@@ -48,7 +48,7 @@ public class SpringJDBCInject {
 
         // 使用匿名类实现 ResultSetExtractor
         return jdbcTemplate.query(sql, resultSet -> {
-            List<Object> result = new ArrayList<>();
+            List<Object> result = new ArrayList();
             while (resultSet.next()) {
                 result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
             }
@@ -81,7 +81,7 @@ public class SpringJDBCInject {
         ResultSetExtractor<List<Object>> rse = new ResultSetExtractor<List<Object>>() {
             @Override
             public List<Object> extractData(ResultSet resultSet) throws SQLException {
-                List<Object> result = new ArrayList<>();
+                List<Object> result = new ArrayList();
                 while (resultSet.next()) {
                     result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
                 }
@@ -117,7 +117,7 @@ public class SpringJDBCInject {
         ResultSetExtractor<List<Object>> rse = new ResultSetExtractor<List<Object>>() {
             @Override
             public List<Object> extractData(ResultSet resultSet) throws SQLException {
-                List<Object> result = new ArrayList<>();
+                List<Object> result = new ArrayList();
                 while (resultSet.next()) {
                     result.add(new Users(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password")));
                 }

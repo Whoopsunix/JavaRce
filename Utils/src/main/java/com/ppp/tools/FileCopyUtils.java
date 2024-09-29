@@ -1,6 +1,6 @@
-package org.ppp.tools;
+package com.ppp.tools;
 
-import com.sun.istack.internal.Nullable;
+
 
 import java.io.*;
 import java.nio.file.Files;
@@ -47,7 +47,7 @@ public class FileCopyUtils {
 
     }
 
-    public static byte[] copyToByteArray(@Nullable InputStream in) throws IOException {
+    public static byte[] copyToByteArray( InputStream in) throws IOException {
         if (in == null) {
             return new byte[0];
         } else {
@@ -84,7 +84,7 @@ public class FileCopyUtils {
 
     }
 
-    public static String copyToString(@Nullable Reader in) throws IOException {
+    public static String copyToString( Reader in) throws IOException {
         if (in == null) {
             return "";
         } else {

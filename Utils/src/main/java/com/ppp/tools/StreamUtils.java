@@ -1,6 +1,4 @@
-package org.ppp.tools;
-
-import com.sun.istack.internal.Nullable;
+package com.ppp.tools;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -17,7 +15,7 @@ public class StreamUtils {
     public StreamUtils() {
     }
 
-    public static byte[] copyToByteArray(@Nullable InputStream in) throws IOException {
+    public static byte[] copyToByteArray( InputStream in) throws IOException {
         if (in == null) {
             return new byte[0];
         } else {
@@ -27,7 +25,7 @@ public class StreamUtils {
         }
     }
 
-    public static String copyToString(@Nullable InputStream in, Charset charset) throws IOException {
+    public static String copyToString( InputStream in, Charset charset) throws IOException {
         if (in == null) {
             return "";
         } else {

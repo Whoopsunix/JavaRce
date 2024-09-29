@@ -44,7 +44,7 @@ public class HQLInject {
         NativeQuery sqlQuery = session.createSQLQuery(sql);
         sqlQuery.addEntity(Users.class);
 
-        List<Object> users = new ArrayList<>();
+        List<Object> users = new ArrayList();
 
         List<Users> rows = sqlQuery.list();
         if (rows.size() > 0) {
