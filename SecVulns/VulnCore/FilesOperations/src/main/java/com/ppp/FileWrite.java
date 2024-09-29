@@ -8,9 +8,13 @@ import java.io.*;
 public class FileWrite {
 
     public static void main(String[] args) throws Exception{
-        String path = "/tmp/1.txt";
+//        String path = "/tmp/1.txt";
+        String name = "123.jsp";
+//        name = "123";
+        String path = "/tmp/"+ name + ".txt";
+
         String content = "Hello Whoopsunix!";
-        FileWrite.write_FileOutputStream_file(path, content);
+        FileWrite.write_DataOut(path, content);
     }
 
     /**
@@ -113,5 +117,12 @@ public class FileWrite {
     // org.apache.commons.io.FileUtils
     public static void write_FileUtils(String filePath, String context) throws Exception {
         org.apache.commons.io.FileUtils.writeStringToFile(new File(filePath), context, "UTF-8");
+    }
+
+    public static void write_DataOut(String filePath, String context) throws Exception {
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
+        dataOutputStream.writeUTF(context);
+
     }
 }

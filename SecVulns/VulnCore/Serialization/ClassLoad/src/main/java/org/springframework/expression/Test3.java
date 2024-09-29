@@ -10,10 +10,16 @@ import java.lang.reflect.Method;
  */
 public class Test3 {
     public Test3() {
+        // Runtime.getRuntime().exec("open -a Calculator.app");
+        // 反射调用
         try {
-            System.out.println("Exec");
-            Runtime.getRuntime().exec("open -a Calculator.app");
+            Class cls = Class.forName("java.lang.Runtime");
+            Method method = cls.getDeclaredMethod("getRuntime");
+            Object obj = method.invoke(null);
+            method = cls.getDeclaredMethod("exec", String.class);
+            method.invoke(obj, "open -a Calculator.app");
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
