@@ -1,4 +1,4 @@
-//package org.command.exec.jni;
+//package com.ppp.command.jni;
 //
 ///**
 // * @author Whoopsunix

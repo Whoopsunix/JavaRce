@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <cstring>
 #include <string>
-#include "org_command_exec_jni_Calc.h"
+#include "com_ppp_command_jni_Calc.h"
 
 using namespace std;
 
